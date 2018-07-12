@@ -2,16 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
-import Header from '../components/header'
 import './index.css'
 
 const Layout = ({ children, data }) => (
   <div>
     <Helmet
-      title={data.site.siteMetadata.title}
+      title={'Rejon Taylor-Foster - Developer, Designer, Mad Scientist'}
       meta={[
-        { name: 'description', content: 'Sample' },
-        { name: 'keywords', content: 'sample, something' },
+        { name: 'description', content: "Rejon\'s personal site" },
+        { name: 'keywords', content: 'rejon, rejontaylor, rejon taylor-foster, maximum crash' },
       ]}
     />
 
