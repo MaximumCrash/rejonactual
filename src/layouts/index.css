@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One|Poppins');
+
 html {
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -39,6 +41,7 @@ template {
 }
 a {
   background-color: transparent;
+  text-decoration: none;
   -webkit-text-decoration-skip: objects;
 }
 a:active,
@@ -198,7 +201,7 @@ html {
 }
 body {
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: georgia, serif;
+  font-family: 'Poppins',georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -621,4 +624,18 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+}
+
+.subtext {
+  font-size: 15px;
+font-weight: lighter;
+}
+
+.contact a {
+  color:hsla(0, 0%, 0%, .8);
+  margin-right: 20px;
+}
+
+.header {
+  margin-top:20px
 }

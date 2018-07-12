@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 
-import './index.css'
-
+//NOTE: This is where the "Consistent" templates go.
 const Header = () => (
   <div
     style={{
@@ -27,7 +26,7 @@ const Header = () => (
             textDecoration: 'none',
           }}
         >
-          Gatsby
+          Hi I'm Rejon
             </Link>
       </h1>
     </div>
@@ -39,13 +38,12 @@ const TemplateWrapper = ({
 }) => (
     <div>
       <Helmet
-        title="Gatsby Default Starter"
+        title="Rejon Taylor-Foster - Developer, Designer, Mad Scientist"
         meta={[
           { name: 'description', content: 'Sample' },
           { name: 'keywords', content: 'sample, something' },
         ]}
       />
-      <Header />
       <div
         style={{
           margin: '0 auto',
