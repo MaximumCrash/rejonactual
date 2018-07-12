@@ -636,6 +636,10 @@ font-weight: lighter;
   margin-right: 20px;
 }
 
+.contact a img {
+  width: 1.64em;
+}
+
 .header {
   margin-top:20px
 }

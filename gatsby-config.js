@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: 'Rejon Taylor-Foster - Developer, Designer, Mad Scientist',
   },
   plugins: ['gatsby-plugin-react-helmet'],
 }
