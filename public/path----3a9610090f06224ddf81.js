@@ -1,2 +1,0 @@
-webpackJsonp([60335399758886],{104:function(e,t){e.exports={data:{site:{siteMetadata:{title:"Rejon Taylor-Foster - Developer, Designer, Mad Scientist"}}},layoutContext:{}}}});
-//# sourceMappingURL=path----3a9610090f06224ddf81.js.map

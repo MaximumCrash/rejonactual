@@ -1,0 +1,22 @@
+@import '~bulma/sass/utilities/initial-variables';
+@import '~bulma/sass/utilities/functions';
+// customize styles
+$black: #282A36;
+$white: #f9f7f4; //NOTE(Rejon): This is not MXM-WhiteMoon, just a higher saturation of it. 
+$red: #FB406F; 
+$blue: #3B88E4;
+$yellow: #FFC300; 
+
+$pageGradient: linear-gradient(to bottom, #08073f, #070635, #080728, #06061e, #020214);
+
+$pageDots-0: radial-gradient(rgba(251, 247, 240, 0.11) 5%, transparent 0);
+$dotSize-0: 60px 60px; 
+
+$pageDots-1: radial-gradient(rgba(251, 247, 240, 0.10) 5%, transparent 0);
+$dotSize-1: 40px 40px; 
+
+
+$pageDots-2: radial-gradient(rgba(251, 247, 240, 0.105) 5%, transparent 0);
+$dotSize-2: 20px 20px;
+
+@import '~bulma';
