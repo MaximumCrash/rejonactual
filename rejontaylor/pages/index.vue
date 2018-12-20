@@ -1,8 +1,11 @@
 <template>
   <section class="container">
     <div class="homepage">
-    <h1>{{hero.firstName}}</h1>
-    <h2>{{hero.lastName}}</h2>
+      <div class="title">
+        <h1>{{hero.firstName}}</h1>
+        <h2>{{hero.lastName}}</h2>
+      </div>
+    
     </div>
   </section>
 </template>
@@ -117,7 +120,37 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+  .homepage {
+    min-height: 100vh; 
+    min-width: 100vw; 
+    text-align: center;
+    pointer-events: none; 
+  }
 
+  .title {
+    position: absolute;
+    display: inline-block;
+    top: 30%; 
+    left: 47%; 
+    transform: translate(-48%, -30%);
+  }
+
+  .title > h1 {
+    font-size: 8em;
+    display: inline-block; 
+    color: $white; 
+    pointer-events: auto;
+  }
+
+  .title > h2 {
+    display: inline-block; 
+    position: absolute;
+    color: $white; 
+    right: -71px; 
+    bottom: -10px; 
+    font-size: 2.25em;
+    pointer-events: auto;
+  }
 </style>
 

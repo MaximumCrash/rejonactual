@@ -14,13 +14,17 @@ module.exports = {
     ]
   },
   modules: [
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    ['nuxt-sass-resources-loader',
+      [
+        'assets/css/main.scss'
+      ]
+    ]
   ],
   css: [
-    {src: '~/assets/fonts/Brother_unhinted.css', lang: 'css'},
     {src: '~/assets/fonts/Brother.css', lang: 'css'},
     {src: '~/assets/fonts/Gibson.css', lang: 'css'},
-    {src: '~/assets/css/main.scss', lang: 'sass'},
+    {src: '~/assets/css/main.scss', lang: 'scss'},
     {src: 'font-awesome/scss/font-awesome.scss', lang: 'scss'}
     
   ],

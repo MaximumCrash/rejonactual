@@ -37,10 +37,11 @@ h1 {
 -o-font-feature-settings:"swsh" 1; 
 -webkit-font-feature-settings:"swsh" 1; 
 font-feature-settings:"swsh" 1;
+font-size: 7em;
 }
 
 h2 {
-  font-family: 'Brother-1816-Regular-Italic';
+  font-family: 'Brother-1816-ExtraBold-Italic';
     -moz-font-feature-settings:"swsh" 1; 
 -ms-font-feature-settings:"swsh" 1; 
 -o-font-feature-settings:"swsh" 1; 

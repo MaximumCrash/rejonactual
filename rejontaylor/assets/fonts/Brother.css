@@ -24,11 +24,11 @@
 
 
 /* @import must be at top of file, otherwise CSS will not work */
-@import url("//hello.myfonts.net/count/384b52");
+@import url("//hello.myfonts.net/count/384f9a");
 
   
-@font-face {font-family: 'Brother-1816-Regular-Italic';src: url('webfonts/384B52_0_0.eot');src: url('webfonts/384B52_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/384B52_0_0.woff2') format('woff2'),url('webfonts/384B52_0_0.woff') format('woff'),url('webfonts/384B52_0_0.ttf') format('truetype');}
- 
-  
-@font-face {font-family: 'Brother-1816-Black-Italic';src: url('webfonts/384B52_1_0.eot');src: url('webfonts/384B52_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/384B52_1_0.woff2') format('woff2'),url('webfonts/384B52_1_0.woff') format('woff'),url('webfonts/384B52_1_0.ttf') format('truetype');}
+@font-face {font-family: 'Brother-1816-Regular-Italic';src: url('webfonts/Brother-1816-Regular-Italic.otf');}
+
+@font-face {font-family: 'Brother-1816-Black-Italic';src: url('webfonts/Brother-1816-Black-Italic.otf');}
+@font-face {font-family: 'Brother-1816-ExtraBold-Italic';src: url('webfonts/Brother-1816-ExtraBold-Italic.otf');}
  
