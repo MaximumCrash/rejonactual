@@ -49,6 +49,10 @@ h2 {
 font-feature-settings:"swsh" 1;
 }
 
+p {
+  font-family: 'Gibson';
+}
+
 body {
   min-height: 100vh;
   min-width: 100vh;
@@ -108,6 +112,7 @@ body {
   .container {
     position: relative;
     z-index: 10;
+        pointer-events: none;
   }
 </style>
 

@@ -29,7 +29,8 @@ module.exports = {
     
   ],
   plugins: [
-    {src: '~/plugins/mouse-parallax.js', ssr:false}
+    {src: '~/plugins/mouse-parallax.js', ssr:false},
+    {src: '~/plugins/anime.js', ssr: false}
   ],
   /*
   ** Customize the progress bar color
