@@ -1,5 +1,6 @@
 <template>
   <section class="container">
+    <div class="center-line"></div>
     <div class="homepage">
       <div class="title">
         <h1 class="layer0">Réjon</h1>
@@ -251,10 +252,11 @@ export default {
 
 <style lang="scss">
   .homepage {
-    min-height: 100vh; 
-    min-width: 100vw; 
+    height: 100vh; 
+    width: 100vw; 
     text-align: center;
     pointer-events: none; 
+    position: relative;
   }
 
   .title {
@@ -355,6 +357,14 @@ export default {
     color: $white;
     opacity:0.8;
 
+  }
+
+  .center-line {
+    position: fixed;
+    width: 1px; 
+    height: 100vh;
+    left:50vw; 
+    background: teal;
   }
 </style>
 
