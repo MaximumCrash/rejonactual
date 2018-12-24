@@ -14,13 +14,16 @@
   },
   "dependencies": {
     "@nuxtjs/pwa": "^2.6.0",
+    "aos": "^3.0.0-beta.6",
     "charming": "^2.2.4",
     "font-awesome": "^4.7.0",
     "nuxt": "^2.0.0",
     "nuxt-sass-resources-loader": "^2.0.5",
     "strapi-sdk-javascript": "^0.3.1",
     "vue-animejs": "^1.0.2",
+    "vue-fullpage.js": "^0.1.1",
     "vue-mouse-parallax": "^0.9.2",
+    "vue-sticky-directive": "0.0.7",
     "vueisotope": "^3.1.2"
   },
   "devDependencies": {

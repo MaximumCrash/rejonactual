@@ -1,21 +1,63 @@
 <template>
   <div class="app">
-    <no-ssr>
     <parallax-container class="dot-parallax-container">
-      <parallax-element class="dot-parallax" :parallaxStrength="64" :type="'translation'">
+      <parallax-element class="dot-parallax" :parallaxStrength="72" :type="'translation'">
         <div class="dot-layer-0"></div>
       </parallax-element>
-      <parallax-element class="dot-parallax" :parallaxStrength="48" :type="'translation'">
+      <parallax-element class="dot-parallax" :parallaxStrength="53" :type="'translation'">
        <div class="dot-layer-1"></div>
       </parallax-element>
-      <parallax-element class="dot-parallax" :parallaxStrength="26" :type="'translation'">
+      <parallax-element class="dot-parallax" :parallaxStrength="34" :type="'translation'">
         <div class="dot-layer-2"></div>
       </parallax-element>
     </parallax-container>
-    </no-ssr>
     <nuxt/>
   </div>
 </template>
+
+<script>
+export default {
+  mounted() {
+    const dotLayer0 = this.$el.querySelector('.dot-layer-0');
+    const dotLayer1 = this.$el.querySelector('.dot-layer-1');
+    const dotLayer2 = this.$el.querySelector('.dot-layer-2');
+
+    var dotAnime = this.$anime.timeline({loop: false});
+
+    dotAnime.add({
+      targets: dotLayer0,
+      opacity: [0.8,1],
+      scale: [1,1.1],
+      easing: "easeOutQuart",
+      duration: 1640
+    })
+    .add({
+      targets: dotLayer1,
+      opacity: [0.8,1],
+      scale: [1,1.1],
+      easing: "easeOutQuart",
+      duration: 1640,
+      offset: 64
+    })
+    .add({
+      targets: dotLayer2,
+      opacity: [0.8,1.1],
+      scale: [1,1.1],
+      easing: "easeOutQuart",
+      duration: 1640,
+      offset: 120
+    })
+
+    document.addEventListener('aos:in', ({ detail }) => {
+      console.log('animated in', detail);
+    });
+
+    document.addEventListener('aos:out', ({ detail }) => {
+      console.log('animated out', detail);
+    });
+  }
+}
+</script>
 
 <style>
 html {
@@ -88,6 +130,8 @@ body {
     height:100vh; 
     width:100vw;
     z-index: 0;
+    transform: scale(0);
+    opacity: 0; 
     position: relative;
   }
 
@@ -97,6 +141,8 @@ body {
     height:100vh; 
     width:100vw;
     z-index: 0;
+    transform: scale(0);
+    opacity: 0; 
     position: relative;
   }
 
@@ -106,6 +152,8 @@ body {
     height:100vh; 
     width:100vw;
     z-index: 0;
+    transform: scale(0);
+    opacity: 0; 
     position: relative;
   }
 

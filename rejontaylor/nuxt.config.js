@@ -26,11 +26,13 @@ module.exports = {
     {src: '~/assets/fonts/Gibson.css', lang: 'css'},
     {src: '~/assets/css/main.scss', lang: 'scss'},
     {src: 'font-awesome/scss/font-awesome.scss', lang: 'scss'}
-    
   ],
   plugins: [
     {src: '~/plugins/mouse-parallax.js', ssr:false},
-    {src: '~/plugins/anime.js', ssr: false}
+    {src: '~/plugins/anime.js', ssr: false},
+    { src: "~/plugins/aos", ssr: false },
+    { src: "~/plugins/sticky", ssr: false },
+    {src: '~/plugins/fullpage', ssr: false}
   ],
   /*
   ** Customize the progress bar color
