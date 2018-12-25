@@ -1,7 +1,7 @@
 <template>
 <section class="container">
     <header className="header">
-      <a href="#home"><h1>{{hero.firstName}}</h1></a>
+      <a href="#home"><h2>{{hero.firstName}}</h2></a>
     </header>
     <full-page ref="fullpage" :options="options" id="fullpage">
     <div class="section home" data-anchor="home">
@@ -46,14 +46,36 @@
        </div>
     </div>
     <div class="section about" data-anchor="about"> 
-      <div class="images">
-        <div class="profile-pic">
-        </div>
-        <div class="secret-pic">
-        </div>
-      </div>
+      
+      
 
       <div class="content">
+        <parallax-container class="profilepic-parallax-container">
+        <div class="images">
+       
+        <div class="profile-pic">
+           <parallax-element class="profilepic-text-parallax" :parallaxStrength="-4" :type="'translation'">
+          <h1 class="profile-backText">Hello</h1>
+          <h1 class="profile-frontText">There</h1>
+           </parallax-element>
+           <parallax-element class="profilebg-parallax" :parallaxStrength="7" :type="'translation'">
+          <div class="bg"></div>
+           </parallax-element>
+           <parallax-element class="profilepic-parallax" :parallaxStrength="7" :type="'translation'">
+          <img :src="about.profileImage.url"/>
+           </parallax-element>
+        </div>
+        
+        <div class="secret-pic">
+        </div>
+
+        <div class="secret-rotate">
+        </div>
+      </div>
+      </parallax-container>
+        
+      <p class="copy" v-html="about.aboutCopy">
+      </p>
       </div>
     </div>
     </full-page>
@@ -76,7 +98,8 @@ export default {
         onLeave: this.onLeaveSection,
         easing: 'easeOutQuad',
         navigation: true, 
-        navigationPosition: 'bottom'
+        navigationPosition: 'left',
+        //animateAnchor: false NOTE(Rejon): May fix scrolling to point on refresh for anchor
       },
       pageAnime:[],
       headerAnime: null,
@@ -87,8 +110,6 @@ export default {
   methods: {
     onLeaveSection(origin, destination,direction) {
       if (destination.index === 0) {
-        this.pageAnime[destination.index].restart();
-
           this.ctaTimeout =  setTimeout(function() {
           if (document.querySelector(".scroll-cta").classList.contains('show')) {
             document.querySelector(".scroll-cta").classList.remove('show'); 
@@ -102,16 +123,18 @@ export default {
           this.headerAnime.play();
           this.headerAnime.reverse();
           this.isShowingHeader = false; 
-          
+          document.querySelector("#fp-nav").classList.add("hide");
         }
-        
       }
+
+      this.pageAnime[destination.index].restart();
 
       if (origin.index === 0) {
         document.querySelector(".scroll-cta").classList.remove('show');
         clearTimeout(this.ctaTimeout);
 
         if (!this.isShowingHeader) {
+          document.querySelector("#fp-nav").classList.remove("hide");
           this.isShowingHeader = true;
           this.headerAnime.restart();
         }
@@ -173,7 +196,7 @@ export default {
       }
     }, 3200);
 
-    const headerName = this.$el.querySelector("header h1");
+    const headerName = this.$el.querySelector("header h2");
     charming(headerName);
     headerName.style.opacity = 1;
     let headerNameTargets = headerName.querySelectorAll("span");
@@ -190,7 +213,7 @@ export default {
       delay: function(el, i) {
         return 60 + 64 * i;
       }
-    })
+    });
     
     this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: true}));
 
@@ -284,7 +307,69 @@ export default {
           delay: function(el, i) {
             return 64 * i
           }
-        })
+        });
+
+
+
+          const profileBackText = this.$el.querySelector(".about .profile-backText");
+          charming(profileBackText);
+          let profileBackChars = profileBackText.querySelectorAll("span");
+          profileBackText.style.opacity = 1; 
+
+          const profileFrontText = this.$el.querySelector(".about .profile-frontText");
+          charming(profileFrontText);
+          let profileFrontChars = profileFrontText.querySelectorAll("span");
+          profileFrontText.style.opacity = 1; 
+
+          const profilePic = this.$el.querySelector(".about .profilepic-parallax img");
+          const profileBG = this.$el.querySelector(".about .profilebg-parallax .bg");
+
+          const profileCopy = this.$el.querySelector(".about .copy");
+
+          this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: true}));
+
+          this.pageAnime[1].add({
+            targets: profileBackChars,
+            opacity: [0,1],
+            translateX:[64,0],
+            easing: "easeOutQuart",
+            duration: 1000, 
+            delay: function(el, i) {
+              return 320 + 32 * i;
+            }
+          }).add({
+            targets: profileFrontChars,
+            opacity: [0,1],
+            translateX:[64,0],
+            easing: "easeOutQuart",
+            duration: 1000, 
+            offset: 64,
+            delay: function(el, i) {
+              return 320 + 32 * i;
+            }
+          }).add({
+            targets: profileBG,
+            opacity: [0,1],
+            scale: [0,1],
+            easing: "easeOutQuart",
+            duration: 800,
+            offset: 164
+          }).add({
+            targets: profilePic,
+            opacity: [0,1],
+            translateX:[-64,0],
+            easing: "easeOutQuart",
+            duration: 800, 
+            offset: 300
+          }).add({
+            targets: profileCopy,
+            opacity: [0,1],
+            translateY:[160,0],
+            easing: "easeOutQuart",
+            duration: 800,
+            offset: 300
+          });
+
   },
   async fetch({store}) {
     store.commit('projects/emptyList'); //Reset all of our stores
@@ -386,20 +471,21 @@ export default {
     pointer-events: none;
   }
 
-  header h1 {
+  header h2 {
     color: $white; 
     font-size: 3.2em; 
     margin-left: 0em;
     opacity: 0;
+    text-shadow: 0 4px 7px #0101093d;
   }
 
-  header h1 span{
+  header h2 span{
         position: relative;
     display: inline-block;
     vertical-align: top;
   }
 
-  header h1 span:first-of-type{
+  header h2 span:first-of-type{
     left: 33px;
     width: 2ch;
     overflow: hidden;
@@ -407,14 +493,7 @@ export default {
   }
 
   #fp-nav {
-    bottom: 16px !important;
-    left:50% !important; 
-    transform: translateX(-50%) !important;
     opacity:1 !important;
-  }
-
-  #fp-nav ul li{
-    display: inline-block !important;
   }
 
   #fp-nav ul li a span{
@@ -506,7 +585,9 @@ export default {
   }
 
   .home .title h1 > span,
-  .home .title h2 > span {
+  .home .title h2 > span,
+  .about .profile-backText span,
+  .about .profile-frontText span {
     position: relative;
     display: inline-block;
     opacity: 0;
@@ -645,12 +726,13 @@ export default {
     animation-iteration-count: infinite;
     animation-duration: 1s;
     opacity: 0;
-    transition: opacity .2s ease;
+    transition: all .2s ease;
   }
 
   .home .scroll-cta.show {
     opacity: 1; 
-    transition: opacity .4s ease;
+    bottom:10px;
+    transition: all .4s ease;
   }
 
   .home .scroll-cta svg {
@@ -682,5 +764,150 @@ export default {
       bottom: 30px;
     }
   }
+
+  .about .about-header {
+    position: absolute;
+    left: 10%;
+    top: 6%;
+    color: $white;
+    opacity: 1;
+    z-index: 0;
+  }
+
+  .about .about-header {
+    text-shadow: 0 4px 7px $textShadow;
+  }
+
+  .about .content {
+    z-index: 10; 
+    position: relative;
+    text-align: center; 
+  }
+
+  .about .content .images{
+    display:inline-block;
+    vertical-align: middle; 
+    overflow: hidden; 
+    height: 100%; 
+    max-width: 564px;
+    width: calc(44.7vw + 4em);
+    padding-right: 3em;
+    padding-left: 10em;
+    position: relative;
+    top: -34px; 
+    padding-top:32px;
+  }
+
+  .about .content .images .profile-pic{
+    height: 600px; 
+    width: auto;
+    min-width: 200px;
+    position: relative;
+    overflow: visible;
+    left:0;
+  }
+
+  .about .content .images .profile-pic .profile-backText {
+    color: $white; 
+    position: relative;
+    left: 0px; 
+    top: 0px;
+    font-size: 6.4em;
+    z-index: 1000;
+    text-shadow: 0 4px 7px rgba(1, 1, 9, 0.79);
+  }
+
+  .about .content .images .profile-pic .profile-frontText {
+        color: #f9f7f4;
+    position: relative;
+    left: 32px;
+    top: -64px;
+    z-index: 1000;
+    font-size: 6.4em;
+    text-shadow: 0 4px 7px rgba(1, 1, 9, 0.79);
+  }
+
+  .about .content .images .profile-pic .bg{
+        background: linear-gradient(32deg, #e4259b, #df0077, #6c15b5);
+            background-size: 100% 164%;
+    background-position: top right;
+    width: 100%;
+    height: 470px;
+    position: relative;
+    border-radius: 5px;
+    color: #5a04a2;
+    bottom: 0;
+  }
+
+  .about .content .images .profile-pic img{
+    width: 130%;
+    left: -8em;
+    position: relative;
+    bottom: -6px;
+    z-index: 100;
+  }
+
+  .about .content .copy{
+    width: 40vw; 
+    max-width: 648px; 
+    display: inline-block; 
+    vertical-align: middle; 
+    pointer-events: all;
+    height: auto;
+    text-align: left;
+    color: $white;
+    font-size: 25px;
+    margin-left: 1em;
+  }
+
+  .about .content .copy a{
+    color: $white;
+  }
+
+  #fp-nav.fp-left {
+    left: 30px; 
+    top: 100px; 
+    opacity: 1 !important; 
+    transition: all .32s ease-in-out;
+  }
+
+  #fp-nav.fp-left.hide {
+    left: 64px;
+    opacity:0 !important; 
+    transition: all .5s ubic-bezier(0.6, -0.28, 0.735, 0.045);
+  }
+
+  .profilepic-parallax-container {
+    position: relative;
+    display: inline-block;
+    pointer-events: all;
+  }
+
+  .profilepic-parallax-container .profilepic-text-parallax {
+    left: -196px; 
+    top: 117px;
+    position: relative;
+    pointer-events: all;
+    z-index: 10000;
+  }
+
+  .profilepic-parallax-container .profilebg-parallax {
+    position: absolute;
+    width: 100%; 
+    height: 470px; 
+    left: 0; 
+    bottom: 0; 
+    pointer-events: all;
+  }
+
+  .profilepic-parallax-container .profilepic-parallax {
+    position: absolute;
+    bottom: 0; 
+    overflow: hidden;
+    border-radius: 5px;
+    width: 400px;
+    pointer-events: all;
+  }
+
 </style>
 
