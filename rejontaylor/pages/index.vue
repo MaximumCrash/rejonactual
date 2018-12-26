@@ -49,19 +49,19 @@
       
       
 
-      <div class="content">
+      <div class="content side-card">
         <parallax-container class="profilepic-parallax-container">
         <div class="images">
        
         <div class="profile-pic">
-           <parallax-element class="profilepic-text-parallax" :parallaxStrength="-4" :type="'translation'">
+           <parallax-element class="profilepic-text-parallax" :parallaxStrength="-6" :type="'translation'">
           <h1 class="profile-backText">Hello</h1>
           <h1 class="profile-frontText">There</h1>
            </parallax-element>
-           <parallax-element class="profilebg-parallax" :parallaxStrength="7" :type="'translation'">
+           <parallax-element class="profilebg-parallax" :parallaxStrength="9" :type="'translation'">
           <div class="bg"></div>
            </parallax-element>
-           <parallax-element class="profilepic-parallax" :parallaxStrength="7" :type="'translation'">
+           <parallax-element class="profilepic-parallax" :parallaxStrength="9" :type="'translation'">
           <img :src="about.profileImage.url"/>
            </parallax-element>
         </div>
@@ -70,11 +70,70 @@
         </div>
 
         <div class="secret-rotate">
+                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+          <style type="text/css">
+            .st0{fill:#F9F7F4;}
+          </style>
+          <path class="st0" d="M440.9,12.6l4,82.8C399.4,41.9,331.7,8,256,8C134.8,8,33.9,94.9,12.3,209.8c-1.4,7.4,4.3,14.2,11.8,14.2h49.1
+            c5.6,0,10.4-3.8,11.7-9.3C103.4,137.4,172.9,80,256,80c60.9,0,114.5,30.9,146.1,77.8l-101.5-4.9c-6.8-0.3-12.6,5.1-12.6,12v47.4
+            c0,6.6,5.4,12,12,12h200.3c6.6,0,12-5.4,12-12V12c0-6.6-5.4-12-12-12h-47.4C446.1,0,440.6,5.7,440.9,12.6z M256,432
+            c-60.9,0-114.5-30.9-146.1-77.8l101.9,4.9c6.8,0.3,12.6-5.1,12.6-12v-47.4c0-6.6-5.4-12-12-12H12c-6.6,0-12,5.4-12,12V500
+            c0,6.6,5.4,12,12,12h47.4c6.9,0,12.3-5.7,12-12.6l-4.1-82.6C112.7,470.2,180.4,504,256,504c121.2,0,222.1-86.9,243.7-201.8
+            c1.4-7.4-4.3-14.2-11.8-14.2h-49.1c-5.6,0-10.4,3.8-11.7,9.3C408.6,374.6,339.1,432,256,432z"/>
+          </svg>
         </div>
       </div>
       </parallax-container>
         
       <p class="copy" v-html="about.aboutCopy">
+      </p>
+      </div>
+    </div>
+    <div class="section" data-anchor="works">
+
+    </div>
+    <div class="section" data-anchor="works-2">
+
+    </div>
+    <div class="section" data-anchor="works-3">
+
+    </div>
+    <div class="section" data-anchor="works-4">
+
+    </div>
+    <div class="section contact" data-anchor="contact">
+      <div class="content side-card">
+        <parallax-container class="profilepic-parallax-container">
+        <div class="images">
+       
+        <div class="profile-pic">
+           <parallax-element class="profilepic-text-parallax" :parallaxStrength="-6" :type="'translation'">
+          <h1 class="profile-backText">Get In</h1>
+          <h1 class="profile-frontText">Touch</h1>
+           </parallax-element>
+           <parallax-element class="profilebg-parallax" :parallaxStrength="9" :type="'translation'">
+          <div class="bg"></div>
+           </parallax-element>
+           <parallax-element class="profilepic-parallax" :parallaxStrength="9" :type="'translation'">
+          <img :src="about.profileImage.url"/>
+           </parallax-element>
+        </div>
+        
+      </div>
+      </parallax-container>
+        
+      <p class="copy">
+        Let's make something great together!
+
+        <a href="mailto:rejon@maximumcrash.com">rejon@maximumcrash.com</a>
+        <ul class="socialLinks">
+          <li v-for="link in socialLinks" :key="link._id">
+            <a :href="link.linkUrl" target="_blank">
+              <img :src="link.icon.url"/>
+            </a>
+          </li>
+        </ul>
       </p>
       </div>
     </div>
@@ -93,13 +152,14 @@ export default {
   data() {
     return {
       options: {
-        anchors: ['home', 'about', 'works', 'contact'],
+        anchors: ['home', 'about', 'works','works-2', 'works-3','works-4', 'contact'],
         licenseKey: process.env.FP_LICENSE_KEY || '4A6E5C2A-3C2D488B-95692C91-0D280E52',
         onLeave: this.onLeaveSection,
+        afterLoad: this.afterLoad,
         easing: 'easeOutQuad',
         navigation: true, 
         navigationPosition: 'left',
-        //animateAnchor: false NOTE(Rejon): May fix scrolling to point on refresh for anchor
+        animateAnchor: false
       },
       pageAnime:[],
       headerAnime: null,
@@ -108,6 +168,22 @@ export default {
     }
   },
   methods: {
+    async afterLoad(origin, destination, direction) {
+      if (origin === null && direction === null) {
+        //We've loaded for the first time.
+        if (destination.index === 0) { //We're on the homepage
+          document.querySelector("#fp-nav").classList.remove("show");
+        }
+        else { //We're on every other page
+          document.querySelector("#fp-nav").classList.add("show");
+        }
+
+        this.options.animateAnchor = true;
+        this.pageAnime[destination.index].restart();
+      }
+
+      
+    },
     onLeaveSection(origin, destination,direction) {
       if (destination.index === 0) {
           this.ctaTimeout =  setTimeout(function() {
@@ -123,7 +199,7 @@ export default {
           this.headerAnime.play();
           this.headerAnime.reverse();
           this.isShowingHeader = false; 
-          document.querySelector("#fp-nav").classList.add("hide");
+          document.querySelector("#fp-nav").classList.remove("show");
         }
       }
 
@@ -134,7 +210,7 @@ export default {
         clearTimeout(this.ctaTimeout);
 
         if (!this.isShowingHeader) {
-          document.querySelector("#fp-nav").classList.remove("hide");
+          document.querySelector("#fp-nav").classList.add("show");
           this.isShowingHeader = true;
           this.headerAnime.restart();
         }
@@ -146,9 +222,7 @@ export default {
       return this.$store.getters['projects/list']
     },
     socialLinks() {
-      return this.$store.getters['socials/list'].filter(function(u) {
-        return u.inheader;
-      })
+      return this.$store.getters['socials/list']
     },
     currentProject() {
       return this.$store.getters['projects/currentProject']
@@ -215,7 +289,7 @@ export default {
       }
     });
     
-    this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: true}));
+    this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
 
     
         this.pageAnime[0].add({
@@ -326,7 +400,7 @@ export default {
 
           const profileCopy = this.$el.querySelector(".about .copy");
 
-          this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: true}));
+          this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
 
           this.pageAnime[1].add({
             targets: profileBackChars,
@@ -370,6 +444,16 @@ export default {
             offset: 300
           });
 
+          this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
+
+          this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
+
+          this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
+
+          this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
+
+          this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
+
   },
   async fetch({store}) {
     store.commit('projects/emptyList'); //Reset all of our stores
@@ -408,7 +492,6 @@ export default {
                   aboutCopy,
                   currentlyLink,
                   currentlyText,
-                  basedIn,
                   _id 
                 },
                 footers {
@@ -430,7 +513,6 @@ export default {
                     url
                   }, 
                   _id,
-                  inheader,
                   linkUrl
                 }
           }`
@@ -490,10 +572,6 @@ export default {
     width: 2ch;
     overflow: hidden;
     letter-spacing: 84px;
-  }
-
-  #fp-nav {
-    opacity:1 !important;
   }
 
   #fp-nav ul li a span{
@@ -778,13 +856,32 @@ export default {
     text-shadow: 0 4px 7px $textShadow;
   }
 
-  .about .content {
+  .about .secret-rotate {
+    position: absolute;
+    height: 25px; 
+    width: 25px; 
+    right: 3px; 
+    bottom: 3px; 
+    pointer-events: all; 
+    transform: rotate(0deg);
+    transition:  all 1.32s ease-in-out;
+    cursor: pointer;
+    opacity:0.8;
+  }
+
+  .about .secret-rotate:hover {
+    transform: rotate(360deg);
+    transition:  all 4s ease;
+  }
+
+
+  .content.side-card {
     z-index: 10; 
     position: relative;
     text-align: center; 
   }
 
-  .about .content .images{
+  .content.side-card .images{
     display:inline-block;
     vertical-align: middle; 
     overflow: hidden; 
@@ -798,7 +895,7 @@ export default {
     padding-top:32px;
   }
 
-  .about .content .images .profile-pic{
+  .content.side-card .images .profile-pic{
     height: 600px; 
     width: auto;
     min-width: 200px;
@@ -807,7 +904,7 @@ export default {
     left:0;
   }
 
-  .about .content .images .profile-pic .profile-backText {
+  .content.side-card .images .profile-pic .profile-backText {
     color: $white; 
     position: relative;
     left: 0px; 
@@ -817,7 +914,7 @@ export default {
     text-shadow: 0 4px 7px rgba(1, 1, 9, 0.79);
   }
 
-  .about .content .images .profile-pic .profile-frontText {
+  .content.side-card .images .profile-pic .profile-frontText {
         color: #f9f7f4;
     position: relative;
     left: 32px;
@@ -827,7 +924,7 @@ export default {
     text-shadow: 0 4px 7px rgba(1, 1, 9, 0.79);
   }
 
-  .about .content .images .profile-pic .bg{
+  .content.side-card .images .profile-pic .bg{
         background: linear-gradient(32deg, #e4259b, #df0077, #6c15b5);
             background-size: 100% 164%;
     background-position: top right;
@@ -839,7 +936,7 @@ export default {
     bottom: 0;
   }
 
-  .about .content .images .profile-pic img{
+  .content.side-card .images .profile-pic img{
     width: 130%;
     left: -8em;
     position: relative;
@@ -847,7 +944,7 @@ export default {
     z-index: 100;
   }
 
-  .about .content .copy{
+  .content.side-card .copy{
     width: 40vw; 
     max-width: 648px; 
     display: inline-block; 
@@ -860,21 +957,22 @@ export default {
     margin-left: 1em;
   }
 
-  .about .content .copy a{
+  .content .copy a{
     color: $white;
   }
 
-  #fp-nav.fp-left {
+  #fp-nav.fp-left.show {
     left: 30px; 
-    top: 100px; 
+    top: 140px; 
     opacity: 1 !important; 
     transition: all .32s ease-in-out;
   }
 
-  #fp-nav.fp-left.hide {
+  #fp-nav.fp-left {
     left: 64px;
+    top:140px;
     opacity:0 !important; 
-    transition: all .5s ubic-bezier(0.6, -0.28, 0.735, 0.045);
+    transition: all .5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
   }
 
   .profilepic-parallax-container {
@@ -907,6 +1005,43 @@ export default {
     border-radius: 5px;
     width: 400px;
     pointer-events: all;
+  }
+
+  .contact .content .copy {
+    font-size: 30px;
+  }
+
+  .contact .content .copy > a {
+    margin-top: 1em; 
+    display: block; 
+    margin-bottom: .64em;
+  }
+
+  .contact .content .copy .socialLinks {
+    padding: 0; 
+    list-style-type: none;
+  }
+
+  .contact .content .copy .socialLinks li{
+    display:inline-block;
+    width: 55px; 
+    height: 55px; 
+    margin-right: .25em;
+  }
+
+  .contact .content .copy .socialLinks li:not(:first-of-type){
+    margin-left:.25em;
+  }
+
+  .contact .content .copy .socialLinks li a{
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    position: relative;
+  }
+
+  .contact .content .copy .socialLinks li a{
+
   }
 
 </style>
