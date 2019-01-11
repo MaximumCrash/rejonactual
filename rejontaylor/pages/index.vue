@@ -50,48 +50,54 @@
       
 
       <div class="content side-card">
-        <parallax-container class="profilepic-parallax-container">
+        <div class="profilepic-parallax-container">
         <div class="images">
        
         <div class="profile-pic">
-           <parallax-element class="profilepic-text-parallax" :parallaxStrength="-6" :type="'translation'">
+           <div class="profilepic-text-parallax">
           <h1 class="profile-backText">Hello</h1>
           <h1 class="profile-frontText">There</h1>
-           </parallax-element>
-           <parallax-element class="profilebg-parallax" :parallaxStrength="9" :type="'translation'">
+           </div>
+           <div class="profilebg-parallax">
           <div class="bg"></div>
-           </parallax-element>
-           <parallax-element class="profilepic-parallax" :parallaxStrength="9" :type="'translation'">
+           </div>
+           <div class="profilepic-parallax">
           <img :src="about.profileImage.url"/>
-           </parallax-element>
-        </div>
-        
-        <div class="secret-pic">
-        </div>
-
-        <div class="secret-rotate">
-                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-          <style type="text/css">
-            .st0{fill:#F9F7F4;}
-          </style>
-          <path class="st0" d="M440.9,12.6l4,82.8C399.4,41.9,331.7,8,256,8C134.8,8,33.9,94.9,12.3,209.8c-1.4,7.4,4.3,14.2,11.8,14.2h49.1
-            c5.6,0,10.4-3.8,11.7-9.3C103.4,137.4,172.9,80,256,80c60.9,0,114.5,30.9,146.1,77.8l-101.5-4.9c-6.8-0.3-12.6,5.1-12.6,12v47.4
-            c0,6.6,5.4,12,12,12h200.3c6.6,0,12-5.4,12-12V12c0-6.6-5.4-12-12-12h-47.4C446.1,0,440.6,5.7,440.9,12.6z M256,432
-            c-60.9,0-114.5-30.9-146.1-77.8l101.9,4.9c6.8,0.3,12.6-5.1,12.6-12v-47.4c0-6.6-5.4-12-12-12H12c-6.6,0-12,5.4-12,12V500
-            c0,6.6,5.4,12,12,12h47.4c6.9,0,12.3-5.7,12-12.6l-4.1-82.6C112.7,470.2,180.4,504,256,504c121.2,0,222.1-86.9,243.7-201.8
-            c1.4-7.4-4.3-14.2-11.8-14.2h-49.1c-5.6,0-10.4,3.8-11.7,9.3C408.6,374.6,339.1,432,256,432z"/>
-          </svg>
+           </div>
         </div>
       </div>
-      </parallax-container>
+      </div>
         
       <p class="copy" v-html="about.aboutCopy">
       </p>
       </div>
     </div>
-    <div class="section" data-anchor="works">
+    <div class="section project project0" data-anchor="works">
+      <a class="content" :href="'/' + projects[0].permalink">
+        <div class="project-title">
+          <h1 class="layer0">{{projects[0].title}}</h1>
+          <h1 class="layer1">{{projects[0].title}}</h1>
+          <h1 class="layer2">{{projects[0].title}}</h1>
+          <h1 class="layer3">{{projects[0].title}}</h1>
+          <h1 class="layer4">{{projects[0].title}}</h1>
+          <h1 class="layer5">{{projects[0].title}}</h1>
+        </div>
+        <div class="project-blurb">
+          {{projects[0].blurb}}
+        </div>
+        
+        <div class="picture">
+          <div class="image" v-if="projects[0].heroImage !== null">
+            <img :src="projects[0].heroImage.url"/>
+          </div>
+          <div class="hover-vid" v-if="projects[0].video !== null">
+            <video data-gif="1" muted playsinline preload="metadata" loop>
+              <source :src="projects[0].hoverVidSrc" type="video/mp4" data-no-instant>
+            </video>
 
+          </div>
+        </div>
+      </a>
     </div>
     <div class="section" data-anchor="works-2">
 
@@ -104,24 +110,24 @@
     </div>
     <div class="section contact" data-anchor="contact">
       <div class="content side-card">
-        <parallax-container class="profilepic-parallax-container">
+        <div class="profilepic-parallax-container">
         <div class="images">
        
         <div class="profile-pic">
-           <parallax-element class="profilepic-text-parallax" :parallaxStrength="-6" :type="'translation'">
+           <div class="profilepic-text-parallax">
           <h1 class="profile-backText">Get In</h1>
           <h1 class="profile-frontText">Touch</h1>
-           </parallax-element>
-           <parallax-element class="profilebg-parallax" :parallaxStrength="9" :type="'translation'">
+           </div>
+           <div class="profilebg-parallax">
           <div class="bg"></div>
-           </parallax-element>
-           <parallax-element class="profilepic-parallax" :parallaxStrength="9" :type="'translation'">
+           </div>
+           <div class="profilepic-parallax">
           <img :src="about.profileImage.url"/>
-           </parallax-element>
+           </div>
         </div>
         
       </div>
-      </parallax-container>
+      </div>
         
       <p class="copy">
         Let's make something great together!
@@ -159,7 +165,8 @@ export default {
         easing: 'easeOutQuad',
         navigation: true, 
         navigationPosition: 'left',
-        animateAnchor: false
+        animateAnchor: false,
+        lazyLoading: false
       },
       pageAnime:[],
       headerAnime: null,
@@ -173,13 +180,25 @@ export default {
         //We've loaded for the first time.
         if (destination.index === 0) { //We're on the homepage
           document.querySelector("#fp-nav").classList.remove("show");
+
+          this.ctaTimeout = setTimeout(function() {
+            if (scrollCTA.classList.contains('show')) {
+              scrollCTA.classList.remove('show'); 
+            }
+            else {
+              scrollCTA.classList.add('show'); 
+            }
+          }, 3200);
         }
         else { //We're on every other page
           document.querySelector("#fp-nav").classList.add("show");
         }
 
         this.options.animateAnchor = true;
-        this.pageAnime[destination.index].restart();
+        if (this.pageAnime !== null) 
+        {
+          this.pageAnime[destination.index].restart();
+        }
       }
 
       
@@ -215,7 +234,7 @@ export default {
           this.headerAnime.restart();
         }
       }
-    }
+    },
   },
   computed: {
     projects() { //NOTE(Rejon): Don't need to worry about filtering because our query does it for us.
@@ -261,14 +280,7 @@ export default {
 
     const scrollCTA = this.$el.querySelector(".scroll-cta");
 
-    this.ctaTimeout = setTimeout(function() {
-      if (scrollCTA.classList.contains('show')) {
-        scrollCTA.classList.remove('show'); 
-      }
-      else {
-        scrollCTA.classList.add('show'); 
-      }
-    }, 3200);
+    
 
     const headerName = this.$el.querySelector("header h2");
     charming(headerName);
@@ -385,18 +397,18 @@ export default {
 
 
 
-          const profileBackText = this.$el.querySelector(".about .profile-backText");
+          const profileBackText = this.$el.querySelector(".about .profilepic-parallax-container .profilepic-text-parallax .profile-backText");
           charming(profileBackText);
           let profileBackChars = profileBackText.querySelectorAll("span");
           profileBackText.style.opacity = 1; 
 
-          const profileFrontText = this.$el.querySelector(".about .profile-frontText");
+          const profileFrontText = this.$el.querySelector(".about .profilepic-parallax-container .profilepic-text-parallax .profile-frontText");
           charming(profileFrontText);
           let profileFrontChars = profileFrontText.querySelectorAll("span");
           profileFrontText.style.opacity = 1; 
 
-          const profilePic = this.$el.querySelector(".about .profilepic-parallax img");
-          const profileBG = this.$el.querySelector(".about .profilebg-parallax .bg");
+          const profilePic = this.$el.querySelector(".about .profilepic-parallax-container .profilepic-parallax img");
+          const profileBG = this.$el.querySelector(".about .profilepic-parallax-container .profilebg-parallax .bg");
 
           const profileCopy = this.$el.querySelector(".about .copy");
 
@@ -444,7 +456,73 @@ export default {
             offset: 300
           });
 
+          let works = [];
+
+          works[0] = {};
+          var workSection = this.$el.querySelector(".project.project0");
+          var workTitleWrappers = workSection.querySelectorAll(".project-title h1");
+
+          let workTitleTargets = [];
+
+          workTitleWrappers.forEach(wrapper => {
+            charming(wrapper);
+            wrapper.style.opacity = 1;
+            let target = wrapper.querySelectorAll("span");
+            workTitleTargets.push(target);
+          });
+
+          var workBlurb = workSection.querySelector(".project-blurb");
+
+          var workImage = workSection.querySelector(".picture");
+          if (this.projects[0].video !== null) {
+            var video = workSection.querySelector(".picture .hover-vid video");
+            var image = workSection.querySelector(".picture .image");
+            video.addEventListener('mouseover', function() {
+              video.currentTime = 0; 
+              video.play();
+              image.classList.add('showvid');
+            });
+            video.addEventListener('mouseleave', function() {
+              video.pause();
+              image.classList.remove('showvid');
+            });
+          }
           this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
+
+          workTitleTargets.forEach((target, i) => {
+            let offsetClamp = Math.min(Math.max(32 + (4 * i), 32), 320);
+            let duration = Math.min(Math.max(900 + (100 * i), 900), 3250)
+            //let delay = Math.min(Math.max(320/(i+1) + 64 * i, 60), 320);
+            
+            this.pageAnime[2].add({
+              targets: target,
+              opacity: [0,1],
+              translateX:[160,0],
+              easing: "easeOutQuart",
+              duration: duration, 
+              offset: offsetClamp,
+              delay: function(el, i) {
+                return Math.min(Math.max(40 + 64 * i, 60), 420)
+              }
+            })
+          });
+
+
+          this.pageAnime[2].add({
+            targets: workBlurb,
+            opacity: [0,1],
+            translateX: [132, 0],
+            easing: "easeOutQuart",
+            duration: 640,
+            offset: 164
+          }).add({
+            targets: workImage,
+            opacity: [0,1],
+            translateX: [132, 0],
+            easing: "easeOutQuart",
+            duration: 1640,
+            offset: 232
+          });
 
           this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
 
@@ -453,6 +531,65 @@ export default {
           this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
 
           this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
+
+          const contactBackText = this.$el.querySelector(".contact .profile-backText");
+          charming(contactBackText);
+          let contactBackChars = contactBackText.querySelectorAll("span");
+          contactBackText.style.opacity = 1; 
+
+          const contactFrontText = this.$el.querySelector(".contact .profile-frontText");
+          charming(contactFrontText);
+          let contactFrontChars = contactFrontText.querySelectorAll("span");
+          contactFrontText.style.opacity = 1; 
+
+          const contactPic = this.$el.querySelector(".contact .profilepic-parallax img");
+          const contactBG = this.$el.querySelector(".contact .profilebg-parallax .bg");
+
+          const contactCopy = this.$el.querySelector(".contact .copy");
+
+          this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
+
+          this.pageAnime[6].add({
+            targets: contactBackChars,
+            opacity: [0,1],
+            translateX:[64,0],
+            easing: "easeOutQuart",
+            duration: 1000, 
+            delay: function(el, i) {
+              return 320 + 32 * i;
+            }
+          }).add({
+            targets: contactFrontChars,
+            opacity: [0,1],
+            translateX:[64,0],
+            easing: "easeOutQuart",
+            duration: 1000, 
+            offset: 64,
+            delay: function(el, i) {
+              return 320 + 32 * i;
+            }
+          }).add({
+            targets: contactBG,
+            opacity: [0,1],
+            scale: [0,1],
+            easing: "easeOutQuart",
+            duration: 800,
+            offset: 164
+          }).add({
+            targets: contactPic,
+            opacity: [0,1],
+            translateX:[-64,0],
+            easing: "easeOutQuart",
+            duration: 800, 
+            offset: 300
+          }).add({
+            targets: contactCopy,
+            opacity: [0,1],
+            translateY:[160,0],
+            easing: "easeOutQuart",
+            duration: 800,
+            offset: 300
+          });
 
   },
   async fetch({store}) {
@@ -478,6 +615,10 @@ export default {
                   title,
                   _id, 
                   heroImage {
+                    _id,
+                    url
+                  },
+    							video{
                     _id,
                     url
                   }
@@ -514,13 +655,23 @@ export default {
                   }, 
                   _id,
                   linkUrl
-                }
+                },
+  							
           }`
       }
     })
     response.data.projects.forEach(project => {
+      //NOTE(Rejon): This only works if it's coming from cloudinary
+      let videoScr = project.video.url;
+      let scrSplit = videoScr.split("/");
+
+      var newVideoScr = scrSplit[0] + "//" + scrSplit[1] + "/" + scrSplit[2] + "/" + scrSplit[3] + "/" + scrSplit[4] + "/" + scrSplit[5] + "/" + "/e_preview:duration_8" +scrSplit[6] + "/" + scrSplit[7];
+
+
+
       store.commit('projects/add', {
         id: project._id, 
+        hoverVidSrc: newVideoScr,
         ...project
       })
     });
@@ -528,6 +679,8 @@ export default {
     let abouts = response.data.abouts; 
     let footers = response.data.footers; 
     let heroes = response.data.heroes;
+
+    console.log(response.data.projects);
 
     store.commit('setSite', {about: abouts[0], footer: footers[0], hero: heroes[0]});
 
@@ -613,14 +766,16 @@ export default {
     opacity:0;
   }
 
-  .home .title h1.layer0 {
+  .home .title h1.layer0,
+  .project .content .project-title h1.layer0 {
     color: $white; 
     z-index: 100;
-   
+    position: relative;
   }
 
    
-  .home .title h1:not(.layer0) {
+  .home .title h1:not(.layer0),
+  .project .content .project-title h1:not(.layer0) {
     position: absolute;
     left:0;
     top:0; 
@@ -628,34 +783,39 @@ export default {
     
   }
 
-  .home .title h1.layer1 {
+  .home .title h1.layer1,
+  .project .content .project-title h1.layer1 {
     color: $theme4; 
     z-index: 99;
      transform: translateX(0px);
      transition: all .35s cubic-bezier(0.6, -0.28, 0.735, 0.045);
   }
-  .home .title h1.layer2 {
+  .home .title h1.layer2,
+  .project .content .project-title h1.layer2 {
     color: $theme3; 
     z-index: 98;
      transform: translateX(0px);
      transition: all .3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
   }
 
-  .home .title h1.layer3 {
+  .home .title h1.layer3,
+  .project .content .project-title h1.layer3 {
     color: $theme2; 
     z-index:97; 
      transform: translateX(0px);
      transition: all .25s cubic-bezier(0.6, -0.28, 0.735, 0.045);
   }  
 
-  .home .title h1.layer4 {
+  .home .title h1.layer4,
+  .project .content .project-title h1.layer4 {
     color: $theme1; 
     z-index:96;
      transform: translateX(0px);
      transition: all .2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
   }
 
-  .home .title h1.layer5 {
+  .home .title h1.layer5,
+  .project .content .project-title h1.layer5 {
     color: $theme0; 
     z-index: 95;
      transform: translateX(0px);
@@ -665,7 +825,10 @@ export default {
   .home .title h1 > span,
   .home .title h2 > span,
   .about .profile-backText span,
-  .about .profile-frontText span {
+  .about .profile-frontText span,
+  .contact .profile-backText span,
+  .contact .profile-frontText span,
+  .project .content .project-title h1 > span {
     position: relative;
     display: inline-block;
     opacity: 0;
@@ -856,25 +1019,6 @@ export default {
     text-shadow: 0 4px 7px $textShadow;
   }
 
-  .about .secret-rotate {
-    position: absolute;
-    height: 25px; 
-    width: 25px; 
-    right: 3px; 
-    bottom: 3px; 
-    pointer-events: all; 
-    transform: rotate(0deg);
-    transition:  all 1.32s ease-in-out;
-    cursor: pointer;
-    opacity:0.8;
-  }
-
-  .about .secret-rotate:hover {
-    transform: rotate(360deg);
-    transition:  all 4s ease;
-  }
-
-
   .content.side-card {
     z-index: 10; 
     position: relative;
@@ -978,14 +1122,12 @@ export default {
   .profilepic-parallax-container {
     position: relative;
     display: inline-block;
-    pointer-events: all;
   }
 
   .profilepic-parallax-container .profilepic-text-parallax {
     left: -196px; 
     top: 117px;
     position: relative;
-    pointer-events: all;
     z-index: 10000;
   }
 
@@ -995,7 +1137,6 @@ export default {
     height: 470px; 
     left: 0; 
     bottom: 0; 
-    pointer-events: all;
   }
 
   .profilepic-parallax-container .profilepic-parallax {
@@ -1004,11 +1145,86 @@ export default {
     overflow: hidden;
     border-radius: 5px;
     width: 400px;
+  }
+
+  .project a.content {
+    text-decoration: none;
+    position: relative; 
+    width: calc(100% - 20vw);
+    display: block; 
+    margin: auto;
     pointer-events: all;
+  }
+
+  .project .content .project-title{
+    position: absolute;
+    left:0; 
+    pointer-events: none;
+  }
+
+  .project .content .project-title h1:last-of-type{
+      text-shadow: 0 4px 7px #0101093d;
+  }
+
+  .project .content .project-blurb {
+    z-index: 100; 
+    font-family: 'Gibson';
+    color: $white; 
+    position: absolute;
+    left: 0; 
+    top: 8.5em; 
+    font-size: 22px; 
+    font-weight: 500; 
+    max-width: 723px;
+    pointer-events: none;
+    text-shadow: 0 4px 7px #0101093d;
+  }
+
+  .project .content .picture {
+    width: 55vw; 
+    height: 30.94vw; 
+    position: relative;
+    right: 0; 
+    margin-left: auto; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+
+  .project .content .picture .image{
+    position: absolute;
+    width: 100%; 
+    height: 100%;
+    opacity: 1;
+    transition: all .164s ease-in-out;
+  }
+
+  .project .content .picture .image.showvid{
+    opacity: 0;
+    transition: all .2s ease-in-out;
+  }
+
+  .project .content .picture .image img {
+        width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .project .content .picture .hover-vid {
+    width: 100%; 
+    height: 100%; 
+  }
+
+  .project .content .picture .hover-vid video{
+    display: block; 
+    width: 100%; 
+    height: 100%; 
   }
 
   .contact .content .copy {
     font-size: 30px;
+  }
+
+  .contact .profile-backText span:nth-child(4) {
+    margin-left: 20px;
   }
 
   .contact .content .copy > a {
@@ -1026,7 +1242,15 @@ export default {
     display:inline-block;
     width: 55px; 
     height: 55px; 
+    position: relative;
+    top: 0;
     margin-right: .25em;
+    transition: all .1s ease-in-out;
+  }
+
+  .contact .content .copy .socialLinks li:hover{
+    top: -7px; 
+    transition: all .1s ease-in-out;
   }
 
   .contact .content .copy .socialLinks li:not(:first-of-type){
@@ -1038,10 +1262,6 @@ export default {
     width: 100%;
     display: inline-block;
     position: relative;
-  }
-
-  .contact .content .copy .socialLinks li a{
-
   }
 
 </style>
