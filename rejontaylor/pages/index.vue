@@ -72,8 +72,8 @@
       </p>
       </div>
     </div>
-    <div class="section project project0" data-anchor="works">
-      <a class="content" :href="'/' + projects[0].permalink">
+    <div class="section project project0" data-anchor="works" v-if="projects[0] !== null">
+      <a class="content" :href="'/' + (projects[0] ? projects[0].permalink : '')">
         <div class="project-title">
           <h1 class="layer0">{{projects[0].title}}</h1>
           <h1 class="layer1">{{projects[0].title}}</h1>
@@ -87,15 +87,25 @@
         </div>
         
         <div class="picture">
+          <div class="slides">
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider video">
+            <div class="hover-vid" v-if="projects[0].video !== null">
+              <video data-gif="1" muted playsinline preload="metadata">
+                <source :src="projects[0].hoverVidSrc" type="video/mp4" data-no-instant>
+              </video>
+            </div>
+          </div>
+          </div>
+          
           <div class="image" v-if="projects[0].heroImage !== null">
             <img :src="projects[0].heroImage.url"/>
           </div>
-          <div class="hover-vid" v-if="projects[0].video !== null">
-            <video data-gif="1" muted playsinline preload="metadata" loop>
-              <source :src="projects[0].hoverVidSrc" type="video/mp4" data-no-instant>
-            </video>
-
-          </div>
+          
         </div>
       </a>
     </div>
@@ -171,7 +181,9 @@ export default {
       pageAnime:[],
       headerAnime: null,
       isShowingHeader: false,
-      ctaTimeout: null
+      ctaTimeout: null,
+      projectVideoTimer: null,
+      projectVideoAnime: []
     }
   },
   methods: {
@@ -234,6 +246,23 @@ export default {
           this.headerAnime.restart();
         }
       }
+
+      // clearTimeout(this.projectVideoTimer);
+
+      // if (destination.index >= 2 || destination.index <= 5) { //We've entered range of our projects
+      //   let projectIndex = destination.index - 2;
+
+      //   if (this.projects[projectIndex].video !== null) {
+      //     this.projectVideoTimer = setTimeout(function () {
+      //     //Play animation into the video
+      //     this.projectVideoAnime[projectIndex]
+
+      //     //When the video ends play the animation back and reset the timeout.
+
+      //   }, 5000);
+      //   }
+        
+      // }
     },
   },
   computed: {
@@ -279,8 +308,6 @@ export default {
     const heroLinks = this.$el.querySelectorAll(".hero-links li");
 
     const scrollCTA = this.$el.querySelector(".scroll-cta");
-
-    
 
     const headerName = this.$el.querySelector("header h2");
     charming(headerName);
@@ -475,17 +502,40 @@ export default {
 
           var workImage = workSection.querySelector(".picture");
           if (this.projects[0].video !== null) {
-            var video = workSection.querySelector(".picture .hover-vid video");
-            var image = workSection.querySelector(".picture .image");
-            video.addEventListener('mouseover', function() {
-              video.currentTime = 0; 
-              video.play();
-              image.classList.add('showvid');
-            });
-            video.addEventListener('mouseleave', function() {
-              video.pause();
-              image.classList.remove('showvid');
-            });
+            let slides = workSection.querySelectorAll(".picture .slides .slider:not(.video)");
+            let videoSlide = workSection.querySelector(".picture .slides .slider.video");  
+            let video = videoSlide.querySelector("video");
+            console.log(video);
+            let self = this;
+            //Set up the project animation
+            this.projectVideoAnime[0] = this.$anime.timeline({loop: false, autoplay: true});
+            video.addEventListener("ended", function() {self.projectVideoAnime[0].reverse(); self.projectVideoAnime[0].play(); console.log("VIDEO ENDED")});
+            this.projectVideoAnime[0].complete = function() {console.log("timeline completed");}
+            
+            this.projectVideoAnime[0].add({
+              targets: slides,
+              translateX: ['-110%', '120%'],
+              easing: "easeInOutQuart",
+              duration: 1320, 
+              delay: function(el, i) {
+                return 132 * i
+              },
+              complete: function(anim) { //Only runs if played forward
+              //  if (!video.ended) { //Video hasn't been played?
+                  video.play();
+               // }
+                console.log("COMPLETE", video.ended);
+              },
+              update: function(anim) {
+                console.log(anim.progress);
+                console.log(anim);
+              }
+            }).add({
+              targets: videoSlide,
+              translateX: ['-100%', '0%'],
+              duration: 1, 
+              offset: 900
+            })
           }
           this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
 
@@ -519,6 +569,7 @@ export default {
             targets: workImage,
             opacity: [0,1],
             translateX: [132, 0],
+            translateY: [-16, 0],
             easing: "easeOutQuart",
             duration: 1640,
             offset: 232
@@ -665,7 +716,7 @@ export default {
       let videoScr = project.video.url;
       let scrSplit = videoScr.split("/");
 
-      var newVideoScr = scrSplit[0] + "//" + scrSplit[1] + "/" + scrSplit[2] + "/" + scrSplit[3] + "/" + scrSplit[4] + "/" + scrSplit[5] + "/" + "/e_preview:duration_8" +scrSplit[6] + "/" + scrSplit[7];
+      var newVideoScr = scrSplit[0] + "//" + scrSplit[1] + "/" + scrSplit[2] + "/" + scrSplit[3] + "/" + scrSplit[4] + "/" + scrSplit[5] + "/" + "/e_preview:duration_9" +scrSplit[6] + "/" + scrSplit[7];
 
 
 
@@ -1163,7 +1214,7 @@ export default {
   }
 
   .project .content .project-title h1:last-of-type{
-      text-shadow: 0 4px 7px #0101093d;
+      text-shadow: 0 2px 5px rgba(1, 1, 9, 0.81);
   }
 
   .project .content .project-blurb {
@@ -1177,7 +1228,7 @@ export default {
     font-weight: 500; 
     max-width: 723px;
     pointer-events: none;
-    text-shadow: 0 4px 7px #0101093d;
+    text-shadow: 0 2px 5px rgba(1, 1, 9, 0.81);
   }
 
   .project .content .picture {
@@ -1217,6 +1268,51 @@ export default {
     display: block; 
     width: 100%; 
     height: 100%; 
+  }
+
+  .project .content .picture .slides {
+    position: absolute;
+    z-index: 100; 
+    width: 100%; 
+    height: 100%; 
+    overflow: hidden;
+  }
+
+  .project .content .picture .slides .slider{
+    width: 100%; 
+    height: 100%; 
+    position: absolute;
+    transform-origin: top left; 
+  }
+
+  .project .content .picture .slides .slider:nth-child(1){
+    background: $theme0;
+    z-index: 100000;
+  }
+
+  .project .content .picture .slides .slider:nth-child(2){
+    background: $theme1;
+    z-index: 10000;
+  }
+
+  .project .content .picture .slides .slider:nth-child(3){
+    background: $theme2;
+    z-index: 1000;
+  }
+
+  .project .content .picture .slides .slider:nth-child(4){
+    background: $theme3;
+    z-index: 100;
+  }
+
+  .project .content .picture .slides .slider:nth-child(5){
+    background: $theme4;
+    z-index: 10;
+  }
+
+  .project .content .picture .slides .slider:nth-child(6){
+    position: relative;
+    z-index: 0;
   }
 
   .contact .content .copy {
