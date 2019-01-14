@@ -72,8 +72,8 @@
       </p>
       </div>
     </div>
-    <div class="section project project0" data-anchor="works" v-if="projects[0] !== null">
-      <a class="content" :href="'/' + (projects[0] ? projects[0].permalink : '')">
+    <div class="section project project0" data-anchor="works" v-if="projects[0] !== (null || undefined)">
+      <a class="content" :href="'/' + (projects[0] ? projects[0].permalink : '')" >
         <div class="project-title">
           <h1 class="layer0">{{projects[0].title}}</h1>
           <h1 class="layer1">{{projects[0].title}}</h1>
@@ -109,14 +109,116 @@
         </div>
       </a>
     </div>
-    <div class="section" data-anchor="works-2">
-
+    <div class="section project project1" data-anchor="works-2" v-if="projects[1] !== (null || undefined)">
+      <a class="content" :href="'/' + (projects[1] ? projects[1].permalink : '')">
+        <div class="project-title">
+          <h1 class="layer0">{{projects[1].title}}</h1>
+          <h1 class="layer1">{{projects[1].title}}</h1>
+          <h1 class="layer2">{{projects[1].title}}</h1>
+          <h1 class="layer3">{{projects[1].title}}</h1>
+          <h1 class="layer4">{{projects[1].title}}</h1>
+          <h1 class="layer5">{{projects[1].title}}</h1>
+        </div>
+        <div class="project-blurb">
+          {{projects[1].blurb}}
+        </div>
+        
+        <div class="picture">
+          <div class="slides">
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider video">
+            <div class="hover-vid" v-if="projects[1].video !== null">
+              <video data-gif="1" muted playsinline preload="metadata">
+                <source :src="projects[1].hoverVidSrc" type="video/mp4" data-no-instant>
+              </video>
+            </div>
+          </div>
+          </div>
+          
+          <div class="image" v-if="projects[1].heroImage !== null">
+            <img :src="projects[1].heroImage.url"/>
+          </div>
+          
+        </div>
+      </a>
     </div>
-    <div class="section" data-anchor="works-3">
-
+    <div class="section project project2" data-anchor="works-3" v-if="projects[2] !== (null || undefined)">
+      <a class="content" :href="'/' + (projects[2] ? projects[2].permalink : '')" >
+        <div class="project-title">
+          <h1 class="layer0">{{projects[2].title}}</h1>
+          <h1 class="layer1">{{projects[2].title}}</h1>
+          <h1 class="layer2">{{projects[2].title}}</h1>
+          <h1 class="layer3">{{projects[2].title}}</h1>
+          <h1 class="layer4">{{projects[2].title}}</h1>
+          <h1 class="layer5">{{projects[2].title}}</h1>
+        </div>
+        <div class="project-blurb">
+          {{projects[2].blurb}}
+        </div>
+        
+        <div class="picture">
+          <div class="slides">
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider video">
+            <div class="hover-vid" v-if="projects[2].video !== null">
+              <video data-gif="1" muted playsinline preload="metadata">
+                <source :src="projects[2].hoverVidSrc" type="video/mp4" data-no-instant>
+              </video>
+            </div>
+          </div>
+          </div>
+          
+          <div class="image" v-if="projects[2].heroImage !== null">
+            <img :src="projects[2].heroImage.url"/>
+          </div>
+          
+        </div>
+      </a>
     </div>
-    <div class="section" data-anchor="works-4">
-
+    <div class="section project project3" data-anchor="works-4" v-if="projects[3] !== (null || undefined)">
+      <a class="content" :href="'/' + (projects[3] ? projects[3].permalink : '')">
+        <div class="project-title">
+          <h1 class="layer0">{{projects[3].title}}</h1>
+          <h1 class="layer1">{{projects[3].title}}</h1>
+          <h1 class="layer2">{{projects[3].title}}</h1>
+          <h1 class="layer3">{{projects[3].title}}</h1>
+          <h1 class="layer4">{{projects[3].title}}</h1>
+          <h1 class="layer5">{{projects[3].title}}</h1>
+        </div>
+        <div class="project-blurb">
+          {{projects[3].blurb}}
+        </div>
+        
+        <div class="picture">
+          <div class="slides">
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider"></div>
+          <div class="slider video">
+            <div class="hover-vid" v-if="projects[3].video !== null">
+              <video data-gif="1" muted playsinline preload="metadata">
+                <source :src="projects[3].hoverVidSrc" type="video/mp4" data-no-instant>
+              </video>
+            </div>
+          </div>
+          </div>
+          
+          <div class="image" v-if="projects[3].heroImage !== null">
+            <img :src="projects[3].heroImage.url"/>
+          </div>
+          
+        </div>
+      </a>
     </div>
     <div class="section contact" data-anchor="contact">
       <div class="content side-card">
@@ -196,7 +298,7 @@ export default {
         //Play animation into the video
         video.currentTime = 0; 
         self.projectVideoAnime[projectIndex].restart();
-      }, 2500);
+      }, 1800);
     },
     async afterLoad(origin, destination, direction) {
       
@@ -238,10 +340,6 @@ export default {
           }
         }
       }
-
-      
-
-      
     },
     onLeaveSection(origin, destination,direction) {
       if (destination.index === 0) {
@@ -290,7 +388,7 @@ export default {
               //Play animation into the video
               video.currentTime = 0; 
               self.projectVideoAnime[projectIndex].restart();
-            }, 2500);
+            }, 1800);
           }
           else {
             video.addEventListener("oncanplaythrough",this.setProjectTimer(projectIndex));
@@ -518,9 +616,6 @@ export default {
             offset: 300
           });
 
-          let works = [];
-
-          works[0] = {};
           var workSection = this.$el.querySelector(".project.project0");
           var workTitleWrappers = workSection.querySelectorAll(".project-title h1");
 
@@ -570,7 +665,7 @@ export default {
 
           workTitleTargets.forEach((target, i) => {
             let offsetClamp = Math.min(Math.max(32 + (4 * i), 32), 320);
-            let duration = Math.min(Math.max(900 + (100 * i), 900), 3250)
+            let duration = 900 + (100 * i);
             //let delay = Math.min(Math.max(320/(i+1) + 64 * i, 60), 320);
             
             this.pageAnime[2].add({
@@ -581,7 +676,7 @@ export default {
               duration: duration, 
               offset: offsetClamp,
               delay: function(el, i) {
-                return Math.min(Math.max(40 + 64 * i, 60), 420)
+                return 40 + 64 * i
               }
             })
           });
@@ -604,13 +699,257 @@ export default {
             offset: 232
           });
 
+          workSection = this.$el.querySelector(".project.project1");
+          workTitleWrappers = workSection.querySelectorAll(".project-title h1");
+
+          workTitleTargets = [];
+
+          workTitleWrappers.forEach(wrapper => {
+            charming(wrapper);
+            wrapper.style.opacity = 1;
+            let target = wrapper.querySelectorAll("span");
+            workTitleTargets.push(target);
+          });
+
+          workBlurb = workSection.querySelector(".project-blurb");
+
+          workImage = workSection.querySelector(".picture");
+          
+          if (this.projects[1].video !== null) {
+            slides = workSection.querySelectorAll(".picture .slides .slider:not(.video)");
+            videoSlide = workSection.querySelector(".picture .slides .slider.video");  
+            video = videoSlide.querySelector("video");
+
+            let self = this;
+            //Set up the project animation
+            this.projectVideoAnime[1] = this.$anime.timeline({loop: false, autoplay: false});
+            video.addEventListener("ended", function() {self.projectVideoAnime[1].reverse(); self.projectVideoAnime[1].play();});
+            
+            this.projectVideoAnime[1].add({
+              targets: slides,
+              translateX: ['-110%', '120%'],
+              easing: "easeInOutQuart",
+              duration: 1320, 
+              delay: function(el, i) {
+                return 132 * i
+              },
+              complete: function(anim) { //Only runs if played forward
+              //  if (!video.ended) { //Video hasn't been played?
+                  video.play();
+               // }
+              },
+            }).add({
+              targets: videoSlide,
+              translateX: ['-100%', '0%'],
+              duration: 1, 
+              offset: 900
+            })
+          }
           this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
 
+          workTitleTargets.forEach((target, i) => {
+            let offsetClamp = Math.min(Math.max(32 + (4 * i), 32), 320);
+            let duration = 900 + (100 * i);
+            //let delay = Math.min(Math.max(320/(i+1) + 64 * i, 60), 320);
+            
+            this.pageAnime[3].add({
+              targets: target,
+              opacity: [0,1],
+              translateX:[160,0],
+              easing: "easeOutQuart",
+              duration: duration, 
+              offset: offsetClamp,
+              delay: function(el, i) {
+                return 40 + 64 * i
+              }
+            })
+          });
+
+
+          this.pageAnime[3].add({
+            targets: workBlurb,
+            opacity: [0,1],
+            translateX: [132, 0],
+            easing: "easeOutQuart",
+            duration: 1320,
+            offset: 164
+          }).add({
+            targets: workImage,
+            opacity: [0,1],
+            translateX: [132, 0],
+            translateY: [-16, 0],
+            easing: "easeOutQuart",
+            duration: 1640,
+            offset: 232
+          });
+
+          workSection = this.$el.querySelector(".project.project2");
+          workTitleWrappers = workSection.querySelectorAll(".project-title h1");
+
+          workTitleTargets = [];
+
+          workTitleWrappers.forEach(wrapper => {
+            charming(wrapper);
+            wrapper.style.opacity = 1;
+            let target = wrapper.querySelectorAll("span");
+            workTitleTargets.push(target);
+          });
+
+          workBlurb = workSection.querySelector(".project-blurb");
+
+          workImage = workSection.querySelector(".picture");
+          
+          if (this.projects[2].video !== null) {
+            slides = workSection.querySelectorAll(".picture .slides .slider:not(.video)");
+            videoSlide = workSection.querySelector(".picture .slides .slider.video");  
+            video = videoSlide.querySelector("video");
+
+            let self = this;
+            //Set up the project animation
+            this.projectVideoAnime[2] = this.$anime.timeline({loop: false, autoplay: false});
+            video.addEventListener("ended", function() {self.projectVideoAnime[2].reverse(); self.projectVideoAnime[2].play();});
+            
+            this.projectVideoAnime[2].add({
+              targets: slides,
+              translateX: ['-110%', '120%'],
+              easing: "easeInOutQuart",
+              duration: 1320, 
+              delay: function(el, i) {
+                return 132 * i
+              },
+              complete: function(anim) { //Only runs if played forward
+              //  if (!video.ended) { //Video hasn't been played?
+                  video.play();
+               // }
+              },
+            }).add({
+              targets: videoSlide,
+              translateX: ['-100%', '0%'],
+              duration: 1, 
+              offset: 900
+            })
+          }
           this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
 
+          workTitleTargets.forEach((target, i) => {
+            let offsetClamp = Math.min(Math.max(32 + (4 * i), 32), 320);
+            let duration = 900 + (100 * i);
+            //let delay = Math.min(Math.max(320/(i+1) + 64 * i, 60), 320);
+            
+            this.pageAnime[4].add({
+              targets: target,
+              opacity: [0,1],
+              translateX:[160,0],
+              easing: "easeOutQuart",
+              duration: duration, 
+              offset: offsetClamp,
+              delay: function(el, i) {
+                return 40 + 64 * i
+              }
+            })
+          });
+
+
+          this.pageAnime[4].add({
+            targets: workBlurb,
+            opacity: [0,1],
+            translateX: [132, 0],
+            easing: "easeOutQuart",
+            duration: 1320,
+            offset: 164
+          }).add({
+            targets: workImage,
+            opacity: [0,1],
+            translateX: [132, 0],
+            translateY: [-16, 0],
+            easing: "easeOutQuart",
+            duration: 1640,
+            offset: 232
+          });
+
+          workSection = this.$el.querySelector(".project.project3");
+          workTitleWrappers = workSection.querySelectorAll(".project-title h1");
+
+          workTitleTargets = [];
+
+          workTitleWrappers.forEach(wrapper => {
+            charming(wrapper);
+            wrapper.style.opacity = 1;
+            let target = wrapper.querySelectorAll("span");
+            workTitleTargets.push(target);
+          });
+
+          workBlurb = workSection.querySelector(".project-blurb");
+
+          workImage = workSection.querySelector(".picture");
+          
+          if (this.projects[3].video !== null) {
+            slides = workSection.querySelectorAll(".picture .slides .slider:not(.video)");
+            videoSlide = workSection.querySelector(".picture .slides .slider.video");  
+            video = videoSlide.querySelector("video");
+
+            let self = this;
+            //Set up the project animation
+            this.projectVideoAnime[3] = this.$anime.timeline({loop: false, autoplay: false});
+            video.addEventListener("ended", function() {self.projectVideoAnime[2].reverse(); self.projectVideoAnime[2].play();});
+            
+            this.projectVideoAnime[3].add({
+              targets: slides,
+              translateX: ['-110%', '120%'],
+              easing: "easeInOutQuart",
+              duration: 1320, 
+              delay: function(el, i) {
+                return 132 * i
+              },
+              complete: function(anim) { //Only runs if played forward
+              //  if (!video.ended) { //Video hasn't been played?
+                  video.play();
+               // }
+              },
+            }).add({
+              targets: videoSlide,
+              translateX: ['-100%', '0%'],
+              duration: 1, 
+              offset: 900
+            })
+          }
           this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
 
-          this.pageAnime.push(this.$anime.timeline({loop: false, autoplay: false}));
+          workTitleTargets.forEach((target, i) => {
+            let offsetClamp = Math.min(Math.max(32 + (4 * i), 32), 320);
+            let duration = 900 + (100 * i);
+            //let delay = Math.min(Math.max(320/(i+1) + 64 * i, 60), 320);
+            
+            this.pageAnime[5].add({
+              targets: target,
+              opacity: [0,1],
+              translateX:[160,0],
+              easing: "easeOutQuart",
+              duration: duration, 
+              offset: offsetClamp,
+              delay: function(el, i) {
+                return 40 + 64 * i
+              }
+            })
+          });
+
+
+          this.pageAnime[5].add({
+            targets: workBlurb,
+            opacity: [0,1],
+            translateX: [132, 0],
+            easing: "easeOutQuart",
+            duration: 1320,
+            offset: 164
+          }).add({
+            targets: workImage,
+            opacity: [0,1],
+            translateX: [132, 0],
+            translateY: [-16, 0],
+            easing: "easeOutQuart",
+            duration: 1640,
+            offset: 232
+          });
 
           const contactBackText = this.$el.querySelector(".contact .profile-backText");
           charming(contactBackText);
@@ -741,11 +1080,18 @@ export default {
       }
     })
     response.data.projects.forEach(project => {
-      //NOTE(Rejon): This only works if it's coming from cloudinary
+
+      var newVideoScr = null;
+
+      if (project.video) {
+        //NOTE(Rejon): This only works if it's coming from cloudinary
       let videoScr = project.video.url;
       let scrSplit = videoScr.split("/");
 
-      var newVideoScr = scrSplit[0] + "//" + scrSplit[1] + "/" + scrSplit[2] + "/" + scrSplit[3] + "/" + scrSplit[4] + "/" + scrSplit[5] + "/" + "/e_preview:duration_9" +scrSplit[6] + "/" + scrSplit[7];
+       newVideoScr = scrSplit[0] + "//" + scrSplit[1] + "/" + scrSplit[2] + "/" + scrSplit[3] + "/" + scrSplit[4] + "/" + scrSplit[5] + "/" + "/e_preview:duration_9" +scrSplit[6] + "/" + scrSplit[7];
+      }
+
+      
 
 
 
@@ -1247,14 +1593,14 @@ export default {
   }
 
   .project .content .project-blurb {
-    z-index: 100; 
+    z-index: 100;
     font-family: 'Gibson';
-    color: $white; 
+    color: #f9f7f4;
     position: absolute;
-    left: 0; 
-    top: 8.5em; 
-    font-size: 22px; 
-    font-weight: 500; 
+    left: 0;
+    top: 7.25em;
+    font-size: 25px;
+    font-weight: 500;
     max-width: 723px;
     pointer-events: none;
     text-shadow: 0 2px 5px rgba(1, 1, 9, 0.81);
@@ -1285,7 +1631,7 @@ export default {
   .project .content .picture .image img {
         width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .project .content .picture .hover-vid {
@@ -1310,6 +1656,7 @@ export default {
   .project .content .picture .slides .slider{
     width: 100%; 
     height: 100%; 
+    transform: translateX(-110%);
     position: absolute;
     transform-origin: top left; 
   }
