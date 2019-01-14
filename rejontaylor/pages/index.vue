@@ -187,8 +187,21 @@ export default {
     }
   },
   methods: {
+    setProjectTimer(index) {
+      let projectIndex = index; 
+      let self = this; 
+      let video = document.querySelector(".project.project"+projectIndex + " .picture .slides .slider.video video");
+
+      this.projectVideoTimer = setTimeout(function () {
+        //Play animation into the video
+        video.currentTime = 0; 
+        self.projectVideoAnime[projectIndex].restart();
+      }, 2500);
+    },
     async afterLoad(origin, destination, direction) {
+      
       if (origin === null && direction === null) {
+        console.log("AFTER LOAD");
         //We've loaded for the first time.
         if (destination.index === 0) { //We're on the homepage
           document.querySelector("#fp-nav").classList.remove("show");
@@ -212,6 +225,21 @@ export default {
           this.pageAnime[destination.index].restart();
         }
       }
+      else {
+          
+
+        if (origin.index >= 2 && origin.index <= 5) {
+          let projectIndex = origin.index - 2;
+          
+          if (this.projects[projectIndex].video !== null) {
+            let video = document.querySelector(".project.project"+projectIndex + " .picture .slides .slider.video video");
+            video.removeEventListener("oncanplaythrough", this.setProjectTimer(projectIndex));
+            this.projectVideoAnime[projectIndex].seek(0);
+          }
+        }
+      }
+
+      
 
       
     },
@@ -247,22 +275,29 @@ export default {
         }
       }
 
-      // clearTimeout(this.projectVideoTimer);
+      if (this.projectVideoTimer !== null) {
+          clearTimeout(this.projectVideoTimer);
+        }      
 
-      // if (destination.index >= 2 || destination.index <= 5) { //We've entered range of our projects
-      //   let projectIndex = destination.index - 2;
+      if (destination.index >= 2 && destination.index <= 5) { //We've entered range of our projects
+        let projectIndex = destination.index - 2;
+        if (this.projects[projectIndex].video !== null) {
+          let video = document.querySelector(".project.project"+projectIndex + " .picture .slides .slider.video video");
 
-      //   if (this.projects[projectIndex].video !== null) {
-      //     this.projectVideoTimer = setTimeout(function () {
-      //     //Play animation into the video
-      //     this.projectVideoAnime[projectIndex]
-
-      //     //When the video ends play the animation back and reset the timeout.
-
-      //   }, 5000);
-      //   }
+          if (video.readyState === 4) {
+            let self = this;
+            this.projectVideoTimer = setTimeout(function () {
+              //Play animation into the video
+              video.currentTime = 0; 
+              self.projectVideoAnime[projectIndex].restart();
+            }, 2500);
+          }
+          else {
+            video.addEventListener("oncanplaythrough",this.setProjectTimer(projectIndex));
+          }
+        }
         
-      // }
+      }
     },
   },
   computed: {
@@ -505,12 +540,11 @@ export default {
             let slides = workSection.querySelectorAll(".picture .slides .slider:not(.video)");
             let videoSlide = workSection.querySelector(".picture .slides .slider.video");  
             let video = videoSlide.querySelector("video");
-            console.log(video);
+
             let self = this;
             //Set up the project animation
-            this.projectVideoAnime[0] = this.$anime.timeline({loop: false, autoplay: true});
-            video.addEventListener("ended", function() {self.projectVideoAnime[0].reverse(); self.projectVideoAnime[0].play(); console.log("VIDEO ENDED")});
-            this.projectVideoAnime[0].complete = function() {console.log("timeline completed");}
+            this.projectVideoAnime[0] = this.$anime.timeline({loop: false, autoplay: false});
+            video.addEventListener("ended", function() {self.projectVideoAnime[0].reverse(); self.projectVideoAnime[0].play();});
             
             this.projectVideoAnime[0].add({
               targets: slides,
@@ -524,12 +558,7 @@ export default {
               //  if (!video.ended) { //Video hasn't been played?
                   video.play();
                // }
-                console.log("COMPLETE", video.ended);
               },
-              update: function(anim) {
-                console.log(anim.progress);
-                console.log(anim);
-              }
             }).add({
               targets: videoSlide,
               translateX: ['-100%', '0%'],
@@ -563,7 +592,7 @@ export default {
             opacity: [0,1],
             translateX: [132, 0],
             easing: "easeOutQuart",
-            duration: 640,
+            duration: 1320,
             offset: 164
           }).add({
             targets: workImage,
