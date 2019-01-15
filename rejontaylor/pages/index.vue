@@ -635,7 +635,7 @@ export default {
             translateY:[160,0],
             easing: "easeOutQuart",
             duration: 800,
-            offset: 300
+            offset: 400
           });
 
           var workSection = this.$el.querySelector(".project.project0");
@@ -1353,6 +1353,7 @@ export default {
     transform: translateX(-50%);
     top: 53%; 
     color: $white;
+    white-space: nowrap;
   }
 
   .home .sub-title p {
@@ -1374,6 +1375,7 @@ export default {
     left: 50%; 
     transform: translateX(-50%);
     pointer-events: all;
+    width: 100%; 
   }
 
   .home .hero-links ul {
@@ -1384,7 +1386,7 @@ export default {
     font-weight: 600; 
     font-size: 1.82em; 
     text-align: center; 
-    width: 55vw; 
+    width: 100%; 
   }
 
   .home .hero-links ul li{
