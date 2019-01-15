@@ -85,6 +85,10 @@
         <div class="project-blurb">
           {{projects[0].blurb}}
         </div>
+        <div class="project-link">
+          <span class="link-text">View Project</span>
+          <span class="link-bullet"></span>
+        </div>
         
         <div class="picture">
           <div class="slides">
@@ -121,6 +125,10 @@
         </div>
         <div class="project-blurb">
           {{projects[1].blurb}}
+        </div>
+        <div class="project-link">
+          <span class="link-text">View Project</span>
+          <span class="link-bullet"></span>
         </div>
         
         <div class="picture">
@@ -159,6 +167,10 @@
         <div class="project-blurb">
           {{projects[2].blurb}}
         </div>
+        <div class="project-link">
+          <span class="link-text">View Project</span>
+          <span class="link-bullet"></span>
+        </div>
         
         <div class="picture">
           <div class="slides">
@@ -196,7 +208,11 @@
         <div class="project-blurb">
           {{projects[3].blurb}}
         </div>
-        
+        <div class="project-link">
+          <span class="link-text">View Project</span>
+          <span class="link-bullet"></span>
+        </div>
+
         <div class="picture">
           <div class="slides">
           <div class="slider"></div>
@@ -219,6 +235,7 @@
           
         </div>
       </a>
+      
     </div>
     <div class="section contact" data-anchor="contact">
       <div class="content side-card">
@@ -252,6 +269,8 @@
             </a>
           </li>
         </ul>
+
+        <a href="https://archive.maximumcrash.com/" class="extra" target="_blank">*I've worked on a lot more stuff! <span>(Full Archive)</span></a>
       </p>
       </div>
     </div>
@@ -334,6 +353,7 @@ export default {
           let projectIndex = origin.index - 2;
           
           if (this.projects[projectIndex].video !== null) {
+            console.log(projectIndex);
             let video = document.querySelector(".project.project"+projectIndex + " .picture .slides .slider.video video");
             video.removeEventListener("oncanplaythrough", this.setProjectTimer(projectIndex));
             this.projectVideoAnime[projectIndex].seek(0);
@@ -375,7 +395,9 @@ export default {
 
       if (this.projectVideoTimer !== null) {
           clearTimeout(this.projectVideoTimer);
-        }      
+        }
+        
+              
 
       if (destination.index >= 2 && destination.index <= 5) { //We've entered range of our projects
         let projectIndex = destination.index - 2;
@@ -631,6 +653,8 @@ export default {
           var workBlurb = workSection.querySelector(".project-blurb");
 
           var workImage = workSection.querySelector(".picture");
+          var workLink = workSection.querySelector(".project-link");
+
           if (this.projects[0].video !== null) {
             let slides = workSection.querySelectorAll(".picture .slides .slider:not(.video)");
             let videoSlide = workSection.querySelector(".picture .slides .slider.video");  
@@ -697,6 +721,13 @@ export default {
             easing: "easeOutQuart",
             duration: 1640,
             offset: 232
+          }).add({
+            targets: workLink,
+            opacity: [0,1],
+            translateX: [132, 0],
+            easing: "easeOutQuart",
+            duration: 1640, 
+            offset: 182
           });
 
           workSection = this.$el.querySelector(".project.project1");
@@ -714,6 +745,7 @@ export default {
           workBlurb = workSection.querySelector(".project-blurb");
 
           workImage = workSection.querySelector(".picture");
+          workLink = workSection.querySelector(".project-link");
           
           if (this.projects[1].video !== null) {
             slides = workSection.querySelectorAll(".picture .slides .slider:not(.video)");
@@ -781,6 +813,13 @@ export default {
             easing: "easeOutQuart",
             duration: 1640,
             offset: 232
+          }).add({
+            targets: workLink,
+            opacity: [0,1],
+            translateX: [132, 0],
+            easing: "easeOutQuart",
+            duration: 1640, 
+            offset: 182
           });
 
           workSection = this.$el.querySelector(".project.project2");
@@ -798,6 +837,7 @@ export default {
           workBlurb = workSection.querySelector(".project-blurb");
 
           workImage = workSection.querySelector(".picture");
+          workLink = workSection.querySelector(".project-link");
           
           if (this.projects[2].video !== null) {
             slides = workSection.querySelectorAll(".picture .slides .slider:not(.video)");
@@ -865,6 +905,13 @@ export default {
             easing: "easeOutQuart",
             duration: 1640,
             offset: 232
+          }).add({
+            targets: workLink,
+            opacity: [0,1],
+            translateX: [132, 0],
+            easing: "easeOutQuart",
+            duration: 1640, 
+            offset: 182
           });
 
           workSection = this.$el.querySelector(".project.project3");
@@ -882,6 +929,7 @@ export default {
           workBlurb = workSection.querySelector(".project-blurb");
 
           workImage = workSection.querySelector(".picture");
+          workLink = workSection.querySelector(".project-link");
           
           if (this.projects[3].video !== null) {
             slides = workSection.querySelectorAll(".picture .slides .slider:not(.video)");
@@ -949,6 +997,13 @@ export default {
             easing: "easeOutQuart",
             duration: 1640,
             offset: 232
+          }).add({
+            targets: workLink,
+            opacity: [0,1],
+            translateX: [132, 0],
+            easing: "easeOutQuart",
+            duration: 1640, 
+            offset: 182
           });
 
           const contactBackText = this.$el.querySelector(".contact .profile-backText");
@@ -1350,7 +1405,8 @@ export default {
     cursor: pointer;
   }
 
-  .home .hero-links ul li .link-bullet{
+  .home .hero-links ul li .link-bullet,
+  .project .project-link .link-bullet{
     width: 5px; 
     height: 5px; 
     background: $white; 
@@ -1361,19 +1417,22 @@ export default {
     transition: all .132s ease-in-out;
   }
 
-  .home .hero-links ul li .link-text {
+  .home .hero-links ul li .link-text,
+  .project .project-link .link-text {
     position: relative;
     display: block;
     transform: translateY(0);
     transition: all .132s ease-in-out;
   }
 
-  .home .hero-links ul li:hover .link-text {
+  .home .hero-links ul li:hover .link-text,
+  .project .project-link:hover .link-text {
     transform: translateY(-2px);
     transition: all .164s ease-in-out;
   }
 
-  .home .hero-links ul li:hover .link-bullet{
+  .home .hero-links ul li:hover .link-bullet,
+  .project .project-link .link-bullet{
     width: 100%; 
     height:2px;
     border-radius: 0%; 
@@ -1481,7 +1540,7 @@ export default {
     top: 0px;
     font-size: 6.4em;
     z-index: 1000;
-    text-shadow: 0 4px 7px rgba(1, 1, 9, 0.79);
+    text-shadow: 0 11px 25px rgba(11, 11, 61, 0.61);
   }
 
   .content.side-card .images .profile-pic .profile-frontText {
@@ -1491,7 +1550,7 @@ export default {
     top: -64px;
     z-index: 1000;
     font-size: 6.4em;
-    text-shadow: 0 4px 7px rgba(1, 1, 9, 0.79);
+    text-shadow: 0 11px 25px rgba(11, 11, 61, 0.61);
   }
 
   .content.side-card .images .profile-pic .bg{
@@ -1589,30 +1648,40 @@ export default {
   }
 
   .project .content .project-title h1:last-of-type{
-      text-shadow: 0 2px 5px rgba(1, 1, 9, 0.81);
+    text-shadow: 0 11px 25px rgba(11, 11, 61, 0.61);
+  }
+
+  .project .content .extra a {
+        color: $white;
+    font-family: 'Gibson';
+    font-size: 20px;
+    opacity: 0.8;
+    text-decoration: none;
   }
 
   .project .content .project-blurb {
-    z-index: 100;
+        z-index: 100;
     font-family: 'Gibson';
     color: #f9f7f4;
     position: absolute;
     left: 0;
-    top: 7.25em;
-    font-size: 25px;
+    top: 6.64em;
+    font-size: 27px;
     font-weight: 500;
     max-width: 723px;
     pointer-events: none;
-    text-shadow: 0 2px 5px rgba(1, 1, 9, 0.81);
+        text-shadow: 0 6px 9px rgba(11, 11, 61, 1), -1px 0 rgba(11, 11, 61, 0.64), 0 1px rgba(11, 11, 61, 0.64), 1px 0 rgba(11, 11, 61, 0.64), 0 -1px rgba(11, 11, 61, 0.64);
   }
 
   .project .content .picture {
-    width: 55vw; 
-    height: 30.94vw; 
+    width: 55vw;
+    max-width: 924px;
+    height: 30.94vw;
+    max-height: 519.78px;
     position: relative;
-    right: 0; 
-    margin-left: auto; 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    right: 0;
+    margin-left: auto;
+    box-shadow: 0 10px 20px rgba(12, 5, 47, 0.19), 0 6px 6px rgba(10, 9, 44, 0.23);
   }
 
   .project .content .picture .image{
@@ -1691,6 +1760,19 @@ export default {
     z-index: 0;
   }
 
+  .project .project-link {
+        display: inline-block;
+    position: absolute;
+    top: 18em;
+  }
+
+  .project .project-link .link-text {
+    font-family: 'Gibson';
+    font-size: 26px;
+    color: $white;
+    font-weight: 600;
+  }
+
   .contact .content .copy {
     font-size: 30px;
   }
@@ -1734,6 +1816,16 @@ export default {
     width: 100%;
     display: inline-block;
     position: relative;
+  }
+
+  .contact .content .copy a.extra {
+    font-size: 19px; 
+    text-decoration: none; 
+    font-family: 'Gibson';
+  }
+
+  .contact .content .copy a.extra span{
+    text-decoration: underline;
   }
 
 </style>
