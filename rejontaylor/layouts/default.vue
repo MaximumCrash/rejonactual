@@ -114,6 +114,7 @@ body {
     background-size: 100vw 100vh;
     background-repeat: no-repeat;
     min-height: 100vh;
+    width: 100vw;
   }
 
   .dot-parallax-container {

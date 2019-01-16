@@ -1,6 +1,7 @@
 <template>
 <section class="container">
-    <header className="header">
+    <div class="center-line"></div>
+    <header class="header">
       <a href="#home"><h2>{{hero.firstName}}</h2></a>
     </header>
     <full-page ref="fullpage" :options="options" id="fullpage">
@@ -1360,7 +1361,7 @@ export default {
     opacity:0;
   }
 
-  .home .center-line {
+  .center-line {
     position: fixed;
     width: 1px; 
     height: 100vh;
@@ -1828,6 +1829,10 @@ export default {
 
   .contact .content .copy a.extra span{
     text-decoration: underline;
+  }
+
+  @media screen and (min-width: $breakPoint-tablet){
+    
   }
 
 </style>
