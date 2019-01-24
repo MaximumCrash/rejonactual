@@ -17,45 +17,7 @@
 
 <script>
 export default {
-  mounted() {
-    const dotLayer0 = this.$el.querySelector('.dot-layer-0');
-    const dotLayer1 = this.$el.querySelector('.dot-layer-1');
-    const dotLayer2 = this.$el.querySelector('.dot-layer-2');
-
-    var dotAnime = this.$anime.timeline({loop: false});
-
-    dotAnime.add({
-      targets: dotLayer0,
-      opacity: [0.8,1],
-      scale: [1,1.1],
-      easing: "easeOutQuart",
-      duration: 1640
-    })
-    .add({
-      targets: dotLayer1,
-      opacity: [0.8,1],
-      scale: [1,1.1],
-      easing: "easeOutQuart",
-      duration: 1640,
-      offset: 64
-    })
-    .add({
-      targets: dotLayer2,
-      opacity: [0.8,1.1],
-      scale: [1,1.1],
-      easing: "easeOutQuart",
-      duration: 1640,
-      offset: 120
-    })
-
-    document.addEventListener('aos:in', ({ detail }) => {
-      console.log('animated in', detail);
-    });
-
-    document.addEventListener('aos:out', ({ detail }) => {
-      console.log('animated out', detail);
-    });
-  }
+  
 }
 </script>
 
