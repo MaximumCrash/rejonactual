@@ -428,9 +428,11 @@ export default {
       }
 
       if (destination !== null && this.pageAnime[destination.index] !== null) {
-         this.pageAnime[destination.index].restart()
+         this.pageAnime[destination.index].restart();
       }
-     
+      this.pageAnime[origin.index].play();
+      this.pageAnime[origin.index].reverse();     
+
 
       if (origin.index === 0) {
         document.querySelector('.scroll-cta').classList.remove('show');
