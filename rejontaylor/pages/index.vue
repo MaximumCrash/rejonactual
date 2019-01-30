@@ -79,7 +79,7 @@
         <br><br>
         Because I design with my Mom in mind, accessibility and enjoyment are at the forefront of everything I make.
         <br><br>
-        In my spare time, I run <a href="https://maximumcrash.com">Maximum Crash</a>, compose chiptune music, fix hardware, teach, and explore fashion design. 
+        In my spare time, I run <a href="https://maximumcrash.com">Maximum Crash</a>, compose music, fix hardware, teach, and explore fashion design. 
         <br><br>
         <a href="http://maximumcrash.com">My Resume</a>
       </p>
@@ -110,13 +110,6 @@
           <div class="slider"></div>
           <div class="slider"></div>
           <div class="slider"></div>
-          <div class="slider video">
-            <div class="hover-vid">
-              <video data-gif="1" muted playsinline preload="metadata">
-                <source src="~/assets/Videos/Test.mp4" type="video/mp4" data-no-instant>
-              </video>
-            </div>
-          </div>
           </div>
           
           <div class="image">
@@ -151,13 +144,6 @@
           <div class="slider"></div>
           <div class="slider"></div>
           <div class="slider"></div>
-          <div class="slider video">
-            <div class="hover-vid">
-              <video data-gif="1" muted playsinline preload="metadata">
-                <source src="~/assets/Videos/Test.mp4" type="video/mp4" data-no-instant>
-              </video>
-            </div>
-          </div>
           </div>
           
           <div class="image">
@@ -192,13 +178,6 @@
           <div class="slider"></div>
           <div class="slider"></div>
           <div class="slider"></div>
-          <div class="slider video">
-            <div class="hover-vid">
-              <video data-gif="1" muted playsinline preload="metadata">
-                <source src="~/assets/Videos/Test.mp4" type="video/mp4" data-no-instant>
-              </video>
-            </div>
-          </div>
           </div>
           
           <div class="image">
@@ -233,13 +212,6 @@
           <div class="slider"></div>
           <div class="slider"></div>
           <div class="slider"></div>
-          <div class="slider video">
-            <div class="hover-vid">
-              <video data-gif="1" muted playsinline preload="metadata">
-                <source src="~/assets/Videos/Test.mp4#t=24,29" type="video/mp4" data-no-instant>
-              </video>
-            </div>
-          </div>
           </div>
           
           <div class="image">
@@ -343,41 +315,27 @@ export default {
       headerAnime: null,
       isShowingHeader: false,
       ctaTimeout: null,
-      projectVideoTimer: null,
-      projectVideoAnime: [],
     }
   },
   methods: {
-    setProjectTimer(index) {
-      let projectIndex = index
-      let self = this
-      let video = document.querySelector(
-        '.project.project' +
-          projectIndex +
-          ' .picture .slides .slider.video video'
-      )
-
-      this.projectVideoTimer = setTimeout(function() {
-        //Play animation into the video
-        video.currentTime = 0
-        self.projectVideoAnime[projectIndex].restart()
-      }, 1800)
-    },
     async afterLoad(origin, destination, direction) {
       if (origin === null && direction === null) {
         //We've loaded for the first time.
+      
         if (destination.index === 0) {
-          //We're on the homepage
-          document.querySelector('#fp-nav').classList.remove('show')
+          if (this.ctaTimeout === null) {
+            //We're on the homepage
+            document.querySelector('#fp-nav').classList.remove('show')
 
-          this.ctaTimeout = setTimeout(function() {
-            var scrollCTA = document.querySelector('.scroll-cta');
-            if (scrollCTA.classList.contains('show')) {
-              scrollCTA.classList.remove('show')
-            } else {
-              scrollCTA.classList.add('show')
-            }
-          }, 3200)
+            this.ctaTimeout = setTimeout(function() {
+              var scrollCTA = document.querySelector('.scroll-cta');
+              if (scrollCTA.classList.contains('show')) {
+                scrollCTA.classList.remove('show')
+              } else {
+                scrollCTA.classList.add('show')
+              }
+            }, 3200)
+          }
         } else {
           //We're on every other page
           document.querySelector('#fp-nav').classList.add('show')
@@ -389,21 +347,6 @@ export default {
           {
             this.pageAnime[destination.index].restart()
           }
-        }
-      } else {
-        if (origin.index >= 2 && origin.index <= 5) {
-          let projectIndex = origin.index - 2;
-            let video = document.querySelector(
-              '.project.project' +
-                projectIndex +
-                ' .picture .slides .slider.video video'
-            )
-            video.removeEventListener(
-              'oncanplaythrough',
-              this.setProjectTimer(projectIndex)
-            );
-            console.log(projectIndex);
-            //this.projectVideoAnime[projectIndex].seek(24);
         }
       }
     },
@@ -445,38 +388,13 @@ export default {
         }
       }
 
-      if (this.projectVideoTimer !== null) {
-        clearTimeout(this.projectVideoTimer);
-      }
-
       if (destination.index >= 2 && destination.index <= 5) {
         //We've entered range of our projects
         let projectIndex = destination.index - 2;
-          let video = document.querySelector(
-            '.project.project' +
-              projectIndex +
-              ' .picture .slides .slider.video video'
-          );
 
-          if (video.readyState === 4 && this.projectVideoAnime[projectIndex] !== null) {
-            let self = this
-            this.projectVideoTimer = setTimeout(function() {
-              //Play animation into the video
-              video.currentTime = 0
 
-              self.projectVideoAnime[projectIndex].restart();
-            }, 1800)
-          } else {
-            video.addEventListener(
-              'oncanplaythrough',
-              this.setProjectTimer(projectIndex)
-            )
-          }
       }
     },
-  },
-  computed: {
-    
   },
   mounted() {
     const firstNameWrappers = this.$el.querySelectorAll('.title h1')
@@ -707,58 +625,16 @@ export default {
 
     var workBlurb = workSection.querySelector('.project-blurb')
 
-    var workImage = workSection.querySelector('.picture')
+    var workImage = workSection.querySelector('.image')
     var workLink = workSection.querySelector('.project-link')
 
-      let slides = workSection.querySelectorAll(
-        '.picture .slides .slider:not(.video)'
-      )
-      let videoSlide = workSection.querySelector(
-        '.picture .slides .slider.video'
-      )
-      let video = videoSlide.querySelector('video');
-
-      let self = this
-      //Set up the project animation
-      this.projectVideoAnime[0] = this.$anime.timeline({
-        loop: false,
-        autoplay: false,
-      })
-      video.addEventListener('pause', function() {
-        self.projectVideoAnime[0].reverse()
-        self.projectVideoAnime[0].play()
-      })
-
-      this.projectVideoAnime[0]
-        .add({
-          targets: slides,
-          translateX: ['-110%', '120%'],
-          easing: 'easeInOutQuart',
-          duration: 1320,
-          delay: function(el, i) {
-            return 132 * i
-          },
-          complete: function(anim) {
-            //Only runs if played forward
-            //  if (!video.ended) { //Video hasn't been played?
-            console.log("Hello?");
-            video.play()
-            // }
-          },
-        })
-        .add({
-          targets: videoSlide,
-          translateX: ['-100%', '0%'],
-          duration: 1,
-          offset: 900,
-        })
+    var slides = workSection.querySelectorAll('.picture .slides .slider:not(.video)');
 
     this.pageAnime.push(this.$anime.timeline({ loop: false, autoplay: false }))
 
     workTitleTargets.forEach((target, i) => {
       let offsetClamp = Math.min(Math.max(32 + 4 * i, 32), 320)
-      let duration = 800 + 100 * i
-      //let delay = Math.min(Math.max(320/(i+1) + 64 * i, 60), 320);
+      let duration = 800 + 100 * i;
 
       this.pageAnime[2].add({
         targets: target,
@@ -785,11 +661,10 @@ export default {
       .add({
         targets: workImage,
         opacity: [0, 1],
-        translateX: [132, 0],
-        translateY: [-16, 0],
-        easing: 'easeOutQuart',
-        duration: 1640,
-        offset: 232,
+        translateX: [4, 0],
+        translateY: [0, 0],
+        duration: 700,
+        offset: 650,
       })
       .add({
         targets: workLink,
@@ -798,7 +673,16 @@ export default {
         easing: 'easeOutQuart',
         duration: 1640,
         offset: 182,
-      })
+      }).add({
+          targets: slides,
+          translateX: ['-110%', '120%'],
+          easing: 'easeInOutQuart',
+          duration: 1220,
+          offset: 0,
+          delay: function(el, i) {
+            return 90 * i
+          }
+        })
 
     workSection = this.$el.querySelector('.project.project1')
     workTitleWrappers = workSection.querySelectorAll('.project-title h1')
@@ -814,55 +698,10 @@ export default {
 
     workBlurb = workSection.querySelector('.project-blurb')
 
-    workImage = workSection.querySelector('.picture')
+    workImage = workSection.querySelector('.image')
     workLink = workSection.querySelector('.project-link')
 
-
-      // slides = workSection.querySelectorAll(
-      //   '.picture .slides .slider:not(.video)'
-      // )
-      // videoSlide = workSection.querySelector('.picture .slides .slider.video')
-      // video = videoSlide.querySelector('video')
-      //overlay = workImage.querySelector('.overlay');
-
-      // //Set up the project animation
-      // this.projectVideoAnime[1] = this.$anime.timeline({
-      //   loop: false,
-      //   autoplay: false,
-      // })
-      // video.addEventListener('pause', function() {
-      //   self.projectVideoAnime[1].reverse()
-      //   self.projectVideoAnime[1].play()
-      // })
-
-      // this.projectVideoAnime[1]
-      //   .add({
-      //     targets: slides,
-      //     translateX: ['-110%', '120%'],
-      //     easing: 'easeInOutQuart',
-      //     duration: 1320,
-      //     delay: function(el, i) {
-      //       return 132 * i
-      //     },
-      //     complete: function(anim) {
-      //       //Only runs if played forward
-      //       //  if (!video.ended) { //Video hasn't been played?
-      //       video.play()
-      //       // }
-      //     },
-      //   })
-      //   .add({
-      //     targets: videoSlide,
-      //     translateX: ['-100%', '0%'],
-      //     duration: 1,
-      //     offset: 900,
-      //   })
-        //     .add({
-        //   targets: overlay,
-        //   opacity: ['0.32', '0'],
-        //   duration: 20, 
-        //   offset: 900
-        // })
+    slides = workSection.querySelectorAll('.picture .slides .slider:not(.video)');
     
     this.pageAnime.push(this.$anime.timeline({ loop: false, autoplay: false }))
 
@@ -896,11 +735,10 @@ export default {
       .add({
         targets: workImage,
         opacity: [0, 1],
-        translateX: [132, 0],
-        translateY: [-16, 0],
-        easing: 'easeOutQuart',
-        duration: 1640,
-        offset: 232,
+        translateX: [4, 0],
+        translateY: [0, 0],
+        duration: 700,
+        offset: 650,
       })
       .add({
         targets: workLink,
@@ -909,7 +747,16 @@ export default {
         easing: 'easeOutQuart',
         duration: 1640,
         offset: 182,
-      })
+      }).add({
+          targets: slides,
+          translateX: ['-110%', '120%'],
+          easing: 'easeInOutQuart',
+          duration: 1220,
+          offset: 0,
+          delay: function(el, i) {
+            return 90 * i
+          }
+        })
 
     workSection = this.$el.querySelector('.project.project2')
     workTitleWrappers = workSection.querySelectorAll('.project-title h1')
@@ -925,47 +772,10 @@ export default {
 
     workBlurb = workSection.querySelector('.project-blurb')
 
-    workImage = workSection.querySelector('.picture')
+    workImage = workSection.querySelector('.image')
     workLink = workSection.querySelector('.project-link')
 
-      slides = workSection.querySelectorAll(
-        '.picture .slides .slider:not(.video)'
-      )
-      videoSlide = workSection.querySelector('.picture .slides .slider.video')
-      video = videoSlide.querySelector('video')
-
-      //Set up the project animation
-      this.projectVideoAnime[2] = this.$anime.timeline({
-        loop: false,
-        autoplay: false,
-      })
-      video.addEventListener('pause', function() {
-        self.projectVideoAnime[2].reverse()
-        self.projectVideoAnime[2].play()
-      })
-
-      this.projectVideoAnime[2]
-        .add({
-          targets: slides,
-          translateX: ['-110%', '120%'],
-          easing: 'easeInOutQuart',
-          duration: 1320,
-          delay: function(el, i) {
-            return 132 * i
-          },
-          complete: function(anim) {
-            //Only runs if played forward
-            //  if (!video.ended) { //Video hasn't been played?
-            video.play()
-            // }
-          },
-        })
-        .add({
-          targets: videoSlide,
-          translateX: ['-100%', '0%'],
-          duration: 1,
-          offset: 900,
-        })
+    slides = workSection.querySelectorAll('.picture .slides .slider:not(.video)');
 
     this.pageAnime.push(this.$anime.timeline({ loop: false, autoplay: false }))
 
@@ -999,11 +809,10 @@ export default {
       .add({
         targets: workImage,
         opacity: [0, 1],
-        translateX: [132, 0],
-        translateY: [-16, 0],
-        easing: 'easeOutQuart',
-        duration: 1640,
-        offset: 232,
+        translateX: [4, 0],
+        translateY: [0, 0],
+        duration: 700,
+        offset: 650,
       })
       .add({
         targets: workLink,
@@ -1012,7 +821,16 @@ export default {
         easing: 'easeOutQuart',
         duration: 1640,
         offset: 182,
-      })
+      }).add({
+          targets: slides,
+          translateX: ['-110%', '120%'],
+          easing: 'easeInOutQuart',
+          duration: 1220,
+          offset: 0,
+          delay: function(el, i) {
+            return 90 * i
+          }
+        })
 
     workSection = this.$el.querySelector('.project.project3')
     workTitleWrappers = workSection.querySelectorAll('.project-title h1')
@@ -1028,47 +846,10 @@ export default {
 
     workBlurb = workSection.querySelector('.project-blurb')
 
-    workImage = workSection.querySelector('.picture')
+    workImage = workSection.querySelector('.image')
     workLink = workSection.querySelector('.project-link')
 
-      slides = workSection.querySelectorAll(
-        '.picture .slides .slider:not(.video)'
-      )
-      videoSlide = workSection.querySelector('.picture .slides .slider.video')
-      video = videoSlide.querySelector('video')
-
-      //Set up the project animation
-      this.projectVideoAnime[3] = this.$anime.timeline({
-        loop: false,
-        autoplay: false,
-      })
-      video.addEventListener('pause', function() {
-        self.projectVideoAnime[2].reverse()
-        self.projectVideoAnime[2].play()
-      })
-
-      this.projectVideoAnime[3]
-        .add({
-          targets: slides,
-          translateX: ['-110%', '120%'],
-          easing: 'easeInOutQuart',
-          duration: 1320,
-          delay: function(el, i) {
-            return 132 * i
-          },
-          complete: function(anim) {
-            //Only runs if played forward
-            //  if (!video.ended) { //Video hasn't been played?
-            video.play()
-            // }
-          },
-        })
-        .add({
-          targets: videoSlide,
-          translateX: ['-100%', '0%'],
-          duration: 1,
-          offset: 900,
-        })
+    slides = workSection.querySelectorAll('.picture .slides .slider:not(.video)');
 
     this.pageAnime.push(this.$anime.timeline({ loop: false, autoplay: false }))
 
@@ -1102,11 +883,10 @@ export default {
       .add({
         targets: workImage,
         opacity: [0, 1],
-        translateX: [132, 0],
-        translateY: [-16, 0],
-        easing: 'easeOutQuart',
-        duration: 1640,
-        offset: 232,
+        translateX: [4, 0],
+        translateY: [0, 0],
+        duration: 700,
+        offset: 650,
       })
       .add({
         targets: workLink,
@@ -1115,7 +895,16 @@ export default {
         easing: 'easeOutQuart',
         duration: 1640,
         offset: 182,
-      })
+      }).add({
+          targets: slides,
+          translateX: ['-110%', '120%'],
+          easing: 'easeInOutQuart',
+          duration: 1220,
+          offset: 0,
+          delay: function(el, i) {
+            return 90 * i
+          }
+        })
 
     const contactBackText = this.$el.querySelector('.contact .profile-backText')
     charming(contactBackText)
@@ -1687,6 +1476,7 @@ header h2 span:first-of-type {
 .project .content .project-title {
   position: absolute;
   left: 0;
+  z-index: 100;
   pointer-events: none;
 }
 
@@ -1709,6 +1499,8 @@ header h2 span:first-of-type {
   color: #f9f7f4;
   position: absolute;
   left: 0;
+
+  z-index: 100;
   top: 6.64em;
   font-size: 27px;
   font-weight: 500;
@@ -1723,6 +1515,8 @@ header h2 span:first-of-type {
   width: 55vw;
   max-width: 924px;
   height: 30.94vw;
+  z-index: 0;
+  overflow: hidden;
   max-height: 519.78px;
   position: relative;
   right: 0;
@@ -1822,6 +1616,7 @@ header h2 span:first-of-type {
   display: inline-block;
   position: absolute;
   top: 18em;
+  pointer-events: all;
 }
 
 .project .project-link .link-text {
