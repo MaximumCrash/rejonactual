@@ -236,7 +236,7 @@
           <div class="bg"></div>
            </div>
            <div class="profilepic-parallax">
-          <img src="~/assets/Images/aboutImage.png"/>
+          <img src="~/assets/Images/contactImage.png"/>
            </div>
         </div>
         
@@ -1679,6 +1679,22 @@ header h2 span:first-of-type {
 
 .contact .content .copy a.extra span {
   text-decoration: underline;
+}
+
+.contact .content.side-card .images .profile-pic img {
+  width: 100%; 
+  right: 0px; 
+  left: unset;
+  bottom: -6px; 
+}
+
+.contact .content.side-card .images .profile-pic .bg {
+  background: linear-gradient(32deg, #6c15b5, #5a04a2, #e4259b);
+}
+
+.contact .profilepic-parallax-container .profilepic-text-parallax {
+  left: -196px; 
+  top: 147px; 
 }
 
 @media screen and (min-width: $breakPoint-tablet) {
