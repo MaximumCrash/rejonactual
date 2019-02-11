@@ -66,7 +66,7 @@
           <div class="bg"></div>
            </div>
            <div class="profilepic-parallax">
-          <img src="~/assets/Images/aboutImage.png"/>
+          <img src="~/assets/Images/aboutImage2.png"/>
            </div>
         </div>
       </div>
@@ -244,7 +244,7 @@
       </div>
         
       <p class="copy">
-        Let's make something great together!
+        Let's make something great together
 
         <a href="mailto:rejon@maximumcrash.com">rejon@maximumcrash.com</a>
         <ul class="socialLinks">
@@ -438,7 +438,7 @@ export default {
         return 60 + 64 * i
       },
     })
-
+    
     this.pageAnime.push(this.$anime.timeline({ loop: false, autoplay: false }))
 
     this.pageAnime[0]
@@ -634,7 +634,7 @@ export default {
 
     workTitleTargets.forEach((target, i) => {
       let offsetClamp = Math.min(Math.max(32 + 4 * i, 32), 320)
-      let duration = 800 + 100 * i;
+      let duration = 700 + 100 * i;
 
       this.pageAnime[2].add({
         targets: target,
@@ -677,7 +677,7 @@ export default {
           targets: slides,
           translateX: ['-110%', '120%'],
           easing: 'easeInOutQuart',
-          duration: 1220,
+          duration: 1020,
           offset: 0,
           delay: function(el, i) {
             return 90 * i
@@ -707,7 +707,7 @@ export default {
 
     workTitleTargets.forEach((target, i) => {
       let offsetClamp = Math.min(Math.max(32 + 4 * i, 32), 320)
-      let duration = 800 + 100 * i
+      let duration = 700 + 100 * i
       //let delay = Math.min(Math.max(320/(i+1) + 64 * i, 60), 320);
 
       this.pageAnime[3].add({
@@ -751,7 +751,7 @@ export default {
           targets: slides,
           translateX: ['-110%', '120%'],
           easing: 'easeInOutQuart',
-          duration: 1220,
+          duration: 1020,
           offset: 0,
           delay: function(el, i) {
             return 90 * i
@@ -781,7 +781,7 @@ export default {
 
     workTitleTargets.forEach((target, i) => {
       let offsetClamp = Math.min(Math.max(32 + 4 * i, 32), 320)
-      let duration = 800 + 100 * i
+      let duration = 700 + 100 * i
       //let delay = Math.min(Math.max(320/(i+1) + 64 * i, 60), 320);
 
       this.pageAnime[4].add({
@@ -825,7 +825,7 @@ export default {
           targets: slides,
           translateX: ['-110%', '120%'],
           easing: 'easeInOutQuart',
-          duration: 1220,
+          duration: 1020,
           offset: 0,
           delay: function(el, i) {
             return 90 * i
@@ -899,7 +899,7 @@ export default {
           targets: slides,
           translateX: ['-110%', '120%'],
           easing: 'easeInOutQuart',
-          duration: 1220,
+          duration: 1020,
           offset: 0,
           delay: function(el, i) {
             return 90 * i
