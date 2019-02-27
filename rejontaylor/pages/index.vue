@@ -312,6 +312,8 @@ export default {
         lazyLoading: false,
       },
       pageAnime: [],
+      dotAnime: null,
+      ranDots: false, 
       headerAnime: null,
       isShowingHeader: false,
       ctaTimeout: null,
@@ -345,7 +347,13 @@ export default {
         if (this.pageAnime !== null && destination !== null && this.pageAnime !== undefined && destination !== undefined) {
           if (this.pageAnime[destination.index] !== undefined)
           {
-            this.pageAnime[destination.index].restart()
+            let self = this; 
+            setTimeout(function() {
+              self.dotAnime.restart();
+              self.pageAnime[destination.index].restart();
+              
+            }, 200);
+            this.ranDots = true;  
           }
         }
       }
@@ -372,6 +380,12 @@ export default {
 
       if (destination !== null && this.pageAnime[destination.index] !== null) {
          this.pageAnime[destination.index].restart();
+          console.log(origin.index)
+
+          if (!this.ranDots) {
+            this.dotAnime.restart();
+            this.ranDots = true;
+          }
       }
       this.pageAnime[origin.index].play();
       this.pageAnime[origin.index].reverse();     
@@ -978,18 +992,18 @@ export default {
     const dotLayer1 = document.querySelector('.dot-layer-1');
     const dotLayer2 = document.querySelector('.dot-layer-2');
 
-    var dotAnime = this.$anime.timeline({loop: false});
+    this.dotAnime = this.$anime.timeline({loop: false, autoplay: false});
 
-    dotAnime.add({
+    this.dotAnime.add({
       targets: dotLayer0,
-      opacity: [0.8,1],
+      opacity: [0,1],
       scale: [1,1.1],
       easing: "easeOutQuart",
       duration: 1640
     })
     .add({
       targets: dotLayer1,
-      opacity: [0.8,1],
+      opacity: [0,1],
       scale: [1,1.1],
       easing: "easeOutQuart",
       duration: 1640,
@@ -997,7 +1011,7 @@ export default {
     })
     .add({
       targets: dotLayer2,
-      opacity: [0.8,1.1],
+      opacity: [0,1.1],
       scale: [1,1.1],
       easing: "easeOutQuart",
       duration: 1640,
@@ -1012,6 +1026,7 @@ header {
   position: fixed;
   opacity: 1;
   pointer-events: all;
+  z-index: 100; 
 }
 
 header.hide {
@@ -1697,7 +1712,140 @@ header h2 span:first-of-type {
   top: 147px; 
 }
 
-@media screen and (min-width: $breakPoint-tablet) {
+.fp-section.fp-table {
+  overflow: hidden;
+}
+
+@media screen and (max-width: $breakPoint-tablet) {
+  .profilepic-parallax-container {
+    display: block; 
+    top: -45px;
+  }
+
+  .content.side-card .images {
+    max-width: none; 
+    width: 70vw; 
+    min-width: 764px;
+    padding-right: 0; 
+    padding-left: 0; 
+    top: 0px;
+  }
+
+  .content.side-card .images .profile-pic {
+    margin-top: 4em; 
+    height: 370px; 
+    width: auto; 
+    min-width: 200px; 
+    left: 0; 
+  }
+
+  .profilepic-parallax-container .profilepic-text-parallax {
+    left: -221px; 
+    top: 92px; 
+    position: relative; 
+  }
+
+  .profilepic-parallax-container .profilebg-parallax {
+    height: 300px; 
+    left: 0; 
+    bottom: 0; 
+  }
+
+  .profilepic-parallax-container .profilepic-parallax {
+    bottom: -77px; 
+    width: 520px; 
+    right: 0; 
+  }
+
+  .content.side-card .images .profile-pic img {
+    width: 100%; 
+    left: 0px; 
+    bottom: -86px;
+  }
+
+  .content.side-card .copy {
+    width: 70vw; 
+    margin: auto; 
+    font-size: 23px; 
+    max-width: none; 
+    top: -10px;
+    position:relative;
+  }
+
+  .project a.content {
+    top: -2.64em;
+  }
+
+  .project .content .project-title {
+    text-align: center;
+    position: relative;  
+    font-size: 1.4vw;
+  }
+
+  .project .content .project-blurb {
+    top: unset; 
+    font-size: 25px; 
+    text-align: center; 
+    left: 0; 
+    margin: auto; 
+    position: relative; 
+    margin-bottom: 1.64em; 
+    margin-top: .5em;
+  }
+
+  .project .project-link {
+    top: unset; 
+    bottom: -5em;
+    left: 50%; 
+    transform: translateX(-50%) !important;
+  }
+
+  .project .content .picture {
+    max-width: none; 
+    width: 100%; 
+    height: 45vw; 
+    max-height: 464px;
+    right: 0; 
+    margin-left: none; 
+  }
+
+  .contact .content.side-card {
+    text-align: center; 
+  }
+
+  .contact .profilepic-parallax-container {
+    top: -80px;
+  }
+
+  .contact .profilepic-parallax-container { 
+    margin-top: 5em;
+  }
+
+  .contact .profilepic-parallax-container .profilepic-text-parallax { 
+    left: -196px; 
+    top: 87px;
+  }
+
+  .contact .profilepic-parallax-container .profilepic-parallax{
+    bottom: -77px; 
+    width: 520px; 
+    transform: scaleX(-1);
+    right: 0; 
+  }
+
+  .contact .content.side-card .images .profile-pic img{
+    width: 70%; 
+    left: unsent; 
+    right: 15%; 
+    bottom: -6px;
+  }
+
+  .contact .content.side-card .copy {
+    font-size: 26px; 
+    text-align: center; 
+    top: -50px; 
+  
+  }
 }
 </style>
 
