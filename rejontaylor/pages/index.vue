@@ -6,20 +6,21 @@
     </header>
     <full-page ref="fullpage" :options="options" id="fullpage">
     <div class="section home" data-anchor="home">
-      <div class="title">
-        <h1 class="layer0">Réjon</h1>
-        <h1 class="layer1">Réjon</h1>
-        <h1 class="layer2">Réjon</h1>
-        <h1 class="layer3">Réjon</h1>
-        <h1 class="layer4">Réjon</h1>
-        <h1 class="layer5">Réjon</h1>
-        <h2>Taylor-Foster</h2>
-      </div>
+      <div class="header-container">
+        <div class="title">
+          <h1 class="layer0">Réjon</h1>
+          <h1 class="layer1">Réjon</h1>
+          <h1 class="layer2">Réjon</h1>
+          <h1 class="layer3">Réjon</h1>
+          <h1 class="layer4">Réjon</h1>
+          <h1 class="layer5">Réjon</h1>
+          <h2>Taylor-Foster</h2>
+        </div>
 
-      <div class="sub-title">
-        <p> Developer • Designer • All Around Mad Scientist </p>
+        <div class="sub-title">
+          <p> Developer • Designer • All Around Mad Scientist </p>
+        </div>
       </div>
-
       <div class="hero-links">
         <ul>
           <li>
@@ -1716,19 +1717,86 @@ header h2 span:first-of-type {
   overflow: hidden;
 }
 
+@media screen and (max-width: 900px) {
+  #fp-nav.fp-left.show,
+  #fp-nav.fp-left {
+    top: 50%;
+  }
+
+
+}
+
+@media screen and (max-width: $breakPoint-mobile) {
+  .home .title {
+    top: 20%; 
+    width: 89%; 
+    left: 40%; 
+  }
+
+  .home .title h1 {
+    font-size: 27vw; 
+  }
+
+  .home .title h1 > span:first-of-type {
+    left: 52px; 
+    top: 38px; 
+    width: 31vw; 
+  }
+
+  .home .title h2 {
+    right: 33px; 
+    bottom: -54px; 
+    font-size: 9vw; 
+  }
+
+  .home .sub-title {
+    display: none; 
+  }
+
+  .home .hero-links {
+    left: 50%; 
+    top: 58%; 
+    width: 100%; 
+  }
+
+  .home .hero-links ul { 
+    font-size: 1.82em;
+  }
+
+  .home .hero-links ul li {
+    min-width: 132px; 
+    height: 60px; 
+    display: block;
+    line-height: 60px;
+  }
+
+  .home .hero-links ul li .link-bullet {
+    display: none;
+  }
+
+  .home .scroll-cta.show {
+    bottom: 10px;
+  }
+}
+
 @media screen and (max-width: $breakPoint-tablet) {
   .profilepic-parallax-container {
     display: block; 
     top: -45px;
   }
 
+  .content.side-card .images .profile-pic .bg {
+    height: 100%;
+  }
+
   .content.side-card .images {
     max-width: none; 
     width: 70vw; 
-    min-width: 764px;
+        min-width: 742px;
     padding-right: 0; 
     padding-left: 0; 
     top: 0px;
+        border-radius: 5px;
   }
 
   .content.side-card .images .profile-pic {
