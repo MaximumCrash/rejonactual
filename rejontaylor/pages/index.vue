@@ -20,7 +20,7 @@
         <div class="sub-title">
           <p> Developer • Designer • All Around Mad Scientist </p>
         </div>
-      </div>
+      
       <div class="hero-links">
         <ul>
           <li>
@@ -42,6 +42,7 @@
             </a>
           </li>
         </ul>
+      </div>
       </div>
        <div class="scroll-cta">
          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1068,12 +1069,21 @@ header h2 span:first-of-type {
   position: relative;
 }
 
-.home .title {
+.home .header-container {
   position: absolute;
-  display: inline-block;
-  top: 30%;
-  left: 45%;
-  transform: translate(-48%, -30%);
+  width: auto; 
+  height: auto; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  top: 50%; 
+}
+
+.home .title {
+    position: relative;
+    width: auto;
+    margin: auto;
+    top: -50px;
+    left: -64px;
 }
 
 .name-parallax-container {
@@ -1183,7 +1193,7 @@ header h2 span:first-of-type {
   display: inline-block;
   position: absolute;
   color: $white;
-  right: -71px;
+  right: 60px;
   bottom: -10px;
   font-size: 2.25em;
   pointer-events: auto;
@@ -1192,12 +1202,9 @@ header h2 span:first-of-type {
 }
 
 .home .sub-title {
-  display: inline-block;
+  display: block;
   font-size: 1.6em;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 53%;
+  position: relative;
   color: $white;
   white-space: nowrap;
 }
@@ -1215,13 +1222,11 @@ header h2 span:first-of-type {
 }
 
 .home .hero-links {
-  display: inline-block;
-  position: absolute;
-  top: 68%;
-  left: 50%;
-  transform: translateX(-50%);
+  display: block;
+  position: relative;
+  margin-top: 5em;
   pointer-events: all;
-  width: 100%;
+      white-space: nowrap;
 }
 
 .home .hero-links ul {
@@ -1727,26 +1732,45 @@ header h2 span:first-of-type {
 }
 
 @media screen and (max-width: $breakPoint-mobile) {
+  .home .header-container {
+    position: absolute; 
+    width: 100%; 
+    pointer-events: none;
+        max-width: 600px;
+  }
   .home .title {
-    top: 20%; 
-    width: 89%; 
-    left: 40%; 
+    top: -50px; 
+    position: relative;
+    left:0; 
+    margin:auto; 
   }
 
   .home .title h1 {
-    font-size: 27vw; 
+    font-size: 7em;
+    left: -33px; 
+    position: relative; 
   }
 
   .home .title h1 > span:first-of-type {
-    left: 52px; 
+    left: 74px; 
     top: 38px; 
-    width: 31vw; 
+  }
+
+  .home .title h1:not(.layer0) {
+    position: absolute;
+    top: 0; 
+    width: 100%; 
+    left: -36px;
+    font-size: 7em;
   }
 
   .home .title h2 {
-    right: 33px; 
-    bottom: -54px; 
-    font-size: 9vw; 
+    right: unset; 
+    bottom: -10px; 
+    top: -11px;
+    font-size: 44px; 
+    pointer-events: none; 
+    position: relative;
   }
 
   .home .sub-title {
@@ -1754,9 +1778,8 @@ header h2 span:first-of-type {
   }
 
   .home .hero-links {
-    left: 50%; 
-    top: 58%; 
-    width: 100%; 
+    margin-top:0em;
+    white-space: nowrap;
   }
 
   .home .hero-links ul { 
@@ -1768,6 +1791,8 @@ header h2 span:first-of-type {
     height: 60px; 
     display: block;
     line-height: 60px;
+    margin-bottom: 10px; 
+    pointer-events: all; 
   }
 
   .home .hero-links ul li .link-bullet {
