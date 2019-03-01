@@ -19,6 +19,7 @@
 
         <div class="sub-title">
           <p> Developer • Designer • All Around Mad Scientist </p>
+          <p class="mobile">Web Designer / Game Developer</p>
         </div>
       
       <div class="hero-links">
@@ -83,7 +84,7 @@
         <br><br>
         In my spare time, I run <a href="https://maximumcrash.com">Maximum Crash</a>, compose music, fix hardware, teach, and explore fashion design. 
         <br><br>
-        <a href="http://maximumcrash.com">My Resume</a>
+        <a href="~/assets/Rejon_Resume_2019.pdf" download>My Resume</a>
       </p>
       </div>
     </div>
@@ -382,7 +383,6 @@ export default {
 
       if (destination !== null && this.pageAnime[destination.index] !== null) {
          this.pageAnime[destination.index].restart();
-          console.log(origin.index)
 
           if (!this.ranDots) {
             this.dotAnime.restart();
@@ -1031,6 +1031,10 @@ header {
   z-index: 100; 
 }
 
+.mobile {
+  display: none; 
+}
+
 header.hide {
   opacity: 0;
   pointer-events: none;
@@ -1336,11 +1340,11 @@ header h2 span:first-of-type {
 
 @keyframes floatCTA {
   from {
-    bottom: 20px;
+    bottom: 1vh;
   }
 
   to {
-    bottom: 30px;
+    bottom: 1.5vh;
   }
 }
 
@@ -1731,7 +1735,178 @@ header h2 span:first-of-type {
 
 }
 
+
+@media screen and (max-width: $breakPoint-tablet) {
+  .profilepic-parallax-container {
+    display: block; 
+    top: -45px;
+  }
+
+  .content.side-card .images .profile-pic .bg {
+    height: 100%;
+  }
+
+  .content.side-card .images {
+    max-width: none; 
+    width: 70vw; 
+        min-width: 742px;
+    padding-right: 0; 
+    padding-left: 0; 
+    top: 0px;
+        border-radius: 5px;
+  }
+
+  .content.side-card .images .profile-pic {
+    margin-top: 4em; 
+    height: 30vh; 
+    max-height: 370px;
+    width: auto; 
+    min-width: 287px; 
+    left: 0; 
+  }
+
+  .profilepic-parallax-container .profilepic-text-parallax {
+    left: -23vh; 
+    top: 4vh; 
+    position: relative; 
+  }
+
+  .content.side-card .images .profile-pic .profile-backText {
+    left: 0px; 
+    top: -1vh; 
+    font-size: 10vh; 
+    height: auto; 
+  }
+
+  .content.side-card .images .profile-pic .profile-frontText {
+    left: 32px; 
+    top: -5vh; 
+    font-size: 10vh; 
+  }
+
+  .profilepic-parallax-container .profilebg-parallax {
+    height: 26vh; 
+    left: 0; 
+    bottom: 0; 
+  }
+
+  .profilepic-parallax-container .profilepic-parallax {
+    bottom: -77px; 
+    width: 52vh;
+    max-width: 460px; 
+    right: 0; 
+  }
+
+  .content.side-card .images .profile-pic img {
+    width: 100%; 
+    left: 0px; 
+    bottom: -86px;
+  }
+
+  .content.side-card .copy {
+    width: 70vw; 
+    margin: auto; 
+    font-size: 2.64vh; 
+    max-width: none; 
+    top: -10px;
+    position:relative;
+  }
+
+  .project a.content {
+    top: -2.64em;
+  }
+
+  .project .content .project-title {
+    text-align: center;
+    position: relative;  
+    font-size: 1.64vh;
+  }
+
+  .project .content .project-blurb {
+    top: unset; 
+    font-size: 25px; 
+    text-align: center; 
+    left: 0; 
+    margin: auto; 
+    position: relative; 
+    margin-bottom: 2vh; 
+    margin-top: .5em;
+  }
+
+  .project .project-link {
+    top: unset; 
+    bottom: -9vh;
+    left: 50%; 
+    transform: translateX(-50%) !important;
+  }
+
+  .project .content .picture {
+    max-width: none; 
+    width: 100%; 
+    height: 50vh; 
+    max-height: 464px;
+    right: 0; 
+    margin-left: none; 
+  }
+
+  .contact .content.side-card {
+    text-align: center; 
+  }
+
+  .contact .profilepic-parallax-container {
+    top: -80px;
+  }
+
+  .contact .profilepic-parallax-container { 
+    margin-top: 5em;
+  }
+
+  .contact .profilepic-parallax-container .profilepic-text-parallax { 
+    left: -196px; 
+    top: 4vh;
+  }
+
+  .contact .profilepic-parallax-container .profilepic-parallax{
+    bottom: -77px; 
+    width: 52vh;
+    max-width: 440px; 
+    transform: scaleX(-1);
+    right: 0; 
+  }
+
+  .contact .content.side-card .images .profile-pic img{
+    width: 70%; 
+    left: unsent; 
+    right: 15%; 
+    bottom: -6px;
+  }
+
+  .contact .content.side-card .copy {
+    font-size: 26px; 
+    text-align: center; 
+    top: -50px; 
+  
+  }
+}
+
 @media screen and (max-width: $breakPoint-mobile) {
+  .mobile {
+    display:block; 
+  }
+
+
+  header {
+    left: -16px; 
+  }
+
+  header h2 {
+    font-size: 7vh;
+  }
+
+  header h2 span:first-of-type {
+    left: 4.5vh;
+  }
+
   .home .header-container {
     position: absolute; 
     width: 100%; 
@@ -1768,12 +1943,17 @@ header h2 span:first-of-type {
     right: unset; 
     bottom: -10px; 
     top: -11px;
-    font-size: 44px; 
+    font-size: 40px; 
     pointer-events: none; 
     position: relative;
   }
 
   .home .sub-title {
+    font-size: 22.23px;
+    top: -30px; 
+  }
+
+  .home .sub-title p:not(.mobile) {
     display: none; 
   }
 
@@ -1783,12 +1963,13 @@ header h2 span:first-of-type {
   }
 
   .home .hero-links ul { 
-    font-size: 1.82em;
+    font-size: 27px;
   }
 
   .home .hero-links ul li {
     min-width: 132px; 
-    height: 60px; 
+    height: 8vh;
+    max-height: 60px; 
     display: block;
     line-height: 60px;
     margin-bottom: 10px; 
@@ -1802,143 +1983,79 @@ header h2 span:first-of-type {
   .home .scroll-cta.show {
     bottom: 10px;
   }
-}
 
-@media screen and (max-width: $breakPoint-tablet) {
-  .profilepic-parallax-container {
-    display: block; 
-    top: -45px;
+  .content.side-card {
+    top: -12px; 
   }
 
-  .content.side-card .images .profile-pic .bg {
-    height: 100%;
+  .contact .profilepic-parallax-container .profilepic-text-parallax {
+    left: 50%; 
+    top: 50%; 
+  }
+
+  .profilepic-parallax-container {
+    top: unset; 
+    display: block;
   }
 
   .content.side-card .images {
     max-width: none; 
-    width: 70vw; 
-        min-width: 742px;
-    padding-right: 0; 
-    padding-left: 0; 
-    top: 0px;
-        border-radius: 5px;
+    min-width: unset; 
+    top:0px;
+    width:100%; 
+    border-radius: 0;
+    padding-top: 0; 
   }
 
   .content.side-card .images .profile-pic {
-    margin-top: 4em; 
-    height: 370px; 
-    width: auto; 
-    min-width: 200px; 
+    margin-top: 0; 
+    height: 27vh; 
+    max-height: 370px; 
+    min-width: none; 
     left: 0; 
   }
 
   .profilepic-parallax-container .profilepic-text-parallax {
-    left: -221px; 
-    top: 92px; 
+    left: 50%; 
+    top: 50%; 
     position: relative; 
+    transform: translate(-50%, -50%);
+  } 
+
+  .content.side-card .images .profile-pic .profile-backText {
+    left: -20px; 
+    top: 2vh; 
+    font-size: 10vh; 
+  }
+
+  .content.side-card .images .profile-pic .profile-frontText {
+    left: 16px; 
+    top: -3vh; 
+    font-size: 10vh; 
   }
 
   .profilepic-parallax-container .profilebg-parallax {
-    height: 300px; 
-    left: 0; 
+    height: 26vh;
+    left:0; 
     bottom: 0; 
   }
 
-  .profilepic-parallax-container .profilepic-parallax {
-    bottom: -77px; 
-    width: 520px; 
-    right: 0; 
+  .content.side-card .images .profile-pic .bg {
+    height: 100%; 
+    border-radius: 0; 
   }
 
-  .content.side-card .images .profile-pic img {
-    width: 100%; 
-    left: 0px; 
-    bottom: -86px;
+  .profilepic-parallax-container .profilepic-parallax {
+    display: none;
   }
 
   .content.side-card .copy {
-    width: 70vw; 
-    margin: auto; 
-    font-size: 23px; 
-    max-width: none; 
-    top: -10px;
-    position:relative;
-  }
-
-  .project a.content {
-    top: -2.64em;
-  }
-
-  .project .content .project-title {
-    text-align: center;
-    position: relative;  
-    font-size: 1.4vw;
-  }
-
-  .project .content .project-blurb {
-    top: unset; 
-    font-size: 25px; 
-    text-align: center; 
-    left: 0; 
-    margin: auto; 
-    position: relative; 
-    margin-bottom: 1.64em; 
-    margin-top: .5em;
-  }
-
-  .project .project-link {
-    top: unset; 
-    bottom: -5em;
-    left: 50%; 
-    transform: translateX(-50%) !important;
-  }
-
-  .project .content .picture {
-    max-width: none; 
-    width: 100%; 
-    height: 45vw; 
-    max-height: 464px;
-    right: 0; 
-    margin-left: none; 
-  }
-
-  .contact .content.side-card {
-    text-align: center; 
-  }
-
-  .contact .profilepic-parallax-container {
-    top: -80px;
-  }
-
-  .contact .profilepic-parallax-container { 
-    margin-top: 5em;
-  }
-
-  .contact .profilepic-parallax-container .profilepic-text-parallax { 
-    left: -196px; 
-    top: 87px;
-  }
-
-  .contact .profilepic-parallax-container .profilepic-parallax{
-    bottom: -77px; 
-    width: 520px; 
-    transform: scaleX(-1);
-    right: 0; 
-  }
-
-  .contact .content.side-card .images .profile-pic img{
-    width: 70%; 
-    left: unsent; 
-    right: 15%; 
-    bottom: -6px;
-  }
-
-  .contact .content.side-card .copy {
-    font-size: 26px; 
-    text-align: center; 
-    top: -50px; 
-  
+    width: 90%; 
+    font-size: 2.5vh; 
+    top: 10px; 
+    position: relative;
   }
 }
+
 </style>
 
