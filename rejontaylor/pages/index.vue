@@ -677,7 +677,7 @@ export default {
       .add({
         targets: workImage,
         opacity: [0, 1],
-        translateX: [4, 0],
+        translateX: [0, 0],
         translateY: [0, 0],
         duration: 700,
         offset: 650,
@@ -751,7 +751,7 @@ export default {
       .add({
         targets: workImage,
         opacity: [0, 1],
-        translateX: [4, 0],
+        translateX: [0, 0],
         translateY: [0, 0],
         duration: 700,
         offset: 650,
@@ -825,7 +825,7 @@ export default {
       .add({
         targets: workImage,
         opacity: [0, 1],
-        translateX: [4, 0],
+        translateX: [0, 0],
         translateY: [0, 0],
         duration: 700,
         offset: 650,
@@ -899,7 +899,7 @@ export default {
       .add({
         targets: workImage,
         opacity: [0, 1],
-        translateX: [4, 0],
+        translateX: [0, 0],
         translateY: [0, 0],
         duration: 700,
         offset: 650,
