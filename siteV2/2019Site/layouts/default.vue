@@ -8,9 +8,9 @@
     <header class="header" >
       <nuxt-link to="/" @click.native="hideHeader"><h2>Réjon</h2></nuxt-link>
       <div class="links">
-        <nuxt-link to="/about">About</nuxt-link>
-        <nuxt-link to="/about">Work</nuxt-link>
-        <nuxt-link to="/about">Contact</nuxt-link>
+        <nuxt-link :class="{'active': (page === 'about')}" to="/about">About</nuxt-link>
+        <nuxt-link :class="{'active': (page === 'work')}" to="/work">Work</nuxt-link>
+        <nuxt-link :class="{'active': (page === 'contact')}" to="/contact">Contact</nuxt-link>
       </div>
     </header>
     <nuxt />
@@ -34,6 +34,8 @@ export default {
     let headerNameTargets = headerName.querySelectorAll('span')
     headerNameTargets[0].innerText += 'e'
 
+    let links = this.$el.querySelectorAll('header .links a');
+
     let headerAnime = this.$anime.timeline({ autoplay: false })
 
     headerAnime.add({
@@ -45,7 +47,16 @@ export default {
       delay: function(el, i) {
         return 60 + 64 * i
       },
-    });
+    }).add({
+      targets: links,
+      opacity: [0, 1],
+      translateX: [160, 0],
+      easing: 'easeOutQuart',
+      duration: 450,
+      delay: function(el, i) {
+        return 60 + 64 * i
+      }
+    }, '-=320');
 
     this.$store.commit('setAnime', headerAnime);
   },
@@ -75,10 +86,16 @@ header {
   z-index: 100; 
 }
 
+header > a {
+  display: inline-block;
+}
+
 header h2 {
   color: $white;
   font-size: 3.2em;
   margin-left: 0em;
+  position: relative; 
+  left: -16px; 
   opacity: 0;
   text-shadow: 0 4px 7px #0101093d;
 }
@@ -95,6 +112,52 @@ header h2 span:first-of-type {
   overflow: hidden;
   letter-spacing: 84px;
 }
+
+header .links {
+  display: inline-block;
+  font-size: 1.4em; 
+}
+
+header .links a {
+  color: white; 
+  text-decoration: none; 
+  margin-left: .5em; 
+  margin-right: .5em; 
+  padding: .1em;
+  position: relative;
+  display: inline-block;
+}
+
+header .links a::before {
+    content: '';
+    height: 110%;
+    width: 0%;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    z-index: -10;
+    transform: translate(-50%, -50%) skew(0deg);
+    transition: all ease-out .2s;
+  }
+
+  header .links a:hover::before,
+  header .links a.active::before {
+    width: 120%; 
+    transform: translate(-50%, -50%) skew(-10deg);
+    transition: all  cubic-bezier(0.165, 0.84, 0.44, 1) .1s;
+  }
+
+  header .links a:nth-child(1)::before {
+    background: $theme0;
+  }
+
+  header .links a:nth-child(2)::before {
+    background: $theme2;
+  }
+
+  header .links a:nth-child(3)::before { 
+    background: $theme4;
+  }
 
 .bg {
   position: absolute;
