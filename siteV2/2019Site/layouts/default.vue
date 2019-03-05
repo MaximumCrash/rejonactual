@@ -9,7 +9,7 @@
       <nuxt-link to="/" @click.native="hideHeader"><h2>Réjon</h2></nuxt-link>
       <div class="links">
         <nuxt-link :class="{'active': (page === 'about')}" to="/about">About</nuxt-link>
-        <nuxt-link :class="{'active': (page === 'work')}" to="/work">Work</nuxt-link>
+        <nuxt-link :class="{'active': (page === 'works')}" to="/works">Work</nuxt-link>
         <nuxt-link :class="{'active': (page === 'contact')}" to="/contact">Contact</nuxt-link>
       </div>
     </header>
@@ -140,12 +140,34 @@ header .links a::before {
     transition: all ease-out .2s;
   }
 
-  header .links a:hover::before,
-  header .links a.active::before {
+  header .links a:hover::before {
     width: 120%; 
     transform: translate(-50%, -50%) skew(-10deg);
     transition: all  cubic-bezier(0.165, 0.84, 0.44, 1) .1s;
   }
+
+  header .links a:not(.active)::after {
+    content: '';
+    position: absolute; 
+    transform-origin: center;
+    width: 0; 
+    height: 2px;
+    background: white;
+    left: 0;
+    bottom: 0;
+    transition: all .2s ease-in-out;
+  }
+
+  header .links a.active::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: white;
+    left: 0;
+    bottom: 0;
+    transition: all .2s ease-in-out;
+}
 
   header .links a:nth-child(1)::before {
     background: $theme0;

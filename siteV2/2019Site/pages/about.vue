@@ -3,15 +3,30 @@
     <div class="center-line"></div>
     
     <section class="about"> 
-      <div class="multi title" data-aos="fade" data-aos-id="home-multi">
-        <h1 class="layer0">Réjon</h1>
-        <h1 class="layer1">Réjon</h1>
-        <h1 class="layer2">Réjon</h1>
-        <h1 class="layer3">Réjon</h1>
-        <h1 class="layer4">Réjon</h1>
-        <h2 data-aos="fade-up">Taylor-Foster</h2>
+      <h1 class="behind-text">
+        About Me
+      </h1>
+      <div class="side-card">
+        <div class="text">
+          <h1>Hello</h1>
+          <h1>There</h1>
+        </div>  
+        <div class="image-holder">
+          <div class="background"></div>
+          <img src="~/assets/Images/about.png">
+        </div>
       </div>
-
+      <p class="copy">
+        I'm Réjon, a multifaceted developer-designer fascinated with envisioning unforgettable experiences. 
+        <br><br> 
+        My specialties lie in UX/UI Design and Game Development, with my experience stretching from <a class="proof" href="http://dailybreak.com" target="_blank"> web development</a> and <a class="proof" href="https://volunteerscience.com/" target="_blank"> data experiments</a> to <a class="proof" href="https://www.wsj.com/articles/when-children-can-benefit-from-playing-videogames-1500321670" target="_blank"> children's health solutions</a> and <a class="proof" href="https://worcester.ma/2016/09/free-to-read-bravehearts-derby-app-a-blast-for-fans-home-run-for-massdigi-developers/" target="_blank">brand management</a>.
+        <br><br>
+        Because I design with my Mom in mind, accessibility and enjoyment are at the forefront of everything I make.
+        <br><br>
+        In my spare time, I run <a href="https://maximumcrash.com">Maximum Crash</a>, compose music, fix hardware, teach, and explore fashion design. 
+        <br><br>
+        <a href="/Rejon_Resume_2019.pdf" target="_blank">My Resume</a>
+      </p>
     </section>
   </section>
 </template>
@@ -26,117 +41,96 @@ export default {
     }
   },
   mounted() {
-    if (this.$store.state.headerAnime) 
+    if (this.$store.state.headerAnime.direction === "reverse") 
     {
       this.$store.state.headerAnime.direction = "normal";
       this.$store.state.headerAnime.play();
     }
 
-    //Define possible animations~!
-    let homeSection = this.$el.querySelector(".about");
-    let multiCollection = homeSection.querySelector(".multi.title");
-    let animeName = multiCollection.getAttribute("data-aos-id");
-    
-    this.animeStore = this.$anime.timeline({autoplay: true});
+    let page = this.$el.querySelector('.about');
+    let behindText = page.querySelector('.behind-text');
+    let profileBackChars = page.querySelector('.side-card .text h1:first-of-type');
+    let profileFrontChars = page.querySelector('.side-card .text h1:last-of-type');
+    let profileBG = page.querySelector('.image-holder .background');
+    let profilePic = page.querySelector('.image-holder img');
+    let profileCopy = page.querySelector('.copy');
 
-    //First Name Animation element set up. Split into individual characters and animate.
-    let firstNameWrappers = multiCollection.querySelectorAll("h1");
-    let firstNameLetters = [];
+    charming(profileBackChars);
+    charming(profileFrontChars);
+    charming(behindText);
 
-    firstNameWrappers.forEach(element => {
-      charming(element);
-      element.style.opacity = 1; 
-      let target = element.querySelectorAll('span');
-      target[0].innerText += 'e'; //Cheat for getting swish on first letter
-      
-      
-      firstNameLetters.push(target);
-    });
+    behindText = behindText.querySelectorAll('span');
+    profileBackChars = profileBackChars.querySelectorAll('span');
+    profileFrontChars = profileFrontChars.querySelectorAll('span');
 
-    let secondNameWrapper = multiCollection.querySelector("h2");
-    charming(secondNameWrapper);
-    let secondNameLetters = secondNameWrapper.querySelectorAll('span');
+    this.animeStore = this.$anime.timeline({loop: false, autoplay: true});
 
     this.animeStore.add({
-        targets: firstNameLetters[0],
+        targets: behindText,
         opacity: [0, 1],
-        translateX: [320, 0],
-        easing: 'easeOutQuart',
-        duration: 900,
-        delay: function(el, i) {
-          if (i == 1) {
-            return 320 + 64 - (10 * i)
-          }
-          return 320 + 64 * i
-          
-        },
-      }, '-=320')
-      .add({
-        targets: secondNameLetters,
-        opacity: [0, 1],
-        translateX: [320, 0],
-        easing: 'easeOutQuart',
-        duration: 470,
-        delay: function(el, i) {
-          return 180 + 40 * i
-        },
-      }, 232)
-      .add({
-        targets: firstNameLetters[1],
-        opacity: [0, 1],
-        translateX: [320, 0],
-        easing: 'easeOutQuart',
-        duration: 800,
-        delay: function(el, i) {
-          return 40 + 64 * i
-        },
-      }, 32)
-      .add({
-        targets: firstNameLetters[2],
-        opacity: [0, 1],
-        translateX: [320, 0],
+        color: ["#ffffff","#1e1d69"],
+        translateX: [64, 0],
         easing: 'easeOutQuart',
         duration: 1000,
         delay: function(el, i) {
-          return 5 + 64 * i
+          return 320 + 32 * i
+        },
+      }).add({
+        targets: profileBackChars,
+        opacity: [0, 1],
+        translateX: [64, 0],
+        easing: 'easeOutQuart',
+        duration: 1000,
+        delay: function(el, i) {
+          return 320 + 32 * i
         },
       }, 64)
       .add({
-        targets: firstNameLetters[3],
+        targets: profileFrontChars,
         opacity: [0, 1],
-        translateX: [320, 0],
+        translateX: [64, 0],
         easing: 'easeOutQuart',
-        duration: 1150,
+        duration: 1000,
         delay: function(el, i) {
-          return 0.625 + 64 * i
+          return 320 + 32 * i
         },
-      }, 64)
+      }, 120)
       .add({
-        targets: firstNameLetters[4],
+        targets: profileBG,
         opacity: [0, 1],
-        translateX: [320, 0],
+        scale: [0, 1],
         easing: 'easeOutQuart',
-        duration: 1300,
-        delay: function(el, i) {
-          return 0.078 + 64 * i
-        },
-      }, 64)
+        duration: 800,
+      }, 220)
       .add({
-        targets: firstNameLetters[5],
+        targets: profilePic,
         opacity: [0, 1],
-        translateX: [320, 0],
+        translateX: [-64, 0],
         easing: 'easeOutQuart',
-        duration: 1450,
-        delay: function(el, i) {
-          return 0.009 + 64 * i
-        },
-      }, 64)
+        duration: 800,
+      }, 332)
+      .add({
+        targets: profileCopy,
+        opacity: [0, 1],
+        translateY: [160, 0],
+        easing: 'easeOutQuart',
+        duration: 800,
+      }, 420)
   }
 }
 </script>
 
 <style lang="scss">
 @import '~/assets/main.scss';
+
+.behind-text {
+      position: absolute;
+    color: #1e1d69;
+    font-size: 11vw;
+    left: 6vw;
+    top: -15vh;
+    opacity: 0.2;
+}
 .center-line {
   position: fixed;
   width: 1px;
@@ -157,140 +151,88 @@ export default {
   flex-direction: column;
 }
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
+.about {
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
 
-.links {
-  padding-top: 15px;
+.side-card {
+  display: inline-block; 
+  margin-right: 2.5vw; 
+  position: relative; 
 }
 
-  .container > section {
-    position: relative;
-    z-index: 1;
+.side-card {
+  .text {
+    position: absolute;
+    z-index: 1; 
+    color: white; 
+    font-size: 1em; 
+    left: -130px; 
+    bottom: 30px; 
   }
 
-  .multi {
-    position: relative;
+  .text > h1 {
+    position: relative; 
+    font-size: 6em; 
+    text-shadow: 0 11px 25px rgba(11, 11, 61, 0.61);
   }
 
-  .multi > .layer0 {
-    color: $white; 
-    z-index: 5;
-    position: relative;
+  .text > h1:first-of-type {
+    left: 0; 
+    top: 66px; 
   }
 
-  .home .multi.title h1 {
-    left: 18px;
+  .text > h1:last-of-type {
+    left: 35px; 
+    top: 11px; 
   }
 
-  .multi > h1 > span,
-  .home .multi.title > h2 > span{
+  .image-holder {
+    width: 360px; 
+    height: 560px; 
+    position: relative; 
+    overflow: hidden;
+  }
+
+  .image-holder .background {
+    background: linear-gradient(32deg, #e4259b, #df0077, #6c15b5);
+    background-size: 100% 164%;
+    background-position: top right;
+    border-radius: 6px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%; 
+    height: 85%; 
+    box-shadow: 0 10px 20px rgba(12, 5, 47, 0.19), 0 6px 6px rgba(10, 9, 44, 0.23);
+  }
+  .image-holder img {
+    width: 149%; 
+    position: absolute;
+    right: -10px; 
+    bottom: -60px;
+  }
+}
+
+.side-card .text > * > span,
+.behind-text > span {
     position: relative;
     display: inline-block;
   }
 
-  .home .multi.title > h1 > span:not(:first-of-type) {
-    position: relative;
-    left: -60px; 
-  }
+.copy {
+  display: inline-block; 
+  width: 30%; 
+  text-align: left; 
+  margin-left: 2.5vw; 
+  font-size: 1.5em; 
+  color: white; 
+  align-self: center;
+}
 
-  .home .multi.title > h2 {
-    color: $white; 
-    font-size: 2.25em; 
-    position: relative;
-    display: inline-block; 
-    right: -116px; 
-    top: -44px; 
-    z-index: 10;
-  }
-
-  .multi > h1:not(.layer0) {
-    position: absolute;
-    left: 0; 
-    top: 0; 
-    width: 100%; 
-  }
-
-  .multi .layer1 {
-    color: $theme4; 
-    z-index: 4; 
-  }
-
-  .multi .layer2 {
-    color: $theme3; 
-    z-index: 3;
-  }
-
-  .multi .layer3 {
-    color: $theme2;
-    z-index: 2; 
-  }
-
-  .multi .layer4 {
-    color: $theme1; 
-    z-index: 1;
-  }
-
-  .multi .layer5 {
-    color: $theme0; 
-    z-index: 0;
-  }
-
-  .home .sub-title {
-        color: white;
-    display: flex;
-    font-size: 1.64em;
-    justify-content: space-around;
-    width: 110%;
-  }
-
-  .quick-links {
-    color: white;
-    display: flex;
-    justify-content: space-around;
-    position: relative;
-    margin-top: 2em;
-    font-size: 1.9em;
-  }
-
-  .quick-links > p {
-    position: relative;
-    font-weight: 600;
-    cursor:pointer; 
-  }
-
-  .quick-links > p::before {
-    content: '';
-    height: 110%;
-    width: 0%;
-    left: 50%;
-    top: 50%;
-    position: absolute;
-    z-index: -10;
-    transform: translate(-50%, -50%) skew(0deg);
-    transition: all ease-out .2s;
-  }
-
-  .quick-links > p:hover::before {
-    width: 120%; 
-    transform: translate(-50%, -50%) skew(-10deg);
-    transition: all  cubic-bezier(0.165, 0.84, 0.44, 1) .1s;
-  }
-
-  .quick-links > p:nth-child(1)::before {
-    background: $theme0;
-  }
-
-  .quick-links > p:nth-child(2)::before {
-    background: $theme2;
-  }
-
-  .quick-links > p:nth-child(3)::before { 
-    background: $theme4;
-  }
+.copy a {
+  color: white; 
+}
 </style>
