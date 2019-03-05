@@ -41,10 +41,14 @@ export default {
     }
   },
   mounted() {
-    if (this.$store.state.headerAnime.direction === "reverse") 
+    if (this.$store.state.headerAnime !== null && this.$store.state.headerAnime.direction === "reverse") 
     {
+      
       this.$store.state.headerAnime.direction = "normal";
-      this.$store.state.headerAnime.play();
+      console.log(this.$store.state.headerAnime.direction);
+      //this.$store.state.headerAnime.reverse();
+      // console.log(this.$store.state.headerAnime.direction);
+       this.$store.state.headerAnime.play();
     }
 
     let page = this.$el.querySelector('.about');
@@ -120,7 +124,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~/assets/main.scss';
 
 .behind-text {

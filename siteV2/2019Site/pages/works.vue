@@ -3,7 +3,7 @@
     <div class="center-line"></div>
     
     <section class="work"> 
-      <h1 class="behind-text">
+      <h1 class="behind-text rellax" data-rellax-speed="5">
         Works
       </h1>
       <div class="projects-container">
@@ -15,7 +15,8 @@
 
 <script>
 import charming from 'charming';
-import Project from '~/components/Project';
+import Project from '~/components/Project.vue';
+import Rellax from 'rellax';
 
 export default {
   data() {
@@ -23,8 +24,13 @@ export default {
       animeStore: {}
     }
   },
+  components: {
+    Project
+  },
   mounted() {
-    if (this.$store.state.headerAnime.direction === "reverse") 
+    var rellax = new Rellax(".rellax");
+
+    if (this.$store.state.headerAnime !== null && this.$store.state.headerAnime.direction === "reverse") 
     {
       this.$store.state.headerAnime.direction = "normal";
       this.$store.state.headerAnime.play();
@@ -33,7 +39,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~/assets/main.scss';
 .center-line {
   position: fixed;
@@ -55,4 +61,24 @@ export default {
   flex-direction: column;
 }
 
+.work {
+  position: relative; 
+  width: 100%; 
+  max-width: 1152px; 
+  height: 100vh; /*TEMPORARY*/
+  padding-top: 15vh;
+}
+
+.behind-text {
+  left: -13vw; 
+  top: 60vh;
+     position: absolute;
+    color: #1e1d69;
+    font-size: 11vw;
+    opacity: 0.2;
+}
+
+.projects-container {
+  margin-top: 4vh;
+}
 </style>

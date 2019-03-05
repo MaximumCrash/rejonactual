@@ -25,18 +25,17 @@ import {mapState} from 'vuex';
 export default {
   computed: mapState(['page']),
   mounted() {
-    console.log(this.$store.state.page)
     var rellax = new Rellax(".rellax");
-
-    let headerName = this.$el.querySelector('header h2')
+    let headerName = this.$el.querySelector('header h2');
     charming(headerName)
     headerName.style.opacity = 1
     let headerNameTargets = headerName.querySelectorAll('span')
     headerNameTargets[0].innerText += 'e'
 
     let links = this.$el.querySelectorAll('header .links a');
-
-    let headerAnime = this.$anime.timeline({ autoplay: false })
+    console.log(this.$store.state.page);
+    let initialPage = this.$store.state.page; 
+    let headerAnime = this.$anime.timeline({ autoplay: initialPage !== 'index', direction: initialPage === 'index' ? 'reverse' : 'normal' })
 
     headerAnime.add({
       targets: headerNameTargets,
@@ -155,7 +154,7 @@ header .links a::before {
     background: white;
     left: 0;
     bottom: 0;
-    transition: all .2s ease-in-out;
+    transition: all .1s ease;
   }
 
   header .links a.active::after {
@@ -166,7 +165,7 @@ header .links a::before {
     background: white;
     left: 0;
     bottom: 0;
-    transition: all .2s ease-in-out;
+    transition: all .1s ease;
 }
 
   header .links a:nth-child(1)::before {
