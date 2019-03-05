@@ -41,14 +41,11 @@ export default {
     }
   },
   mounted() {
-    if (this.$store.state.headerAnime !== null && this.$store.state.headerAnime.direction === "reverse") 
+    if (this.$store.state.headerAnime !== null && this.$store.state.oldPage === "index") 
     {
       
       this.$store.state.headerAnime.direction = "normal";
-      console.log(this.$store.state.headerAnime.direction);
-      //this.$store.state.headerAnime.reverse();
-      // console.log(this.$store.state.headerAnime.direction);
-       this.$store.state.headerAnime.play();
+      this.$store.state.headerAnime.play();
     }
 
     let page = this.$el.querySelector('.about');
@@ -75,11 +72,11 @@ export default {
         color: ["#ffffff","#1e1d69"],
         translateX: [64, 0],
         easing: 'easeOutQuart',
-        duration: 1000,
+        duration: 900,
         delay: function(el, i) {
-          return 320 + 32 * i
+          return 520 + 64 * i
         },
-      }).add({
+      }, '-=640').add({
         targets: profileBackChars,
         opacity: [0, 1],
         translateX: [64, 0],
@@ -124,7 +121,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~/assets/main.scss';
 
 .behind-text {
@@ -220,13 +217,13 @@ export default {
   }
 }
 
-.side-card .text > * > span,
-.behind-text > span {
+.about .side-card .text > * > span,
+.about .behind-text > span {
     position: relative;
     display: inline-block;
   }
 
-.copy {
+.about .copy {
   display: inline-block; 
   width: 30%; 
   text-align: left; 
@@ -236,7 +233,7 @@ export default {
   align-self: center;
 }
 
-.copy a {
+.about .copy a {
   color: white; 
 }
 </style>

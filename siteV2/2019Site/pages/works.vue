@@ -8,6 +8,18 @@
       </h1>
       <div class="projects-container">
         <Project/>
+        <Project/>
+        <Project/>
+        <Project/>
+        <Project/>
+        <Project/>
+        <Project/>
+        <Project/>
+        <Project/>
+        <Project/>
+        <Project/>
+        <Project/>
+        <Project/>
       </div>
     </section>
   </section>
@@ -30,7 +42,7 @@ export default {
   mounted() {
     var rellax = new Rellax(".rellax");
 
-    if (this.$store.state.headerAnime !== null && this.$store.state.headerAnime.direction === "reverse") 
+    if (this.$store.state.headerAnime !== null && this.$store.state.oldPage === "index") 
     {
       this.$store.state.headerAnime.direction = "normal";
       this.$store.state.headerAnime.play();
@@ -65,13 +77,12 @@ export default {
   position: relative; 
   width: 100%; 
   max-width: 1152px; 
-  height: 100vh; /*TEMPORARY*/
   padding-top: 15vh;
 }
 
 .behind-text {
   left: -13vw; 
-  top: 60vh;
+  top: 2vh;
      position: absolute;
     color: #1e1d69;
     font-size: 11vw;

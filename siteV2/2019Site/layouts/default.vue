@@ -35,8 +35,8 @@ export default {
     let links = this.$el.querySelectorAll('header .links a');
     console.log(this.$store.state.page);
     let initialPage = this.$store.state.page; 
-    let headerAnime = this.$anime.timeline({ autoplay: initialPage !== 'index', direction: initialPage === 'index' ? 'reverse' : 'normal' })
-
+    let headerAnime = this.$anime.timeline({ autoplay: initialPage !== 'index'})
+    
     headerAnime.add({
       targets: headerNameTargets,
       opacity: [0, 1],
@@ -71,7 +71,7 @@ export default {
 <style lang="scss">
 @import '~/assets/main.scss';
 .app {
-  
+  position: relative; 
   background: $pageGradient;
   background-attachment: fixed;
   background-size: 100% 100%; 

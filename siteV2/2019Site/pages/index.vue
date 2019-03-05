@@ -39,8 +39,6 @@ export default {
   },
   mounted() {
     
-    
-
     //Define possible animations~!
     let homeSection = this.$el.querySelector(".home");
     let multiCollection = homeSection.querySelector(".multi.title");
@@ -143,6 +141,12 @@ export default {
         delay: function(el, i) {
           return 0.009 + 64 * i
         },
+        complete: function() {
+          firstNameWrappers[1].style.display = 'none'; 
+          firstNameWrappers[2].style.display = 'none'; 
+          firstNameWrappers[3].style.display = 'none'; 
+          firstNameWrappers[4].style.display = 'none'; 
+        }
       }, 64)
       .add({
         targets: subTitle,

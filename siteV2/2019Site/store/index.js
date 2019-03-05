@@ -4,11 +4,15 @@ const createStore = () => {
      return new Vuex.Store({
           state: {
                page: 'index',
+               oldPage: null,
                headerAnime: null
           },
           mutations: {
                updatePage(state, pageName) {
-                    state.page = pageName
+                    
+                    state.oldPage = state.page; 
+                    state.page = pageName;
+
                },
                setAnime(state, anime) {
                     state.headerAnime = anime;
