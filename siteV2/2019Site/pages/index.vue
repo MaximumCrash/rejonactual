@@ -3,13 +3,13 @@
     <div class="center-line"></div>
     
     <section class="home"> 
-      <div class="multi title" data-aos="fade" data-aos-id="home-multi">
+      <div class="multi title">
         <h1 class="layer0">Réjon</h1>
         <h1 class="layer1">Réjon</h1>
         <h1 class="layer2">Réjon</h1>
         <h1 class="layer3">Réjon</h1>
         <h1 class="layer4">Réjon</h1>
-        <h2 data-aos="fade-up">Taylor-Foster</h2>
+        <h2>Taylor-Foster</h2>
       </div>
       <div class="sub-title">
         <p>Developer</p>
@@ -42,7 +42,6 @@ export default {
     //Define possible animations~!
     let homeSection = this.$el.querySelector(".home");
     let multiCollection = homeSection.querySelector(".multi.title");
-    let animeName = multiCollection.getAttribute("data-aos-id");
     
     this.animeStore = this.$anime.timeline({autoplay: true});
 

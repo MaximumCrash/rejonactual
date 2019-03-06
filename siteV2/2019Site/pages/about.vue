@@ -17,9 +17,9 @@
         </div>
       </div>
       <p class="copy">
-        I'm Réjon, a multifaceted developer-designer fascinated with envisioning unforgettable experiences. 
+        I'm Réjon, a multifaceted developer-designer captivated with envisioning unforgettable experiences. 
         <br><br> 
-        My specialties lie in UX/UI Design and Game Development, with my experience stretching from <a class="proof" href="http://dailybreak.com" target="_blank"> web development</a> and <a class="proof" href="https://volunteerscience.com/" target="_blank"> data experiments</a> to <a class="proof" href="https://www.wsj.com/articles/when-children-can-benefit-from-playing-videogames-1500321670" target="_blank"> children's health solutions</a> and <a class="proof" href="https://worcester.ma/2016/09/free-to-read-bravehearts-derby-app-a-blast-for-fans-home-run-for-massdigi-developers/" target="_blank">brand management</a>.
+        My specialties lie in UX/UI Design and Game Development. My experience stretches from <a class="proof" href="http://dailybreak.com" target="_blank"> web development</a> and <a class="proof" href="https://volunteerscience.com/" target="_blank"> data experiments</a> to <a class="proof" href="https://www.wsj.com/articles/when-children-can-benefit-from-playing-videogames-1500321670" target="_blank"> children's health solutions</a> and <a class="proof" href="https://worcester.ma/2016/09/free-to-read-bravehearts-derby-app-a-blast-for-fans-home-run-for-massdigi-developers/" target="_blank">brand management</a>.
         <br><br>
         Because I design with my Mom in mind, accessibility and enjoyment are at the forefront of everything I make.
         <br><br>

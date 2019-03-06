@@ -1,15 +1,15 @@
 <template>
   <div class="app">
     <div class="bg">
-      <div class="rellax dot-layer-0" data-rellax-speed="-5"></div>
-      <div class="rellax dot-layer-1" data-rellax-speed="-7"></div>
-      <div class="rellax dot-layer-2" data-rellax-speed="-10"></div>
+      <div class="dot-layer-0"></div>
+      <div class="dot-layer-1"></div>
+      <div class="dot-layer-2"></div>
     </div>
     <header class="header" >
       <nuxt-link to="/" @click.native="hideHeader"><h2>Réjon</h2></nuxt-link>
       <div class="links">
         <nuxt-link :class="{'active': (page === 'about')}" to="/about">About</nuxt-link>
-        <nuxt-link :class="{'active': (page === 'works')}" to="/works">Work</nuxt-link>
+        <nuxt-link :class="{'active': (page === 'works')}" to="/works">Works</nuxt-link>
         <nuxt-link :class="{'active': (page === 'contact')}" to="/contact">Contact</nuxt-link>
       </div>
     </header>
@@ -18,14 +18,12 @@
 </template>
 
 <script>
-import Rellax from 'rellax';
 import charming from 'charming';
 import {mapState} from 'vuex';
 
 export default {
   computed: mapState(['page']),
   mounted() {
-    var rellax = new Rellax(".rellax");
     let headerName = this.$el.querySelector('header h2');
     charming(headerName)
     headerName.style.opacity = 1
@@ -125,6 +123,7 @@ header .links a {
   padding: .1em;
   position: relative;
   display: inline-block;
+  text-shadow: 0 11px 25px rgba(11, 11, 61, 0.61);
 }
 
 header .links a::before {
@@ -193,6 +192,7 @@ header .links a::before {
 .dot-layer-0 {
     background-image: $pageDots-0; 
     background-size: $dotSize-0;
+    background-attachment: fixed; 
     height:100%; 
     width:100%;
     position: absolute;
@@ -201,6 +201,7 @@ header .links a::before {
   .dot-layer-1 {
     background-image: $pageDots-1; 
     background-size: $dotSize-1;
+    background-attachment: fixed; 
     height:100%; 
     width:100%;
     position: absolute;
@@ -209,6 +210,7 @@ header .links a::before {
   .dot-layer-2 {
     background-image: $pageDots-2; 
     background-size: $dotSize-2;
+    background-attachment: fixed;
     height:100%; 
     width:100%;
     position: absolute;
