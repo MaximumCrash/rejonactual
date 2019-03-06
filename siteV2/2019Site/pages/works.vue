@@ -128,9 +128,9 @@ export default {
           opacity: [0, 1],
         translateX: [64, 0],
         easing: 'easeOutQuart',
-        duration: 800,
+        duration: 700,
         delay: function(el, i) {
-          return 200 + 32 * i
+          return 190 + 32 * i
         }
         }, 420)
       })
