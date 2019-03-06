@@ -288,6 +288,7 @@ export default {
     position: relative;
     margin-top: 2em;
     font-size: 1.9em;
+    pointer-events: all;
   }
 
   .quick-links > a {

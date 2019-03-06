@@ -1,13 +1,13 @@
 <template>
   <div class="app">
     <parallax-container class="bg">
-      <parallax-element class="dot-parallax" :parallaxStrength="72" :type="'translation'">
+      <parallax-element class="dot-parallax" :parallaxStrength="100" :type="'translation'">
         <div class="dot-layer-0"></div>
       </parallax-element>
-      <parallax-element class="dot-parallax" :parallaxStrength="53" :type="'translation'">
+      <parallax-element class="dot-parallax" :parallaxStrength="72" :type="'translation'">
         <div class="dot-layer-1"></div>
       </parallax-element>
-      <parallax-element class="dot-parallax" :parallaxStrength="34" :type="'translation'">
+      <parallax-element class="dot-parallax" :parallaxStrength="50" :type="'translation'">
         <div class="dot-layer-2"></div>
       </parallax-element>
     </parallax-container>
@@ -268,7 +268,15 @@ p {
   margin: 0;
 }
 
+.parallax-container {
+  pointer-events: all; 
+}
 
 
+.parallax-element {
+  width: 100%; 
+  height: 100%; 
+  position: absolute;
+}
 
 </style>

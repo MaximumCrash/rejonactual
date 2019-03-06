@@ -150,6 +150,7 @@ export default {
   position: relative; 
   overflow: hidden;
   flex-direction: column;
+  pointer-events: none; 
 }
 
 .about {
@@ -235,5 +236,6 @@ export default {
 
 .about .copy a {
   color: white; 
+  pointer-events: all;
 }
 </style>

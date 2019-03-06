@@ -89,6 +89,7 @@ export default {
           border-radius: 6px;
           box-shadow: 0 10px 20px hsla(250, 81%, 5%, 0.33), 0 6px 6px hsla(250, 81%, 5%, 0.33);
           transition: all .2s ease; 
+          pointer-events: all;
 
      }
 
