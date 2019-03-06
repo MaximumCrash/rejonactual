@@ -43,6 +43,7 @@ module.exports = {
   plugins: [
     { src: "~/plugins/aos", ssr: false},
     {src: '~/plugins/anime.js', ssr: false},
+    {src: '~/plugins/mouse-parallax.js', ssr:false}
   ],
 
   /*

@@ -1,10 +1,16 @@
 <template>
   <div class="app">
-    <div class="bg">
-      <div class="dot-layer-0"></div>
-      <div class="dot-layer-1"></div>
-      <div class="dot-layer-2"></div>
-    </div>
+    <parallax-container class="bg">
+      <parallax-element class="dot-parallax" :parallaxStrength="72" :type="'translation'">
+        <div class="dot-layer-0"></div>
+      </parallax-element>
+      <parallax-element class="dot-parallax" :parallaxStrength="53" :type="'translation'">
+        <div class="dot-layer-1"></div>
+      </parallax-element>
+      <parallax-element class="dot-parallax" :parallaxStrength="34" :type="'translation'">
+        <div class="dot-layer-2"></div>
+      </parallax-element>
+    </parallax-container>
     <header class="header" >
       <nuxt-link to="/" @click.native="hideHeader"><h2>Réjon</h2></nuxt-link>
       <div class="links">
@@ -31,7 +37,7 @@ export default {
     headerNameTargets[0].innerText += 'e'
 
     let links = this.$el.querySelectorAll('header .links a');
-    console.log(this.$store.state.page);
+
     let initialPage = this.$store.state.page; 
     let headerAnime = this.$anime.timeline({ autoplay: initialPage !== 'index'})
     
