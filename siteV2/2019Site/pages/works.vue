@@ -156,7 +156,7 @@ export default {
   align-items: center;
   text-align: center;
   position: relative; 
-  overflow: hidden;
+  overflow: visible;
   flex-direction: column;
 }
 

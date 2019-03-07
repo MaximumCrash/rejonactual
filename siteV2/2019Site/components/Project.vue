@@ -1,7 +1,7 @@
 <template>
-     <div class="project" data-aos="fade-up" data-aos-once="true" :data-aos-id="'project-' + index" data-aos-anchor-placement="center-bottom">
+     <div :class="open ? 'project open' : 'project'" data-aos="fade-up" data-aos-once="true" :data-aos-id="'project-' + index" data-aos-anchor-placement="center-bottom" v-on:click="toggleProject">
           <div class="title">
-              <h1> Project Name That is Too Long </h1>
+              <h1> Much Much More </h1>
           </div>
           <div class="slides">
                <div class="slide0"></div>
@@ -10,9 +10,18 @@
                <div class="slide3"></div>
                <div class="slide4"></div>
           </div>
-          <div class="image" :style="{backgroundImage: `url(${backgroundTest})`}">
+          <div class="image" :style="{backgroundImage: `url(${backgroundTest})`}"></div>
+          <div class="project-copy">
+               <p>
+                    Re-use of text: Attribution: To re-distribute a text file with the Derived Work based on or through a medium customarily used for software interchange; or, b) Accompany it with the Work that they do to the Program. Contributors. Therefore, if a court requires any Contributor that the BeOpen Python License is dependent only upon the terms of this Agreement as released by OWNER, including source code, even though third parties on terms identical to an alternative, stable online copy which is described in Exhibit A shall not affect the validity or enforceability of either of that version. You may use the Work and that the Package constitutes direct or indirect, to cause the direction or management of such Commercial Distributor's responsibility alone. Under this section, the Commercial Distributor to control, and cooperate with the terms of this Agreement must be on the same or some similar place meets this condition, even though third parties are not derivative works of, publicly display, publicly perform, distribute and sublicense the Contribution of such Contributor, if any, to grant the rights we want to make such provision shall be held by the Package.
+               </p>
           </div>
-          
+          <div class="more-arrow left">
+               <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+          </div>
+          <div class="more-arrow right">
+               <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+          </div>
      </div>
 </template>
 <script>
@@ -23,7 +32,13 @@ export default {
      props:['index'],
      data() {
           return { backgroundTest,
-                   animeStore: {} }
+                   animeStore: {},
+                   open: false }
+     },
+     methods: {
+          toggleProject() {
+               this.open = !this.open;
+          }
      },
      mounted() {
           this.animeStore = this.$anime.timeline({loop: false, autoplay: false})
@@ -85,8 +100,7 @@ export default {
           position: relative;
           margin-bottom: 1.64em;
           cursor: pointer; 
-          overflow: hidden;
-          border-radius: 6px;
+          
           box-shadow: 0 10px 20px hsla(250, 81%, 5%, 0.33), 0 6px 6px hsla(250, 81%, 5%, 0.33);
           transition: all .2s ease; 
           pointer-events: all;
@@ -125,6 +139,7 @@ export default {
           position:absolute;
           overflow: hidden; 
           z-index: 1;
+          border-radius: 6px;
      }
 
      .slides > div {
@@ -166,8 +181,34 @@ export default {
           background-size: cover;
           background-repeat: no-repeat;
           transition: all .2s ease;
+          border-radius: 6px;
+          z-index:0; 
      }
 
-     
+     .more-arrow {
+          position: absolute;
+          bottom: 0; 
+          z-index: -1; 
+          opacity: 0; 
+          transition: opacity  cubic-bezier(0.165, 0.84, 0.44, 1) .1s;
+     }
+
+     .more-arrow.left {
+          left: -3.5vw; 
+          transform: translateX(100%);
+          transition: all  cubic-bezier(0.165, 0.84, 0.44, 1) .25s;
+     }
+
+     .more-arrow.right {
+          right: -3.5vw; 
+          transform: translateX(-100%);
+          transition: all  cubic-bezier(0.165, 0.84, 0.44, 1) .25s;
+     }
+     .project:hover .more-arrow.left,
+     .project:hover .more-arrow.right {
+          opacity: 1; 
+          transform: translateX(0%);
+          transition: transform  cubic-bezier(0.165, 0.84, 0.44, 1) .25s;
+     }
 </style>
 

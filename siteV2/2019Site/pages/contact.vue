@@ -2,28 +2,45 @@
   <section class="container">
     <div class="center-line"></div>
     
-    <section class="about"> 
-      <h1 class="behind-text">About Me</h1>
+    <section class="contact"> 
+      <h1 class="behind-text">Contact</h1>
       <div class="side-card">
         <div class="text">
-          <h1>Hello</h1>
-          <h1>There</h1>
+          <h1>Get in</h1>
+          <h1>Touch</h1>
         </div>  
         <div class="image-holder">
           <div class="background"></div>
-          <img src="~/assets/Images/about.png">
+          <img src="~/assets/Images/contact.png">
         </div>
       </div>
       <p class="copy">
-        I'm Réjon, a multifaceted developer-designer captivated with envisioning unforgettable experiences. 
-        <br><br> 
-        My specialties lie in UX/UI Design and Game Development. My experience stretches from <a class="proof" href="http://dailybreak.com" target="_blank"> web development</a> and <a class="proof" href="https://volunteerscience.com/" target="_blank"> data experiments</a> to <a class="proof" href="https://www.wsj.com/articles/when-children-can-benefit-from-playing-videogames-1500321670" target="_blank"> children's health solutions</a> and <a class="proof" href="https://worcester.ma/2016/09/free-to-read-bravehearts-derby-app-a-blast-for-fans-home-run-for-massdigi-developers/" target="_blank">brand management</a>.
-        <br><br>
-        Because I design with my Mom in mind, accessibility and enjoyment are at the forefront of everything I make.
-        <br><br>
-        In my spare time, I run <a href="https://maximumcrash.com">Maximum Crash</a>, compose music, fix hardware, teach, and explore fashion design. 
-        <br><br>
-        <a href="/Rejon_Resume_2019.pdf" target="_blank">My Resume</a>
+        Let's make something great together
+        </br></br>
+        <a href="mailto:rejon@maximumcrash.com">rejon@maximumcrash.com</a>
+        </br></br>
+        <ul class="socialLinks">
+          <li>
+            <a href="https://www.linkedin.com/in/rtaylorfoster/" target="_blank">
+              <img src="~/assets/Images/linkedIn_contact.svg"/>
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com/Maximum_Crash" target="_blank">
+              <img src="~/assets/Images/twitter_contact.svg"/>
+            </a>
+          </li>
+          <li>
+            <a href="https://archive.maximumcrash.com/" target="_blank">
+              <img src="~/assets/Images/archive_contact.svg"/>
+            </a>
+          </li>
+          <li>
+            <a href="https://maximumcrash.com/" target="_blank">
+              <img src="~/assets/Images/crash_contact.svg"/>
+            </a>
+          </li>
+        </ul>
       </p>
     </section>
   </section>
@@ -46,7 +63,7 @@ export default {
       this.$store.state.headerAnime.play();
     }
 
-    let page = this.$el.querySelector('.about');
+    let page = this.$el.querySelector('.contact');
     let behindText = page.querySelector('.behind-text');
     let profileBackChars = page.querySelector('.side-card .text h1:first-of-type');
     let profileFrontChars = page.querySelector('.side-card .text h1:last-of-type');
@@ -57,18 +74,18 @@ export default {
     charming(profileBackChars);
     charming(profileFrontChars);
     charming(behindText);
-    behindText = [].slice.call(behindText.querySelectorAll('span'));
+    profileBackChars = [].slice.call(profileBackChars.querySelectorAll('span'));
 
-          behindText = behindText.filter(el => {
+          profileBackChars = profileBackChars.filter(el => {
                if (el.textContent === ' ') {
                     el.textContent = String.fromCharCode(8194);
                     el.style.width = ".35ch";
                }
 
                return el;
-          })
+          });
 
-    profileBackChars = profileBackChars.querySelectorAll('span');
+    behindText = behindText.querySelectorAll('span');
     profileFrontChars = profileFrontChars.querySelectorAll('span');
 
     this.animeStore = this.$anime.timeline({loop: false, autoplay: true});
@@ -113,7 +130,8 @@ export default {
       .add({
         targets: profilePic,
         opacity: [0, 1],
-        translateX: [-64, 0],
+        translateX: [64, 0],
+        scaleX: [-1, -1],
         easing: 'easeOutQuart',
         duration: 800,
       }, 400)
@@ -131,12 +149,13 @@ export default {
 <style lang="scss">
 @import '~/assets/main.scss';
 
-.behind-text {
+.contact .behind-text {
       position: absolute;
     color: #1e1d69;
     font-size: 11vw;
-    left: 6vw;
+    left: -20vw;
     top: -15vh;
+    white-space: nowrap;
     opacity: 0.2;
 }
 .center-line {
@@ -160,7 +179,7 @@ export default {
   pointer-events: none; 
 }
 
-.about {
+.contact {
   display: flex;
   justify-content: center;
   position: relative;
@@ -172,7 +191,7 @@ export default {
   position: relative; 
 }
 
-.side-card {
+.contact .side-card {
   .text {
     position: absolute;
     z-index: 1; 
@@ -218,31 +237,54 @@ export default {
     box-shadow: 0 10px 20px rgba(12, 5, 47, 0.19), 0 6px 6px rgba(10, 9, 44, 0.23);
   }
   .image-holder img {
-    width: 149%; 
+    width: 130%; 
     position: absolute;
-    right: -10px; 
-    bottom: -60px;
+    right: -110px; 
+    bottom: -140px;
   }
 }
 
-.about .side-card .text > * > span,
-.about .behind-text > span {
+.contact .side-card .text > * > span,
+.contact .behind-text > span {
     position: relative;
     display: inline-block;
   }
 
-.about .copy {
+.contact .copy {
   display: inline-block; 
-  width: 30%; 
+  width: 100%; 
   text-align: left; 
   margin-left: 2.5vw; 
-  font-size: 1.5em; 
+  font-size: 1.64em; 
   color: white; 
   align-self: center;
 }
 
-.about .copy a {
+.contact .copy a {
   color: white; 
   pointer-events: all;
+}
+
+.socialLinks {
+  list-style-type: none;
+  padding: 0; 
+  pointer-events: all; 
+}
+
+.socialLinks li {
+  display: inline-block; 
+  width: 55px; 
+  height: 55px; 
+  position: relative; 
+  top: 0;
+  margin-right: 0.25em; 
+  cursor: pointer;
+  
+  transform: scale(1);
+  transition: transform cubic-bezier(0.165, 0.84, 0.44, 1) .25s;
+}
+
+.socialLinks li:hover {
+  transform: scale(1.32);
 }
 </style>
