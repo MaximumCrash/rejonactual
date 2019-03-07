@@ -21,6 +21,9 @@
         <Project :index="11"/>
         <Project :index="12"/>
       </div>
+      <div :class="this.showScrollUp ? 'scroll-up' : 'scroll-up hide'" v-on:click="this.scrollToTop" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4M12 16V9"/></svg>
+      </div>
     </section>
   </section>
 </template>
@@ -32,17 +35,30 @@ import Project from '~/components/Project.vue';
 export default {
   data() {
     return {
-      animeStore: {}
+      animeStore: {},
+      showScrollUp: false
     }
   },
   components: {
     Project
+  },
+  methods: {
+    scrollToTop() {
+      window.scrollTo({
+        top: 0, 
+        behavior: 'smooth'
+      });
+    }
   },
   mounted() {
     if (this.$store.state.headerAnime !== null && this.$store.state.oldPage === "index") 
     {
       this.$store.state.headerAnime.direction = "normal";
       this.$store.state.headerAnime.play();
+    }
+
+    window.onscroll = () => {
+        this.showScrollUp = window.scrollY > window.innerHeight; 
     }
 
     let page = this.$el.querySelector('.works');
@@ -134,8 +150,11 @@ export default {
         }
         }, 420)
       })
+  },
+  beforeDestroy() {
+    window.onscroll = null; 
   }
-}
+} 
 </script>
 
 <style lang="scss">
@@ -190,5 +209,30 @@ export default {
 .project .title h1 > span {
           position: relative;
           display: inline-block;
+     }
+
+     .scroll-up {
+       position: fixed; 
+       width: 50px; 
+       height: 50px; 
+       right: 3em;
+       bottom: 2.64em;
+       transform: translateY(-10px) scale(0.8);
+       opacity: 1; 
+       pointer-events: all; 
+       cursor:pointer; 
+       transform-origin: right;
+       transition: all .32s cubic-bezier(0.075, 0.82, 0.165, 1);
+     }
+
+     .scroll-up.hide {
+       transform: translateY(0px) scale(0.8);
+       opacity: 0; 
+       transition: all .32s cubic-bezier(0.075, 0.82, 0.165, 1);
+     }
+
+     .scroll-up:not(.hide):hover {
+       transform: translateY(-15px);
+       transition: all .2s ease;
      }
 </style>

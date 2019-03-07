@@ -1,5 +1,5 @@
 <template>
-     <div :class="open ? 'project open' : 'project'" data-aos="fade-up" data-aos-once="true" :data-aos-id="'project-' + index" data-aos-anchor-placement="center-bottom" v-on:click="toggleProject">
+     <div :class="projectClass" data-aos="fade-up" data-aos-once="true" data-aos-mirror="false" :data-aos-id="'project-' + index" data-aos-anchor-placement="center-bottom" v-on:click="toggleProject">
          
          <div class="heading">
           <div class="title">
@@ -39,11 +39,75 @@ export default {
      data() {
           return { backgroundTest,
                    animeStore: {},
-                   open: false }
+                   open: false,
+                   dirty: false
+                   }
+     },
+     computed: {
+          projectClass: function () {
+               return {
+                    open: this.open,
+                    dirty: this.dirty,
+                    project: true
+               }
+          }
      },
      methods: {
           toggleProject() {
+               // let projectCopy = this.$el.querySelector('.project-copy');
+
+               // if (this.open) {
+               //      this.collapseSection(projectCopy);
+               // }
+               // else {
+
+               //      this.expandSection(projectCopy);
+               // }
+
                this.open = !this.open;
+               this.dirty = true;
+               
+          },
+          collapseSection(element) {
+               //SOURCED FROM: https://css-tricks.com/using-css-transitions-auto-dimensions/
+               //NOTE(Rejon): Wanted a really smooth open/close for the accordion but CSS doesn't support height transitions like that unfortunately. [Magic Conch "Maybe soommmeday"]
+               // get the height of the element's inner content, regardless of its actual size
+               var sectionHeight = element.scrollHeight;
+               
+               // temporarily disable all css transitions
+               var elementTransition = element.style.transition;
+               element.style.transition = '';
+               
+               // on the next frame (as soon as the previous style change has taken effect),
+               // explicitly set the element's height to its current pixel height, so we 
+               // aren't transitioning out of 'auto'
+               requestAnimationFrame(function() {
+               element.style.height = sectionHeight + 'px';
+               element.style.transition = elementTransition;
+               
+               // on the next frame (as soon as the previous style change has taken effect),
+               // have the element transition to height: 0
+               requestAnimationFrame(function() {
+                    element.style.height = 0 + 'px';
+               });
+               });
+          },
+          expandSection(element) {
+                // get the height of the element's inner content, regardless of its actual size
+               var sectionHeight = element.scrollHeight;
+               
+               // have the element transition to the height of its inner content
+               element.style.height = sectionHeight + 'px';
+
+               // when the next css transition finishes (which should be the one we just triggered)
+               element.addEventListener('transitionend', function(e) {
+               // remove this event listener so it only gets triggered once
+               element.removeEventListener('transitionend', arguments.callee);
+               
+               // remove "height" from the element's inline styles, so it can return to its initial value
+               element.style.height = null;
+               });
+               
           }
      },
      mounted() {
@@ -104,24 +168,33 @@ export default {
           width: 100%; 
           position: relative;
           margin-bottom: 1.64em;
-          cursor: pointer; 
           
-          box-shadow: 0 10px 20px hsla(250, 81%, 5%, 0.33), 0 6px 6px hsla(250, 81%, 5%, 0.33);
+          
+          
           transition: all .2s ease; 
           pointer-events: all;
 
-     }
-
-     .project:not(.open):hover {
-              box-shadow: 0 19px 28px hsla(250, 81%, 5%, 0.48), 0 15px 12px hsla(250, 81%, 5%, 0.48);
-          transform: translateY(-16px) !important; 
-          transition: all .2s ease; 
      }
 
      .heading {
           position: relative;
           width:100%; 
           height: 30vh;
+          cursor: pointer; 
+          transform: translateY(0px);
+          box-shadow: 0 0px 0px hsla(250, 81%, 5%, 0.33), 0 0px 0px hsla(250, 81%, 5%, 0.33);
+          transition: all .2s ease; 
+     }
+
+     .project:not(.open) .heading:hover {
+          transform: translateY(-16px);
+          box-shadow: 0 19px 28px hsla(250, 81%, 5%, 0.48), 0 15px 12px hsla(250, 81%, 5%, 0.48);
+          transition: all .2s ease; 
+     }
+
+     .project.open .heading {
+          height: 42vh; 
+          transition: all .2s cubic-bezier(0.165, 0.84, 0.44, 1);
      }
 
      .title {
@@ -216,11 +289,16 @@ export default {
           transform: translateX(-100%);
           transition: all  cubic-bezier(0.165, 0.84, 0.44, 1) .25s;
      }
-     .project:hover .more-arrow.left,
-     .project:hover .more-arrow.right,
-     .project.open .more-arrow.left {
+     .project:not(.open) .heading:hover .more-arrow.left,
+     .project:not(.open) .heading:hover .more-arrow.right,
+     .project.open .heading .more-arrow.left {
           opacity: 1; 
           transform: translateX(0%);
+          transition: transform  cubic-bezier(0.165, 0.84, 0.44, 1) .25s;
+     }
+
+     .project.open .heading:hover .more-arrow.left {
+          transform: translateX(-10px);
           transition: transform  cubic-bezier(0.165, 0.84, 0.44, 1) .25s;
      }
 
@@ -258,9 +336,29 @@ export default {
           transform-origin: top; 
           overflow: hidden;
           text-align: left;
-          padding: 1em; 
+          height:0;
+          opacity: 0;
+          transform: translateY(-10px);
           font-size: 1.32rem; 
           line-height: 1.8rem;
+          transition: transform  cubic-bezier(0.165, 0.84, 0.44, 1) .2s;
+     }
+
+     .project-copy > * {
+          padding: 1em;
+     }
+
+     .project.open .project-copy {
+          opacity: 1;
+          transform: translateY(0px);
+          height: 100%; 
+          transition: transform  cubic-bezier(0.165, 0.84, 0.44, 1) .2s;
+     }
+
+     /*NOTE(Rejon): We need this cause AOS seems to be fading out some elements on close*/
+     .project.dirty {
+          opacity: 1 !important; 
+          transform: translate3d(0,0,0) !important; 
      }
 </style>
 
