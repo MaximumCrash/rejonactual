@@ -1,5 +1,7 @@
 <template>
      <div :class="open ? 'project open' : 'project'" data-aos="fade-up" data-aos-once="true" :data-aos-id="'project-' + index" data-aos-anchor-placement="center-bottom" v-on:click="toggleProject">
+         
+         <div class="heading">
           <div class="title">
               <h1> Much Much More </h1>
           </div>
@@ -11,16 +13,20 @@
                <div class="slide4"></div>
           </div>
           <div class="image" :style="{backgroundImage: `url(${backgroundTest})`}"></div>
+          
+          <div class="more-arrow left">
+               <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+               <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="arcs"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          
+          </div>
+          <div class="more-arrow right">
+               <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+          </div>
+          </div>
           <div class="project-copy">
                <p>
                     Re-use of text: Attribution: To re-distribute a text file with the Derived Work based on or through a medium customarily used for software interchange; or, b) Accompany it with the Work that they do to the Program. Contributors. Therefore, if a court requires any Contributor that the BeOpen Python License is dependent only upon the terms of this Agreement as released by OWNER, including source code, even though third parties on terms identical to an alternative, stable online copy which is described in Exhibit A shall not affect the validity or enforceability of either of that version. You may use the Work and that the Package constitutes direct or indirect, to cause the direction or management of such Commercial Distributor's responsibility alone. Under this section, the Commercial Distributor to control, and cooperate with the terms of this Agreement must be on the same or some similar place meets this condition, even though third parties are not derivative works of, publicly display, publicly perform, distribute and sublicense the Contribution of such Contributor, if any, to grant the rights we want to make such provision shall be held by the Package.
                </p>
-          </div>
-          <div class="more-arrow left">
-               <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
-          </div>
-          <div class="more-arrow right">
-               <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
           </div>
      </div>
 </template>
@@ -96,7 +102,6 @@ export default {
 @import '~/assets/main.scss';
      .project {
           width: 100%; 
-          height: 30vh; 
           position: relative;
           margin-bottom: 1.64em;
           cursor: pointer; 
@@ -107,10 +112,16 @@ export default {
 
      }
 
-     .project:hover {
+     .project:not(.open):hover {
               box-shadow: 0 19px 28px hsla(250, 81%, 5%, 0.48), 0 15px 12px hsla(250, 81%, 5%, 0.48);
           transform: translateY(-16px) !important; 
           transition: all .2s ease; 
+     }
+
+     .heading {
+          position: relative;
+          width:100%; 
+          height: 30vh;
      }
 
      .title {
@@ -178,6 +189,7 @@ export default {
           width: 100%; 
           height: 100%; 
           opacity: 0;
+          position: absolute;
           background-size: cover;
           background-repeat: no-repeat;
           transition: all .2s ease;
@@ -205,10 +217,50 @@ export default {
           transition: all  cubic-bezier(0.165, 0.84, 0.44, 1) .25s;
      }
      .project:hover .more-arrow.left,
-     .project:hover .more-arrow.right {
+     .project:hover .more-arrow.right,
+     .project.open .more-arrow.left {
           opacity: 1; 
           transform: translateX(0%);
           transition: transform  cubic-bezier(0.165, 0.84, 0.44, 1) .25s;
+     }
+
+     .project .more-arrow.left svg:last-of-type {
+          opacity: 0; 
+          transform: rotate(0);
+          transition: transform  cubic-bezier(0.165, 0.84, 0.44, 1) .2s;
+     }
+
+     .project .more-arrow.left svg:first-of-type,
+     .project.open .more-arrow.right svg:first-of-type { 
+          opacity: 1;
+          transform: rotate(0deg);
+          transition: transform  cubic-bezier(0.165, 0.84, 0.44, 1) .2s;
+     }
+
+     .project.open .more-arrow.left svg:last-of-type {
+          opacity: 1; 
+          transform: rotate(180deg);
+          position:absolute;
+          left:0;
+          top: 0;
+          transition: transform  cubic-bezier(0.165, 0.84, 0.44, 1) .2s;
+     }
+
+     .project.open .more-arrow.left svg:first-of-type,
+     .project.open .more-arrow.right svg:first-of-type { 
+          opacity: 0;
+          transform: rotate(180deg);
+          transition: transform  cubic-bezier(0.165, 0.84, 0.44, 1) .2s;
+     }
+
+     .project-copy {
+          color: white; 
+          transform-origin: top; 
+          overflow: hidden;
+          text-align: left;
+          padding: 1em; 
+          font-size: 1.32rem; 
+          line-height: 1.8rem;
      }
 </style>
 

@@ -225,7 +225,7 @@ export default {
   }
 
   .image-holder .background {
-    background: linear-gradient(32deg, #e4259b, #df0077, #6c15b5);
+    background: linear-gradient(32deg, #6c15b5, #5a04a2, #e4259b);
     background-size: 100% 164%;
     background-position: top right;
     border-radius: 6px;
