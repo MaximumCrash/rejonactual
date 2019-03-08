@@ -1,7 +1,7 @@
 <template>
-     <div :class="projectClass" data-aos="fade-up" data-aos-once="true" data-aos-mirror="false" :data-aos-id="'project-' + index" data-aos-anchor-placement="center-bottom" v-on:click="toggleProject">
+     <div :class="projectClass" data-aos="fade-up" data-aos-once="true" data-aos-mirror="false" :data-aos-id="'project-' + index" data-aos-anchor-placement="center-bottom">
          
-         <div class="heading">
+         <div class="heading" v-on:click="toggleProject">
           <div class="title">
               <h1> Much Much More </h1>
           </div>
@@ -279,13 +279,13 @@ export default {
      }
 
      .more-arrow.left {
-          left: -3.5vw; 
+          left: -60px; 
           transform: translateX(100%);
           transition: all  cubic-bezier(0.165, 0.84, 0.44, 1) .25s;
      }
 
      .more-arrow.right {
-          right: -3.5vw; 
+          right: -60px; 
           transform: translateX(-100%);
           transition: all  cubic-bezier(0.165, 0.84, 0.44, 1) .25s;
      }
@@ -359,6 +359,32 @@ export default {
      .project.dirty {
           opacity: 1 !important; 
           transform: translate3d(0,0,0) !important; 
+     }
+
+     @media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) {
+          .project:not(.open) .heading:hover .more-arrow.left,
+     .project:not(.open) .heading:hover .more-arrow.right {
+          opacity: 0;
+     }
+
+  .project:not(.open) .heading:hover .more-arrow {
+    opacity: 0;
+  }
+
+  .project.open .more-arrow.left {
+    opacity: 1; 
+    left: unset; 
+    right: 0; 
+    z-index: 100;
+    transform: scale(1);
+  }
+
+  .project.open .heading:hover .more-arrow.left {
+    transform: scale(1.2);
+  }
+     .heading {
+          height: 35vh;
+     }
      }
 </style>
 

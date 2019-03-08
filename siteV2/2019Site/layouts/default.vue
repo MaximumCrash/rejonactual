@@ -279,4 +279,10 @@ p {
   position: absolute;
 }
 
+@media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) { 
+  header {
+    position: relative;
+  }
+}
+
 </style>

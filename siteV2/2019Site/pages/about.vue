@@ -132,11 +132,11 @@ export default {
 @import '~/assets/main.scss';
 
 .behind-text {
-      position: absolute;
+      position: fixed;
     color: #1e1d69;
     font-size: 11vw;
-    left: 6vw;
-    top: -15vh;
+    left: 4vw;
+    top: 5vh;
     opacity: 0.2;
 }
 .center-line {
@@ -244,5 +244,51 @@ export default {
 .about .copy a {
   color: white; 
   pointer-events: all;
+}
+
+@media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) {
+  .about {
+    display: block; 
+    padding-top: 5vw; 
+    padding-bottom: 10vh; 
+    justify-content: initial;
+  }
+
+  .side-card {
+    margin-right: 2.5vw;
+    position: relative; 
+    width: 80%; 
+    margin-left: 2.5vw; 
+  }
+
+  .side-card .text {
+    left: 7%; 
+    bottom: 30px; 
+  } 
+
+  .side-card .image-holder {
+    width: 100%; 
+    height: 400px; 
+    position: relative; 
+    overflow: hidden;
+    margin: auto; 
+  }
+
+  .side-card .image-holder .background {
+    width: 100%; 
+    height: 65%; 
+  }
+
+  .side-card .image-holder img {
+    width: 54%; 
+    max-width: 402px;
+  }
+
+  .about .copy {
+    display: block; 
+    margin: auto; 
+    margin-top: 2em;
+    width: 74%; 
+  }
 }
 </style>

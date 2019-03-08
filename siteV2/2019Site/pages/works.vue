@@ -235,4 +235,20 @@ export default {
        transform: translateY(-15px);
        transition: all .2s ease;
      }
+
+     @media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) {
+  .works {
+    max-width: none; 
+    padding-top: 6vh;
+  }
+
+  .works .projects-container {
+    margin-top: 4vh; 
+    padding-bottom: 20vh; 
+    padding-left: 2vw; 
+    padding-right: 2vw; 
+  }
+
+  
+}
 </style>

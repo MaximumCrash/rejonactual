@@ -150,11 +150,11 @@ export default {
 @import '~/assets/main.scss';
 
 .contact .behind-text {
-      position: absolute;
+      position: fixed;
     color: #1e1d69;
     font-size: 11vw;
-    left: -20vw;
-    top: -15vh;
+    left: 3vw;
+    top: 3vh;
     white-space: nowrap;
     opacity: 0.2;
 }
@@ -287,4 +287,5 @@ export default {
 .socialLinks li:hover {
   transform: scale(1.32);
 }
+
 </style>
