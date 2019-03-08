@@ -1,7 +1,5 @@
 <template>
   <section class="container works">
-    <div class="center-line"></div>
-    
     <section class="works"> 
       <h1 class="behind-text">
         Works
@@ -239,11 +237,10 @@ export default {
      @media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) {
   .works {
     max-width: none; 
-    padding-top: 6vh;
   }
 
   .works .projects-container {
-    margin-top: 4vh; 
+    margin-top: 0vh; 
     padding-bottom: 20vh; 
     padding-left: 2vw; 
     padding-right: 2vw; 

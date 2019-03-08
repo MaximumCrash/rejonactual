@@ -1,7 +1,5 @@
 <template>
   <section class="container">
-    <div class="center-line"></div>
-    
     <section class="home"> 
       <div class="multi title">
         <h1 class="layer0">Réjon</h1>
@@ -327,5 +325,43 @@ export default {
 
   .quick-links > a:nth-child(3)::before { 
     background: $theme4;
+  }
+
+  @media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) {
+    header.header {
+      position:absolute !important;
+    }
+  }
+
+  @media screen and (max-width: $breakPoint-mobile) { 
+    .home .multi.title h1 {
+     left: 18px; 
+     font-size: 78.25px; 
+    }
+
+    .home .multi.title > h1 > span:not(:first-of-type) {
+      position: relative;
+      left: -40.69px;
+    }
+
+    .home .multi.title > h2 {
+      left: unset; 
+      right: unset; 
+      top: -10px; 
+      font-size: 31.3px; 
+    }
+
+    .home .sub-title {
+      display: none; 
+    }
+
+    .quick-links {
+      flex-direction: column; 
+    }
+
+    .quick-links > a {
+      padding-top: 2vh; 
+      padding-bottom: 2vh; 
+    }
   }
 </style>

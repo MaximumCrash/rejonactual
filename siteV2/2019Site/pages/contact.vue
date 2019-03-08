@@ -1,7 +1,5 @@
 <template>
-  <section class="container">
-    <div class="center-line"></div>
-    
+  <section class="contacts container">
     <section class="contact"> 
       <h1 class="behind-text">Contact</h1>
       <div class="side-card">
@@ -153,8 +151,9 @@ export default {
       position: fixed;
     color: #1e1d69;
     font-size: 11vw;
-    left: 3vw;
+    right: 3vw;
     top: 3vh;
+    left: 3vw;
     white-space: nowrap;
     opacity: 0.2;
 }
@@ -288,4 +287,63 @@ export default {
   transform: scale(1.32);
 }
 
+@media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) {
+  .contact .behind-text {
+    top:unset;
+    bottom: 3vh;
+  }
+
+  .contacts .container {
+    min-height: calc(100vh - 78px);
+  }
+  .contact {
+    display: block; 
+    padding-top: 0; 
+    justify-content: unset; 
+    position: relative;
+    top: -78px;
+    width: 100%; 
+  }
+
+  .contact .side-card {
+    margin-right: 0;
+    position: relative; 
+    width: 100%; 
+    margin-left: 0; 
+    max-width: 782px;
+  }
+
+  .contact .side-card .text {
+    left: 7%; 
+    bottom: 30px; 
+  } 
+
+  .contact .side-card .image-holder {
+    width: 100%; 
+    height: 400px; 
+    position: relative; 
+    overflow: hidden;
+    margin: auto; 
+  }
+
+  .contact .side-card .image-holder .background {
+    width: 100%; 
+    height: 60%; 
+  }
+
+  .contact .side-card .image-holder img {
+    width: 348px; 
+    right: -50px; 
+    bottom: -128px; 
+    display:inline-block; 
+  }
+
+  .contact .copy {
+    display: block; 
+    margin: auto; 
+    margin-top: 2em;
+    width: 84%;
+    text-align: center;  
+  }
+}
 </style>

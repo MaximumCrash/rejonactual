@@ -1,7 +1,5 @@
 <template>
-  <section class="container">
-    <div class="center-line"></div>
-    
+  <section class="abouts container">
     <section class="about"> 
       <h1 class="behind-text">About Me</h1>
       <div class="side-card">
@@ -247,11 +245,20 @@ export default {
 }
 
 @media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) {
+  .abouts .container {
+    min-height: calc(100vh - 78px);
+  }
   .about {
     display: block; 
-    padding-top: 5vw; 
+    padding-top: 0vw; 
     padding-bottom: 10vh; 
     justify-content: initial;
+  }
+
+  .about .behind-text {
+    left: 4vw; 
+    top: 10vh; 
+    font-size: 15vw; 
   }
 
   .side-card {

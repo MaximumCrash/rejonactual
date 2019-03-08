@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <parallax-container class="bg">
+    <parallax-container class="bg not-mobile">
       <parallax-element class="dot-parallax" :parallaxStrength="100" :type="'translation'">
         <div class="dot-layer-0"></div>
       </parallax-element>
@@ -11,6 +11,14 @@
         <div class="dot-layer-2"></div>
       </parallax-element>
     </parallax-container>
+    <div class="bg mobile-only">
+      <div class="dot-layer-0 rellax" data-rellax-speed="-10">
+        </div>
+        <div class="dot-layer-1 rellax" data-rellax-speed="-5">
+        </div>
+        <div class="dot-layer-2 rellax" data-rellax-speed="-2">
+          </div>
+    </div>
     <header class="header" >
       <nuxt-link to="/" @click.native="hideHeader"><h2>Réjon</h2></nuxt-link>
       <div class="links">
@@ -26,10 +34,13 @@
 <script>
 import charming from 'charming';
 import {mapState} from 'vuex';
+import Rellax from 'rellax';
 
 export default {
   computed: mapState(['page']),
   mounted() {
+    var rellax = new Rellax(".rellax");
+
     let headerName = this.$el.querySelector('header h2');
     charming(headerName)
     headerName.style.opacity = 1
@@ -222,6 +233,8 @@ header .links a::before {
     position: absolute;
   }
 
+
+
 html {
   font-family: 'Gibson', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -279,9 +292,29 @@ p {
   position: absolute;
 }
 
+.mobile-only {
+  display: none; 
+}
+
+
 @media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) { 
   header {
     position: relative;
+  }
+}
+
+@media screen and (max-width: $breakPoint-mobile) {
+  .not-mobile {
+  display: none; 
+}
+.mobile-only {
+  display: initial;
+}
+
+  .bg.mobile-only .dot-layer-0, 
+  .bg.mobile-only .dot-layer-1,
+  .bg.mobile-only .dot-layer-2 {
+    background-attachment:initial;
   }
 }
 
