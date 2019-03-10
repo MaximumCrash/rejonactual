@@ -7,15 +7,21 @@
           <h1>Hello</h1>
           <h1>There</h1>
         </div>  
+        <div class="particles">
+            <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#FFC300" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#5a04a2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18L12 4z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#df0077" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </div>
         <div class="image-holder">
           <div class="background"></div>
-          <img src="~/assets/Images/about.png">
+          <img :src="require('~/assets/Images/about.png')" :data-src="require('~/assets/Images/about.png')">
+          
         </div>
       </div>
       <p class="copy">
         I'm Réjon, a multifaceted developer-designer captivated with envisioning unforgettable experiences. 
         <br><br> 
-        My specialties lie in UX/UI Design and Game Development. My experience stretches from <a class="proof" href="http://dailybreak.com" target="_blank"> web development</a> and <a class="proof" href="https://volunteerscience.com/" target="_blank"> data experiments</a> to <a class="proof" href="https://www.wsj.com/articles/when-children-can-benefit-from-playing-videogames-1500321670" target="_blank"> children's health solutions</a> and <a class="proof" href="https://worcester.ma/2016/09/free-to-read-bravehearts-derby-app-a-blast-for-fans-home-run-for-massdigi-developers/" target="_blank">brand management</a>.
+        My specialties lie in UX/UI Design and Game Development. My experience stretches from <a class="proof" href="http://dailybreak.com" target="_blank"> content platforms</a> and <a class="proof" href="https://volunteerscience.com/" target="_blank"> data experiments</a> to <a class="proof" href="https://www.wsj.com/articles/when-children-can-benefit-from-playing-videogames-1500321670" target="_blank"> children's health solutions</a> and <a class="proof" href="https://worcester.ma/2016/09/free-to-read-bravehearts-derby-app-a-blast-for-fans-home-run-for-massdigi-developers/" target="_blank">brand management</a>.
         <br><br>
         Because I design with my Mom in mind, accessibility and enjoyment are at the forefront of everything I make.
         <br><br>
@@ -51,6 +57,9 @@ export default {
     let profileBG = page.querySelector('.image-holder .background');
     let profilePic = page.querySelector('.image-holder img');
     let profileCopy = page.querySelector('.copy');
+    let particle0 = page.querySelector('.side-card .particles svg:nth-child(1)');
+    let particle1 = page.querySelector('.side-card .particles svg:nth-child(2)');
+    let particle2 = page.querySelector('.side-card .particles svg:nth-child(3)');
 
     charming(profileBackChars);
     charming(profileFrontChars);
@@ -122,6 +131,32 @@ export default {
         easing: 'easeOutQuart',
         duration: 800,
       }, 520)
+      .add({
+        targets: particle0,
+        translateY: [0, -64],
+        translateX: [0, -35],
+        scale: [0, 0.7],
+        duration: 1000, 
+        easing: 'easeOutQuart'
+      }, 480)
+      .add({
+        targets: particle1,
+        translateX: [0, -75],
+        translateY: [0, -20],
+        rotate: [0, 406],
+        scale: [0, 0.55],
+        duration: 1000, 
+        easing: 'easeOutQuart'
+      }, 530)
+      .add({
+        targets: particle2,
+        translateX: [0, -100],
+        translateY: [0, -75],
+        rotate: [0, 424],
+        scale: [0, 0.5],
+        duration: 1000, 
+        easing: 'easeOutQuart'
+      }, 590)
   }
 }
 </script>
@@ -244,9 +279,27 @@ export default {
   pointer-events: all;
 }
 
+.about .particles {
+  position: absolute; 
+  z-index: 100; 
+  display: inline-block; 
+  top: 40%; 
+  left: 10%;
+}
+
+.about .particles > svg {
+  position: absolute;
+  filter: drop-shadow(0 11px 25px rgba(11, 11, 61, 0.61));
+}
+
 @media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) {
-  .abouts .container {
+  .about .particles {
+    left: unset; 
+    right: 31%; 
+  }
+  .abouts.container {
     min-height: calc(100vh - 78px);
+    margin-top:78px;
   }
   .about {
     display: block; 

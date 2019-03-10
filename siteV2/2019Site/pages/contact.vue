@@ -7,9 +7,14 @@
           <h1>Get in</h1>
           <h1>Touch</h1>
         </div>  
+        <div class="particles">
+          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </div>
         <div class="image-holder">
           <div class="background"></div>
-          <img src="~/assets/Images/contact.png">
+          <img :src="require('~/assets/Images/contact.png')" :data-src="require('~/assets/Images/contact.png')" >
         </div>
       </div>
       <p class="copy">
@@ -68,6 +73,9 @@ export default {
     let profileBG = page.querySelector('.image-holder .background');
     let profilePic = page.querySelector('.image-holder img');
     let profileCopy = page.querySelector('.copy');
+    let particle0 = page.querySelector('.side-card .particles svg:nth-child(1)');
+    let particle1 = page.querySelector('.side-card .particles svg:nth-child(2)');
+    let particle2 = page.querySelector('.side-card .particles svg:nth-child(3)');
 
     charming(profileBackChars);
     charming(profileFrontChars);
@@ -140,19 +148,59 @@ export default {
         easing: 'easeOutQuart',
         duration: 800,
       }, 520)
+      .add({
+        targets: particle0,
+        scale: [0, 0.9],
+        translateX: [30, 30], 
+        translateY: [-20,-20],
+        rotate: 32,
+        duration: 900, 
+        easing: 'easeOutBack'
+      }, 480)
+      .add({
+        targets: particle1,
+        scale: [0, 0.8],
+        translateX: [30,30], 
+        translateY: [0,0], 
+        rotate: 0,
+        duration: 900, 
+        easing: 'easeOutBack'
+      }, 530)
+      .add({
+        targets: particle2,
+        scale: [0, 0.9],
+        translateX: [30,30], 
+        translateY: [20,20], 
+        rotate: -32,
+        duration: 900, 
+        easing: 'easeOutBack'
+      }, 590)
   }
 }
 </script>
 
 <style lang="scss">
 @import '~/assets/main.scss';
+.contact .particles {
+  position: absolute; 
+  z-index: 100; 
+  top: 36%; 
+  left: -11px; 
+  transform: rotate(25deg);
+}
+
+.contact .particles > svg {
+  position: absolute;
+  transform-origin: right;
+  filter: drop-shadow(0 11px 25px rgba(11, 11, 61, 0.61));
+}
 
 .contact .behind-text {
       position: fixed;
     color: #1e1d69;
     font-size: 11vw;
     right: 3vw;
-    top: 3vh;
+    top: 3vw;
     left: 3vw;
     white-space: nowrap;
     opacity: 0.2;
@@ -288,20 +336,25 @@ export default {
 }
 
 @media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) {
+  .contact .particles {
+    left: unset; 
+    right: 42%;
+  }
+  
   .contact .behind-text {
     top:unset;
-    bottom: 3vh;
   }
 
   .contacts .container {
     min-height: calc(100vh - 78px);
+     margin-top:78px;
   }
+
   .contact {
     display: block; 
     padding-top: 0; 
     justify-content: unset; 
     position: relative;
-    top: -78px;
     width: 100%; 
   }
 
@@ -315,7 +368,7 @@ export default {
 
   .contact .side-card .text {
     left: 7%; 
-    bottom: 30px; 
+    bottom: 20px; 
   } 
 
   .contact .side-card .image-holder {

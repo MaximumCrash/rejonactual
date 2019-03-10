@@ -61,39 +61,10 @@ export default {
 
     let page = this.$el.querySelector('.works');
     let behindText = page.querySelector('.behind-text');
-    let projects = page.querySelectorAll('.projects-container .project');
-    let projectsInView = [];
-    let projectSlidesInView = [];
-    let projectImages = [];
-    let projectText = [];
 
     charming(behindText);
 
     behindText = behindText.querySelectorAll('span');
-
-    //Only Animate projects in view. 
-    projects.forEach((project) => {
-      if (project.offsetTop < window.innerHeight) {
-        project.removeAttribute('data-aos');
-        projectImages.push(project.querySelector('.image'))
-        let title  = project.querySelector('.title h1');
-        charming(title);
-        title = [].slice.call(title.querySelectorAll('span'));
-
-        title = title.filter(el => {
-          if (el.textContent === ' ') {
-            el.textContent = String.fromCharCode(8194);
-            el.style.width = ".35ch";
-          }
-          
-          return el
-        })
-       
-       projectText.push(title);
-        projectSlidesInView.push(project.querySelectorAll('.slides div'));
-        projectsInView.push(project);
-      }
-    });
 
     this.animeStore = this.$anime.timeline({loop: false, autoplay: true});
 
@@ -107,47 +78,7 @@ export default {
         delay: function(el, i) {
           return 164 * i
         },
-      }, '-=640')     
-      .add({
-        targets: projectsInView,
-        opacity: [0, 1],
-        translateY: [64, 0],
-        easing: 'easeOutQuart',
-        duration: 900, 
-        delay: function(el, i) {
-          return 300 + 164 * i
-        }
-      }, 232)
-      
-
-      projectSlidesInView.forEach((slideWrap, index) => {
-        this.animeStore.add({
-          targets: slideWrap,
-          translateX:['-110%','110%'],
-          skew: ['-16deg','-16deg'],
-          easing: 'easeOutExpo',
-          duration: 1632, 
-          delay: function(el, i) {
-            return 300 + 100 * i
-          }
-        }, 352)
-        .add({
-          targets: projectImages[index],
-          opacity: [0,1],
-          easing: 'easeOutQuart',
-          duration: 900
-        }, 780)
-        .add({
-          targets: projectText[index],
-          opacity: [0, 1],
-        translateX: [64, 0],
-        easing: 'easeOutQuart',
-        duration: 700,
-        delay: function(el, i) {
-          return 190 + 32 * i
-        }
-        }, 420)
-      })
+      })     
   },
   beforeDestroy() {
     window.onscroll = null; 

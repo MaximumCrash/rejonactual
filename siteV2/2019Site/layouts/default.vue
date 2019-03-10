@@ -26,6 +26,7 @@
         <nuxt-link :class="{'active': (page === 'works')}" to="/works">Works</nuxt-link>
         <nuxt-link :class="{'active': (page === 'contact')}" to="/contact">Contact</nuxt-link>
       </div>
+      <HeaderMenu :activePage="{page}"/>
     </header>
     <nuxt />
   </div>
@@ -35,8 +36,12 @@
 import charming from 'charming';
 import {mapState} from 'vuex';
 import Rellax from 'rellax';
+import HeaderMenu from '~/components/HeaderMenu.vue';
 
 export default {
+  components: {
+    HeaderMenu
+  },
   computed: mapState(['page']),
   mounted() {
     var rellax = new Rellax(".rellax");
@@ -48,7 +53,7 @@ export default {
     headerNameTargets[0].innerText += 'e'
 
     let links = this.$el.querySelectorAll('header .links a');
-
+    let headerMenu = this.$el.querySelector('header .header-menu').querySelector('.icon');
     let initialPage = this.$store.state.page; 
     let headerAnime = this.$anime.timeline({ autoplay: initialPage !== 'index'})
     
@@ -70,7 +75,14 @@ export default {
       delay: function(el, i) {
         return 60 + 64 * i
       }
-    }, '-=320');
+    }, '-=320')
+    .add({
+      targets: headerMenu,
+      scale:[0, 1],
+      easing: 'easeOutBack',
+      duration: 450
+    }, '-=640')
+    ;
 
     this.$store.commit('setAnime', headerAnime);
   },
@@ -127,12 +139,12 @@ header h2 span:first-of-type {
   letter-spacing: 84px;
 }
 
-header .links {
+header > .links {
   display: inline-block;
   font-size: 1.4em; 
 }
 
-header .links a {
+header > .links a {
   color: white; 
   text-decoration: none; 
   margin-left: .5em; 
@@ -143,7 +155,7 @@ header .links a {
   text-shadow: 0 11px 25px rgba(11, 11, 61, 0.61);
 }
 
-header .links a::before {
+header > .links a::before {
     content: '';
     height: 110%;
     width: 0%;
@@ -155,13 +167,13 @@ header .links a::before {
     transition: all ease-out .2s;
   }
 
-  header .links a:hover::before {
+  header > .links a:hover::before {
     width: 120%; 
     transform: translate(-50%, -50%) skew(-10deg);
     transition: all  cubic-bezier(0.165, 0.84, 0.44, 1) .1s;
   }
 
-  header .links a:not(.active)::after {
+  header > .links a:not(.active)::after {
     content: '';
     position: absolute; 
     transform-origin: center;
@@ -173,7 +185,7 @@ header .links a::before {
     transition: all .1s ease;
   }
 
-  header .links a.active::after {
+  header > .links a.active::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -184,15 +196,15 @@ header .links a::before {
     transition: all .1s ease;
 }
 
-  header .links a:nth-child(1)::before {
+  header > .links a:nth-child(1)::before {
     background: $theme0;
   }
 
-  header .links a:nth-child(2)::before {
+  header > .links a:nth-child(2)::before {
     background: $theme2;
   }
 
-  header .links a:nth-child(3)::before { 
+  header > .links a:nth-child(3)::before { 
     background: $theme4;
   }
 
@@ -315,6 +327,11 @@ p {
   .bg.mobile-only .dot-layer-1,
   .bg.mobile-only .dot-layer-2 {
     background-attachment:initial;
+  }
+
+  header > .links {
+    display: none; 
+    pointer-events: none; 
   }
 }
 
