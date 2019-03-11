@@ -308,6 +308,31 @@ p {
   display: none; 
 }
 
+ .scroll-up {
+       position: fixed; 
+       width: 50px; 
+       height: 50px; 
+       right: 3em;
+       bottom: 2.64em;
+       transform: translateY(-10px) scale(0.8);
+       opacity: 1; 
+       pointer-events: all; 
+       cursor:pointer; 
+       transform-origin: right;
+       transition: all .32s cubic-bezier(0.075, 0.82, 0.165, 1);
+     }
+
+     .scroll-up.hide {
+       transform: translateY(0px) scale(0.8);
+       opacity: 0; 
+       transition: all .32s cubic-bezier(0.075, 0.82, 0.165, 1);
+     }
+
+     .scroll-up:not(.hide):hover {
+       transform: translateY(-15px);
+       transition: all .2s ease;
+     }
+
 
 @media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) { 
   header {
@@ -329,10 +354,16 @@ p {
     background-attachment:initial;
   }
 
+  header {
+    z-index: 1000; 
+  }
+
   header > .links {
     display: none; 
     pointer-events: none; 
   }
+
+  
 }
 
 </style>

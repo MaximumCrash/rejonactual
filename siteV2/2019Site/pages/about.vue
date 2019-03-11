@@ -17,6 +17,9 @@
           <img :src="require('~/assets/Images/about.png')" :data-src="require('~/assets/Images/about.png')">
           
         </div>
+        <div class="mobile-only scroll-cta">
+          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="arcs"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
       </div>
       <p class="copy">
         I'm Réjon, a multifaceted developer-designer captivated with envisioning unforgettable experiences. 
@@ -28,7 +31,17 @@
         In my spare time, I run <a href="https://maximumcrash.com">Maximum Crash</a>, compose music, fix hardware, teach, and explore fashion design. 
         <br><br>
         <a href="/Rejon_Resume_2019.pdf" target="_blank">My Resume</a>
-      </p>
+
+         <div class="mobile-only next-up">
+           <p>Next up</p>
+           
+        <nuxt-link to="/works"><h2>Works</h2></nuxt-link>
+        <nuxt-link to="/contact"><h2>Contact</h2></nuxt-link>
+      </div>
+      <div :class="this.showScrollUp ? 'scroll-up' : 'scroll-up hide'" v-on:click="this.scrollToTop" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4M12 16V9"/></svg>
+      </div>
+     
     </section>
   </section>
 </template>
@@ -39,7 +52,16 @@ import charming from 'charming';
 export default {
   data() {
     return {
-      animeStore: {}
+      animeStore: {},
+      showScrollUp: false
+    }
+  },
+  methods: {
+    scrollToTop() {
+      window.scrollTo({
+        top: 0, 
+        behavior: 'smooth'
+      });
     }
   },
   mounted() {
@@ -48,6 +70,10 @@ export default {
       
       this.$store.state.headerAnime.direction = "normal";
       this.$store.state.headerAnime.play();
+    }
+
+    window.onscroll = () => {
+        this.showScrollUp = window.scrollY > window.innerHeight; 
     }
 
     let page = this.$el.querySelector('.about');
@@ -60,6 +86,8 @@ export default {
     let particle0 = page.querySelector('.side-card .particles svg:nth-child(1)');
     let particle1 = page.querySelector('.side-card .particles svg:nth-child(2)');
     let particle2 = page.querySelector('.side-card .particles svg:nth-child(3)');
+    let scrollCTA = page.querySelector('.side-card .scroll-cta');
+
 
     charming(profileBackChars);
     charming(profileFrontChars);
@@ -157,6 +185,17 @@ export default {
         duration: 1000, 
         easing: 'easeOutQuart'
       }, 590)
+      .add({
+        targets: scrollCTA, 
+        translateY: [40, 0],
+        translateX: ['-50%', '-50%'],
+        scale: [0, 1],
+        duration: 1000,
+        easing: 'easeOutQuart'
+      }, 500)
+  },
+  beforeDestroy() {
+    window.onscroll = null; 
   }
 }
 </script>
@@ -240,7 +279,7 @@ export default {
 
   .image-holder .background {
     background: linear-gradient(32deg, #e4259b, #df0077, #6c15b5);
-    background-size: 100% 164%;
+     background-size: 100% 164%;
     background-position: top right;
     border-radius: 6px;
     position: absolute;
@@ -249,6 +288,9 @@ export default {
     width: 100%; 
     height: 85%; 
     box-shadow: 0 10px 20px rgba(12, 5, 47, 0.19), 0 6px 6px rgba(10, 9, 44, 0.23);
+    -webkit-animation: Gradient 6s ease infinite;
+	-moz-animation: Gradient 6s ease infinite;
+	animation: Gradient 6s ease infinite;
   }
   .image-holder img {
     width: 149%; 
@@ -290,6 +332,18 @@ export default {
 .about .particles > svg {
   position: absolute;
   filter: drop-shadow(0 11px 25px rgba(11, 11, 61, 0.61));
+}
+
+@keyframes Gradient {
+	0% {
+		background-position: 0% 50%
+	}
+	50% {
+		background-position: 100% 50%
+	}
+	100% {
+		background-position: 0% 50%
+	}
 }
 
 @media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) {
@@ -349,6 +403,154 @@ export default {
     margin: auto; 
     margin-top: 2em;
     width: 74%; 
+  }
+}
+
+@media screen and (max-width: $breakPoint-mobile) and (min-width: 539px) {
+  .about .side-card .text {
+    font-size: 24px;
+  }
+} 
+
+@media screen and (max-width: $breakPoint-mobile) {
+  .about {
+    display: block; 
+  }
+
+  .about .particles {
+    transform: scale(1.3);
+  }
+
+  .about .side-card {
+    margin-right:0; 
+    overflow: hidden; 
+  }
+
+  .side-card .text {
+    width:100%; 
+    left: 50%; 
+    bottom: 9vh; 
+    font-size: 4.5vw;
+    transform: translateX(-50%);
+  }
+
+  .side-card .text > h1:first-of-type{
+    left: -25px; 
+    display: inline-block;
+  }
+
+  .side-card .text h1:last-of-type {
+    left: 7px; 
+    display: inline-block; 
+  }
+
+  .about .particles {
+    top: 44%; 
+    left: 28%; 
+  }
+
+  .side-card .image-holder {
+    width: 100vw; 
+    height: 100vh; 
+
+  }
+
+  .side-card .image-holder .background {
+    border-radius: 0; 
+    height: 100%; 
+    width: 100%; 
+  }
+
+  .side-card .image-holder img {
+    width: 149%; 
+    right: -40px; 
+    bottom: -45px;
+    max-width:837px;
+  }
+
+  .side-card .scroll-cta {
+    position: absolute; 
+    bottom: -85px; 
+    border: 3px solid $white; 
+    width: 43vw; 
+    height: 43vw; 
+    max-width: 164px; 
+    max-height: 164px; 
+    transform: translateX(-50%);
+    left: 50%; 
+    border-radius: 100%; 
+    z-index: 100; 
+    pointer-events: all;
+  }
+
+  @keyframes spinner {
+  from {
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+  }
+  to {
+    -moz-transform: rotateY(-360deg);
+    -ms-transform: rotateY(-360deg);
+    transform: rotateY(-360deg);
+  }
+}
+
+
+  .side-card .scroll-cta svg {
+    filter: drop-shadow(0 11px 25px rgba(11, 11, 61, 0.61));
+    position: relative; 
+    top: 3%; 
+    animation-name: spinner;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 3.64s;
+  }
+
+  .about .copy {
+    padding: 1em; 
+    margin: 0; 
+    margin-top: 1em; 
+    padding-top: 0; 
+    font-size: 1.45em; 
+    width: 100%; 
+  }
+
+  .behind-text {
+        word-break: break-word;
+    position: fixed;
+    color: #1e1d69;
+    font-size: 26vw;
+    left: 4vw;
+    top: unset;
+    opacity: 0.2;
+    bottom: 4vh;
+    text-align: left;
+    z-index: -1;
+    line-height: 11vh;
+  }
+
+  .next-up {
+    display: block; 
+    text-align: left; 
+    padding: 1.4em; 
+    z-index: 10; 
+    color: $white; 
+    pointer-events: all;
+  }
+
+  .next-up h2 {
+    font-size: 11vw; 
+  }
+
+  .next-up a {
+    color: $white;
+    text-decoration-color: rgba(255,255,255,0.3);
+  }
+
+  .next-up p {
+    font-size: 30px; 
+    margin-bottom: .5em;
   }
 }
 </style>
