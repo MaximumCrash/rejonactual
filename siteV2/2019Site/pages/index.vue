@@ -334,7 +334,7 @@ export default {
   }
 
   @media screen and (max-width: $breakPoint-mobile) { 
-    .home .multi.title h1 {
+    .home .multi.title >h1 {
      left: 18px; 
      font-size: 78.25px; 
     }
@@ -364,4 +364,18 @@ export default {
       padding-bottom: 2vh; 
     }
   }
+
+  @media screen and (max-width: $breakPoint-mobile) and (min-width: 539px) {
+  .home .multi.title > h2 {
+    font-size: 6vw; 
+  }
+
+  .home .multi.title h1 {
+    font-size: 16vw; 
+  }
+
+  .home .multi.title > h1 > span:not(:first-of-type) {
+    left: -8.5vw;
+  }
+} 
 </style>

@@ -310,16 +310,21 @@ p {
 
  .scroll-up {
        position: fixed; 
-       width: 50px; 
-       height: 50px; 
-       right: 3em;
-       bottom: 2.64em;
+       width: 60px; 
+       height: 60px; 
+       right: 5vw;
+       bottom: 10px;
        transform: translateY(-10px) scale(0.8);
        opacity: 1; 
        pointer-events: all; 
        cursor:pointer; 
        transform-origin: right;
        transition: all .32s cubic-bezier(0.075, 0.82, 0.165, 1);
+     }
+
+     .scroll-up svg {
+       width: 100%; 
+       height: 100%;
      }
 
      .scroll-up.hide {

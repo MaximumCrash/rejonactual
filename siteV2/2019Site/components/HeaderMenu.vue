@@ -1,5 +1,6 @@
 <template>
   <div :class="open ? 'header-menu open' : 'header-menu'">
+       <div class="back-closer" @mouseup="closeMenu"></div>
        <div class="icon" @click="toggleMenu">
             <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
             <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -35,6 +36,12 @@
                if (this.activePage.page === 'index') {
                     this.open = false;
                }
+          },
+          mounted() {
+               window.addEventListener('scroll', () => this.closeMenu())
+          },
+          beforeDestroy() {
+               window.removeEventListener('scroll', () => this.closeMenu())
           }
      }
 </script>
@@ -47,6 +54,19 @@
      top: 0; 
      pointer-events: none; 
 
+}
+
+.header-menu .back-closer {
+     width: 100vw; 
+     left: 0; 
+     top: 0; 
+     height: 100vh;
+     position:fixed; 
+     pointer-events: all;  
+}
+
+.header-menu:not(.open) .back-closer {
+     pointer-events: none; 
 }
 
 .header-menu .icon {
@@ -130,6 +150,7 @@
      font-weight: normal; 
      display: block; 
      padding: 2vh; 
+     z-index: 1000;
      text-shadow: 0 4px 7px #0101093d;
 }
 
@@ -176,5 +197,11 @@
           display: none; 
           pointer-events: none; 
      }
+}
+
+@media screen and (max-width: $breakPoint-mobile) and (min-width: 539px) {
+.header-menu .links a {
+     font-size: 5vw; 
+}
 }
 </style>

@@ -145,6 +145,7 @@ export default {
      @media screen and (max-width: $breakPoint-tablet) and (min-width: $breakPoint-mobile) {
   .works {
     max-width: none; 
+    padding-top: 64px;
   }
 
   .works .projects-container {
@@ -155,5 +156,18 @@ export default {
   }
 
   
+}
+
+@media screen and (max-width: $breakPoint-mobile) {
+  .works .projects-container {
+    padding-left: 4vw; 
+    padding-right: 4vw; 
+  }
+
+  .works h1.behind-text {
+    font-size: 23vw; 
+    white-space: nowrap;
+    bottom: 4vh; 
+  }
 }
 </style>

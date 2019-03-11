@@ -1,5 +1,5 @@
 <template>
-     <div :class="projectClass" data-aos="fade-up" data-aos-once="true" data-aos-mirror="false" :data-aos-id="'project-' + index" data-aos-anchor-placement="center-bottom">
+     <div :class="projectClass" data-aos="fade-up" data-aos-once="true" :data-aos-id="'project-' + index" data-aos-anchor-placement="top-bottom">
          
          <div class="heading" v-on:click="toggleProject">
           <div class="title">
@@ -68,7 +68,9 @@ export default {
           }
      },
      mounted() {
-          this.animeStore = this.$anime.timeline({loop: false, autoplay: false})
+          let isOnScreen = this.$el.offsetTop <= window.innerHeight;
+          console.log(this.$el.offsetTop, window.innerHeight, isOnScreen)
+          this.animeStore = this.$anime.timeline({loop: false, autoplay: isOnScreen})
           
           let slides =  this.$el.querySelectorAll('.slides div')
           let image = this.$el.querySelector('.image');
@@ -347,6 +349,44 @@ export default {
      .heading {
           height: 35vh;
      }
+     }
+
+     @media screen and (max-width: $breakPoint-mobile) {
+           .project:not(.open) .heading:hover .more-arrow.left,
+     .project:not(.open) .heading:hover .more-arrow.right {
+          opacity: 0;
+     }
+
+.project:not(.open) .heading:hover .more-arrow {
+    opacity: 0;
+  }
+
+  .project.open .more-arrow.left {
+    opacity: 1; 
+    left: unset; 
+    right: 0; 
+    z-index: 100;
+    transform: scale(1);
+  }
+
+  .project.open .heading:hover .more-arrow.left {
+    transform: scale(1.2);
+  }
+     .heading {
+          height: 35vh;
+     }
+          .title {
+               top: 50%; 
+               left: 50%; 
+               bottom: unset; 
+               width: 100%; 
+               
+               transform: translate(-50%, -50%);
+          }
+
+          .title h1  {
+               font-size: 10.5vw;
+          }
      }
 </style>
 

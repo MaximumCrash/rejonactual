@@ -459,6 +459,8 @@ export default {
     border-radius: 0; 
     height: 100%; 
     width: 100%; 
+        background: linear-gradient(692deg, #e4259b, #df0077, #6c15b5);
+            background-size: 100% 134%;
   }
 
   .side-card .image-holder img {
