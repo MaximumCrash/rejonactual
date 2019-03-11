@@ -190,9 +190,9 @@ export default {
         translateY: [40, 0],
         translateX: ['-50%', '-50%'],
         scale: [0, 1],
-        duration: 1000,
+        duration: 900,
         easing: 'easeOutQuart'
-      }, 500)
+      }, 400)
   },
   beforeDestroy() {
     window.onscroll = null; 
@@ -535,7 +535,8 @@ export default {
   .next-up {
     display: block; 
     text-align: left; 
-    padding: 1.4em; 
+    padding: 1.4em;
+    padding-bottom:2.5em; 
     z-index: 10; 
     color: $white; 
     pointer-events: all;

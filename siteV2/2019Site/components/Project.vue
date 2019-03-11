@@ -3,7 +3,7 @@
          
          <div class="heading" v-on:click="toggleProject">
           <div class="title">
-              <h1> Much Much More </h1>
+              <h1> Welcome to the BoneZone </h1>
           </div>
           <div class="slides">
                <div class="slide0"></div>
@@ -90,7 +90,7 @@ export default {
           
           this.animeStore.add({
                targets: slides, 
-               translateX:['-110%','110%'],
+               translateX:['-120%','120%'],
           skew: ['-16deg','-16deg'],
           easing: 'easeOutExpo',
           duration: 1632, 
@@ -379,8 +379,9 @@ export default {
                top: 50%; 
                left: 50%; 
                bottom: unset; 
-               width: 100%; 
-               
+               width: 90%; 
+               text-align: center; 
+               word-wrap: break-word;
                transform: translate(-50%, -50%);
           }
 

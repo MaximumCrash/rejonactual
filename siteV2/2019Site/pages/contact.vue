@@ -16,6 +16,9 @@
           <div class="background"></div>
           <img :src="require('~/assets/Images/contact.png')" :data-src="require('~/assets/Images/contact.png')" >
         </div>
+        <div class="mobile-only scroll-cta">
+          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="arcs"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
       </div>
       <p class="copy">
         Let's make something great together
@@ -76,6 +79,7 @@ export default {
     let particle0 = page.querySelector('.side-card .particles svg:nth-child(1)');
     let particle1 = page.querySelector('.side-card .particles svg:nth-child(2)');
     let particle2 = page.querySelector('.side-card .particles svg:nth-child(3)');
+    let scrollCTA = page.querySelector('.side-card .scroll-cta');
 
     charming(profileBackChars);
     charming(profileFrontChars);
@@ -175,6 +179,14 @@ export default {
         duration: 900, 
         easing: 'easeOutBack'
       }, 590)
+      .add({
+        targets: scrollCTA, 
+        translateY: [40, 0],
+        translateX: ['-50%', '-50%'],
+        scale: [0, 1],
+        duration: 900,
+        easing: 'easeOutQuart'
+      }, 400)
   }
 }
 </script>
@@ -397,6 +409,166 @@ export default {
     margin-top: 2em;
     width: 84%;
     text-align: center;  
+  }
+}
+
+@media screen and (max-width: $breakPoint-mobile) and (min-width: 539px) {
+  .contact .side-card .text {
+    font-size: 24px !important;
+  }
+
+  .contact .side-card .image-holder img {
+    max-width: 684px !important;
+    right: 0 !important; 
+  }
+
+  .contact .particles {
+    display: none;
+  }
+} 
+
+@media screen and (max-width: $breakPoint-mobile) {
+  .contact {
+    display: block; 
+  }
+
+  .contact .particles {
+    top: 34%; 
+    left: -2%; 
+    transform: scale(1.3) rotate(20deg);
+  }
+
+  .contact .side-card {
+    margin-right:0; 
+    overflow: hidden; 
+  }
+
+  .contact .side-card .text {
+    width:100%; 
+    left: 50%; 
+    bottom: 11vh; 
+    font-size: 4vw;
+    transform: translateX(-50%);
+  }
+
+  .contact .side-card .text > h1:first-of-type{
+    left: -25px; 
+    display: inline-block;
+  }
+
+  .contact .side-card .text h1:last-of-type {
+    left: 7px; 
+    display: inline-block; 
+  }
+  .contact .side-card .image-holder {
+    width: 100vw; 
+    height: 100vh; 
+
+  }
+
+  .contact .side-card .image-holder .background {
+    border-radius: 0; 
+    height: 100%; 
+    width: 100%; 
+        background: linear-gradient(692deg, #e4259b, #df0077, #6c15b5);
+            background-size: 100% 134%;
+  }
+
+  .contact .side-card .image-holder img {
+    width: 119%; 
+    right: -120px; 
+    bottom: -45px;
+    max-width:837px;
+  }
+
+  .contact .side-card .scroll-cta {
+    position: absolute; 
+    bottom: -85px; 
+    border: 3px solid $white; 
+    width: 43vw; 
+    height: 43vw; 
+    max-width: 164px; 
+    max-height: 164px; 
+    transform: translateX(-50%);
+    left: 50%; 
+    border-radius: 100%; 
+    z-index: 100; 
+    pointer-events: all;
+  }
+
+  @keyframes spinner {
+  from {
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+  }
+  to {
+    -moz-transform: rotateY(-360deg);
+    -ms-transform: rotateY(-360deg);
+    transform: rotateY(-360deg);
+  }
+}
+
+
+  .contact .side-card .scroll-cta svg {
+    filter: drop-shadow(0 11px 25px rgba(11, 11, 61, 0.61));
+    position: relative; 
+    top: 3%; 
+    animation-name: spinner;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 3.64s;
+  }
+
+  .contact .copy {
+    padding: 1em; 
+    margin: 0; 
+    margin-top: 1em; 
+    padding-bottom: 2.5em;
+    padding-top: 0; 
+    font-size: 1.45em; 
+    width: 100%; 
+    text-align: center;
+  }
+
+  .contact .behind-text {
+        word-break: break-word;
+    position: fixed;
+    color: #1e1d69;
+    opacity: 0.2;
+    text-align: left;
+    z-index: -1;
+    line-height: 11vh;
+    white-space: nowrap;
+    top: unset;
+    font-size: 23vw;
+    left: 50%;
+    transform: translateX(-50%);
+    right: unset;
+    bottom: 4vh;
+  }
+
+  .next-up {
+    display: block; 
+    text-align: left; 
+    padding: 1.4em; 
+    z-index: 10; 
+    color: $white; 
+    pointer-events: all;
+  }
+
+  .next-up h2 {
+    font-size: 11vw; 
+  }
+
+  .next-up a {
+    color: $white;
+    text-decoration-color: rgba(255,255,255,0.3);
+  }
+
+  .next-up p {
+    font-size: 30px; 
+    margin-bottom: .5em;
   }
 }
 </style>
