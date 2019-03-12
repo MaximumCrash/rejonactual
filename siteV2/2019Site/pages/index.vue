@@ -273,7 +273,7 @@ export default {
   }
 
   .home .sub-title {
-        color: white;
+        color: $white;
     display: flex;
     font-size: 1.64em;
     justify-content: space-around;

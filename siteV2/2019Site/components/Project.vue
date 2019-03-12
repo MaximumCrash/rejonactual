@@ -3,7 +3,7 @@
          
          <div class="heading" v-on:click="toggleProject">
           <div class="title">
-              <h1> Welcome to the BoneZone </h1>
+              <h1> {{title}} </h1>
           </div>
           <div class="slides">
                <div class="slide0"></div>
@@ -12,7 +12,7 @@
                <div class="slide3"></div>
                <div class="slide4"></div>
           </div>
-          <div class="image" :style="{backgroundImage: `url(${backgroundTest})`}"></div>
+          <div class="image" :style="{backgroundImage: `url(${image})`}"></div>
           
           <div class="more-arrow left">
                <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
@@ -23,21 +23,17 @@
                <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
           </div>
           </div>
-          <div class="project-copy">
-               <p>
-                    Re-use of text: Attribution: To re-distribute a text file with the Derived Work based on or through a medium customarily used for software interchange; or, b) Accompany it with the Work that they do to the Program. Contributors. Therefore, if a court requires any Contributor that the BeOpen Python License is dependent only upon the terms of this Agreement as released by OWNER, including source code, even though third parties on terms identical to an alternative, stable online copy which is described in Exhibit A shall not affect the validity or enforceability of either of that version. You may use the Work and that the Package constitutes direct or indirect, to cause the direction or management of such Commercial Distributor's responsibility alone. Under this section, the Commercial Distributor to control, and cooperate with the terms of this Agreement must be on the same or some similar place meets this condition, even though third parties are not derivative works of, publicly display, publicly perform, distribute and sublicense the Contribution of such Contributor, if any, to grant the rights we want to make such provision shall be held by the Package.
-               </p>
+          <div class="project-copy" v-html="content">
           </div>
      </div>
 </template>
 <script>
-import backgroundTest from '~/assets/Images/work0_header.jpg';
 import charming from 'charming';
 
 export default {
-     props:['index'],
+     props:['index', 'title', 'image', 'content', 'link'],
      data() {
-          return { backgroundTest,
+          return {
                    animeStore: {},
                    open: false,
                    dirty: false
@@ -69,7 +65,6 @@ export default {
      },
      mounted() {
           let isOnScreen = this.$el.offsetTop <= window.innerHeight;
-          console.log(this.$el.offsetTop, window.innerHeight, isOnScreen)
           this.animeStore = this.$anime.timeline({loop: false, autoplay: isOnScreen})
           
           let slides =  this.$el.querySelectorAll('.slides div')
@@ -157,7 +152,7 @@ export default {
      }
 
      .title {
-          color: white; 
+          color: $white; 
           position: absolute; 
           bottom: 5px; 
           left: 10px; 
@@ -224,6 +219,8 @@ export default {
           position: absolute;
           background-size: cover;
           background-repeat: no-repeat;
+          background-position: center; 
+          background-attachment: fixed;
           transition: all .2s ease;
           border-radius: 6px;
           z-index:0; 
@@ -296,7 +293,7 @@ export default {
      }
 
      .project-copy {
-          color: white; 
+          color: $white; 
           transform-origin: top; 
           overflow: hidden;
           text-align: left;
@@ -308,7 +305,7 @@ export default {
           transition: transform  cubic-bezier(0.165, 0.84, 0.44, 1) .2s;
      }
 
-     .project-copy > * {
+     .project.open .project-copy {
           padding: 1em;
      }
 
@@ -317,6 +314,16 @@ export default {
           transform: translateY(0px);
           height: 100%; 
           transition: transform  cubic-bezier(0.165, 0.84, 0.44, 1) .2s;
+     }
+
+     .project-copy {
+          /deep/ *{
+               margin-bottom: .5em;
+          }
+
+          /deep/ a {
+               color: $white;
+          }
      }
 
      /*NOTE(Rejon): We need this cause AOS seems to be fading out some elements on close*/

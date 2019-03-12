@@ -248,7 +248,7 @@ export default {
   .text {
     position: absolute;
     z-index: 1; 
-    color: white; 
+    color: $white; 
     font-size: 1em; 
     left: -130px; 
     bottom: 30px; 
@@ -312,12 +312,12 @@ export default {
   text-align: left; 
   margin-left: 2.5vw; 
   font-size: 1.5em; 
-  color: white; 
+  color: $white; 
   align-self: center;
 }
 
 .about .copy a {
-  color: white; 
+  color: $white; 
   pointer-events: all;
 }
 
@@ -353,7 +353,7 @@ export default {
   }
   .abouts.container {
     min-height: calc(100vh - 78px);
-    margin-top:78px;
+    margin-top:24px;
   }
   .about {
     display: block; 
@@ -364,7 +364,7 @@ export default {
 
   .about .behind-text {
     left: 4vw; 
-    top: 10vh; 
+    top: 5vh; 
     font-size: 15vw; 
   }
 
@@ -407,8 +407,8 @@ export default {
 }
 
 @media screen and (max-width: $breakPoint-mobile) and (min-width: 539px) {
-  .about .side-card .text {
-    font-size: 24px;
+  .about .side-card .text h1{
+    font-size: 24vw;
   }
 } 
 

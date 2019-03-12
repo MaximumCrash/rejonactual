@@ -5,19 +5,14 @@
         Works
       </h1>
       <div class="projects-container">
-        <Project :index="0"/>
-        <Project :index="1"/>
-        <Project :index="2"/>
-        <Project :index="3"/>
-        <Project :index="4"/>
-        <Project :index="5"/>
-        <Project :index="6"/>
-        <Project :index="7"/>
-        <Project :index="8"/>
-        <Project :index="9"/>
-        <Project :index="10"/>
-        <Project :index="11"/>
-        <Project :index="12"/>
+        <Project v-for="(project, index) in projects" 
+                 :key="index"
+                 :title="project.title"
+                 :image="project.image"
+                 :content="project.content"
+                 :link="project.archiveLink"
+                 :index="index"
+                  />
       </div>
       <div :class="this.showScrollUp ? 'scroll-up' : 'scroll-up hide'" v-on:click="this.scrollToTop" >
         <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4M12 16V9"/></svg>
@@ -29,12 +24,14 @@
 <script>
 import charming from 'charming';
 import Project from '~/components/Project.vue';
+import Projects from '~/assets/works.json';
 
 export default {
   data() {
     return {
       animeStore: {},
-      showScrollUp: false
+      showScrollUp: false,
+      projects: Projects.projects
     }
   },
   components: {

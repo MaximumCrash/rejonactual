@@ -145,7 +145,7 @@ header > .links {
 }
 
 header > .links a {
-  color: white; 
+  color: $white; 
   text-decoration: none; 
   margin-left: .5em; 
   margin-right: .5em; 
@@ -179,7 +179,7 @@ header > .links a::before {
     transform-origin: center;
     width: 0; 
     height: 2px;
-    background: white;
+    background: $white;
     left: 0;
     bottom: 0;
     transition: all .1s ease;
@@ -190,7 +190,7 @@ header > .links a::before {
     position: absolute;
     width: 100%;
     height: 2px;
-    background: white;
+    background: $white;
     left: 0;
     bottom: 0;
     transition: all .1s ease;
@@ -278,8 +278,8 @@ h2 {
 font-feature-settings:"swsh" 1;
 }
 
-h3 {
-  font-family: 'Brother-1816-Regular-Italics';
+h3, h4 {
+  font-family: 'Brother-1816-Regular-Italic';
 }
 
 p {

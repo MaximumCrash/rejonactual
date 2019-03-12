@@ -254,7 +254,7 @@ export default {
   .text {
     position: absolute;
     z-index: 1; 
-    color: white; 
+    color: $white; 
     font-size: 1em; 
     left: -130px; 
     bottom: 30px; 
@@ -315,12 +315,12 @@ export default {
   text-align: left; 
   margin-left: 2.5vw; 
   font-size: 1.64em; 
-  color: white; 
+  color: $white; 
   align-self: center;
 }
 
 .contact .copy a {
-  color: white; 
+  color: $white; 
   pointer-events: all;
 }
 

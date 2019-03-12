@@ -81,7 +81,7 @@
      max-width: 46px; 
      min-width:42px;
      min-height: 42px;
-     border: 3px solid white; 
+     border: 3px solid $white; 
      border-radius: 100%; 
 }
 
@@ -146,7 +146,7 @@
 .header-menu .links a {
      font-size: 29px;
      text-decoration: none; 
-     color: white; 
+     color: $white; 
      font-weight: normal; 
      display: block; 
      padding: 2vh; 
