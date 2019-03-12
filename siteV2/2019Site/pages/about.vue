@@ -4,21 +4,21 @@
       <h1 class="behind-text">About Me</h1>
       <div class="side-card">
         <div class="text">
-          <h1>Hello</h1>
-          <h1>There</h1>
+          <h1 class="rellax" :data-rellax-speed="1 * rellaxMulti">Hello</h1>
+          <h1 class="rellax" :data-rellax-speed="1 * rellaxMulti">There</h1>
         </div>  
-        <div class="particles">
+        <div class="particles rellax" :data-rellax-speed="-3 * rellaxMulti">
             <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#FFC300" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg>
             <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#5a04a2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18L12 4z"/></svg>
             <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#df0077" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
           </div>
-        <div class="image-holder">
+        <div class="image-holder rellax" :data-rellax-speed="-6 * rellaxMulti">
           <div class="background"></div>
-          <img :src="require('~/assets/Images/about.png')" :data-src="require('~/assets/Images/about.png')">
+          <img  :src="require('~/assets/Images/about.png')" :data-src="require('~/assets/Images/about.png')">
           
         </div>
         <div class="mobile-only scroll-cta">
-          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="arcs"><path d="M6 9l6 6 6-6"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#f9f7f4" stroke-width="2" stroke-linecap="round" stroke-linejoin="arcs"><path d="M6 9l6 6 6-6"/></svg>
         </div>
       </div>
       <p class="copy">
@@ -39,7 +39,7 @@
         <nuxt-link to="/contact"><h2>Contact</h2></nuxt-link>
       </div>
       <div :class="this.showScrollUp ? 'scroll-up' : 'scroll-up hide'" v-on:click="this.scrollToTop" >
-        <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4M12 16V9"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#f9f7f4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4-4 4M12 16V9"/></svg>
       </div>
      
     </section>
@@ -53,7 +53,8 @@ export default {
   data() {
     return {
       animeStore: {},
-      showScrollUp: false
+      showScrollUp: false,
+      rellaxMulti: window.innerWidth <= 786 ? 1 : 0
     }
   },
   methods: {
@@ -111,7 +112,7 @@ export default {
     this.animeStore.add({
         targets: behindText,
         opacity: [0, 1],
-        color: ["#ffffff","#1e1d69"],
+        color: ["#f9f7f4","#1e1d69"],
         translateX: [64, 0],
         easing: 'easeOutQuart',
         duration: 900,

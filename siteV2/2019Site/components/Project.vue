@@ -162,7 +162,8 @@ export default {
 
      .title h1 {
           font-size: 3.64em;
-          text-shadow: 0 11px 25px rgba(11, 11, 61, 0.61);
+          // text-shadow: 0 11px 25px rgba(11, 11, 61, 0.61);
+              text-shadow: 0 6px 9px #0b0b3d6b, -1px 0 rgba(11, 11, 61, 0.5), 0 1px rgba(11, 11, 61, 0.5), 1px 0 rgba(11, 11, 61, 0.5), 0 -1px rgba(11, 11, 61, 0.5);
      }
 
      
@@ -386,7 +387,7 @@ export default {
                top: 50%; 
                left: 50%; 
                bottom: unset; 
-               width: 90%; 
+               width: 95%; 
                text-align: center; 
                word-wrap: break-word;
                transform: translate(-50%, -50%);
@@ -394,6 +395,10 @@ export default {
 
           .title h1  {
                font-size: 10.5vw;
+          }
+
+          .image {
+               background-attachment:unset;
           }
      }
 </style>

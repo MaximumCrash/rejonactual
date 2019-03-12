@@ -44,8 +44,7 @@ export default {
   },
   computed: mapState(['page']),
   mounted() {
-    var rellax = new Rellax(".rellax");
-
+      var rellax = new Rellax(".rellax");
     let headerName = this.$el.querySelector('header h2');
     charming(headerName)
     headerName.style.opacity = 1

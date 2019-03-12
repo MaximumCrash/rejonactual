@@ -8,20 +8,20 @@
           <h1>Touch</h1>
         </div>  
         <div class="particles">
-          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#f9f7f4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#f9f7f4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#f9f7f4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
         </div>
-        <div class="image-holder">
+        <div class="image-holder rellax" :data-rellax-speed="-6 * rellaxMulti">
           <div class="background"></div>
           <img :src="require('~/assets/Images/contact.png')" :data-src="require('~/assets/Images/contact.png')" >
         </div>
         <div class="mobile-only scroll-cta">
-          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="arcs"><path d="M6 9l6 6 6-6"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 24 24" fill="none" stroke="#f9f7f4" stroke-width="2" stroke-linecap="round" stroke-linejoin="arcs"><path d="M6 9l6 6 6-6"/></svg>
         </div>
       </div>
       <p class="copy">
-        Let's make something great together
+        Let's make something great together.
         </br></br>
         <a href="mailto:rejon@maximumcrash.com">rejon@maximumcrash.com</a>
         </br></br>
@@ -58,7 +58,8 @@ import charming from 'charming';
 export default {
   data() {
     return {
-      animeStore: {}
+      animeStore: {},
+      rellaxMulti:  window.innerWidth <= 786 ? 1 : 0
     }
   },
   mounted() {
@@ -103,7 +104,7 @@ export default {
     this.animeStore.add({
         targets: behindText,
         opacity: [0, 1],
-        color: ["#ffffff","#1e1d69"],
+        color: ["#f9f7f4","#1e1d69"],
         translateX: [64, 0],
         easing: 'easeOutQuart',
         duration: 900,

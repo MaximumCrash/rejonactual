@@ -10,7 +10,6 @@
                  :title="project.title"
                  :image="project.image"
                  :content="project.content"
-                 :link="project.archiveLink"
                  :index="index"
                   />
       </div>
@@ -75,7 +74,7 @@ export default {
         delay: function(el, i) {
           return 164 * i
         },
-      })     
+      }, 0)     
   },
   beforeDestroy() {
     window.onscroll = null; 
