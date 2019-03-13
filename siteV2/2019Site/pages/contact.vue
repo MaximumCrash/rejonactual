@@ -70,6 +70,8 @@ export default {
       this.$store.state.headerAnime.play();
     }
 
+    this.rellaxMulti = window.innerWidth <= 786 ? 1 : 0;
+
     let page = this.$el.querySelector('.contact');
     let behindText = page.querySelector('.behind-text');
     let profileBackChars = page.querySelector('.side-card .text h1:first-of-type');

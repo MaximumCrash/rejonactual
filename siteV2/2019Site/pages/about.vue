@@ -77,6 +77,8 @@ export default {
         this.showScrollUp = window.scrollY > window.innerHeight; 
     }
 
+    this.rellaxMulti = window.innerWidth <= 786 ? 1 : 0;
+
     let page = this.$el.querySelector('.about');
     let behindText = page.querySelector('.behind-text');
     let profileBackChars = page.querySelector('.side-card .text h1:first-of-type');
