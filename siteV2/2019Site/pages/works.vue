@@ -26,6 +26,14 @@ import Project from '~/components/Project.vue';
 import Projects from '~/assets/works.json';
 
 export default {
+  head() {
+    return {
+      title: 'Works • Réjon Taylor-Foster',
+      meta: [
+        {hid: 'description', name: 'description', content: 'The works of Réjon Taylor-Foster'}
+      ]
+    }
+  },
   data() {
     return {
       animeStore: {},

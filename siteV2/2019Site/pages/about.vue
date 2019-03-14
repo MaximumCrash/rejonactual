@@ -50,6 +50,14 @@
 import charming from 'charming';
 
 export default {
+  head() {
+    return {
+      title: 'About Me • Réjon Taylor-Foster',
+      meta: [
+        {hid: 'description', name: 'description', content: 'All about Réjon Taylor-Foster'}
+      ]
+    }
+  },
   data() {
     return {
       animeStore: {},
